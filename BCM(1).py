@@ -41,7 +41,9 @@ while  True:
         print(eqlist)
         print("You have failed in your mission.")
         print("You completed ", n, " out of 5 major events successfully.")
-        end = input()               
+        end = input() 
+    def listweapons():
+        print("You can attempt to use any of the folllowing: black dagger (BD), ")
     if coins < 0:
         loc = 999
     if loc == 1:
