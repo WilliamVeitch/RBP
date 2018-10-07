@@ -43,9 +43,7 @@ while  True:
         print("You completed ", n, " out of 5 major events successfully.")
         end = input() 
     def listweapons():
-        print("You can attempt to use any of the folllowing: black dagger (BD), ")
-    if coins < 0:
-        loc = 999
+        print("You can attempt to use any of the folllowing: black dagger (BD), throwing stars (TS), invisibility potion (IP), golden blade (GB)")
     if loc == 1:
         print("The year is 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies or the mission")
@@ -548,7 +546,7 @@ while  True:
                                 eqlist.append("woodenrod")
                                 eqlist.append("metalrod")
                             elif choice == "B":
-                                #book#
+                                eqlist.append("information book")
                                 print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
     elif loc == 26:
         print("You are in a circular room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
