@@ -10,6 +10,8 @@ window = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 while  True:
+    def inap():
+        print("The item you have chosen is not appropriate for the current situation")
     def equip():
         print("You possess ", eqlist,)     
     def destroy(n):
@@ -63,17 +65,17 @@ while  True:
         print("You can choose from the throwing stars (T), invisibility potion (I), golden blade, (G), time bomb (B) or super strong rope (S)")
         choice1 = str(input("choice 1   "))
         choice2 = str(input("choice 2   "))
-        eqlist.append("blackdagger")
+        eqlist.append("black dagger (BD)")
         if choice1 == "T" or choice2 == "T":
-            eqlist.append("throwingstars")
+            eqlist.append("throwing stars (TS)")
         if choice1 == "I" or choice2 == "I":
-            eqlist.append("invisibility")
+            eqlist.append("invisibility potion (IP)")
         if choice1 == "G" or choice2 == "G":
-            eqlist.append("goldenblade")
+            eqlist.append("golden blade (GB)")
         if choice1 == "B" or choice2== "B":
-            eqlist.append("timebomb")
+            eqlist.append("time bomb (TB)")
         if choice1 == "S" or choice2 == "S":
-            eqlist.append("rope")
+            eqlist.append("super strong rope (SSR)")
         loc = 5
     elif loc == 3:
         print("The chairmonkey of the Royal Weaponary Supply Company welcomes you into his office and tells you that you may use any of his equipment so long as you can pay for it.")
@@ -82,29 +84,29 @@ while  True:
         while choice != "E":
             choice = str(input("Type in an item code or type E to exit the office.   "))
             if choice == "SS":
-                eqlist.append("shortsword")
+                eqlist.append("shortsword (SS)")
                 coins = coins - 2
             elif choice == "SOS":
-                eqlist.append("shield")
+                eqlist.append("shield of safety (SOS)")
                 coins = coins - 3
             elif choice == "SP":
-                eqlist.append("strengthp")
+                eqlist.append("strength potion (SP)")
                 coins = coins - 3
             elif choice  == "W":
-                eqlist.append("warhammer")
+                eqlist.append("warhammer (WH)")
                 coins = coins - 4
             elif choice == "G":
-                eqlist.append("goldenblade")
+                eqlist.append("golden blade (GB)")
                 coins = coins - 5
             elif choice == "P":
-                eqlist.append("pcannon")
+                eqlist.append("portable cannon (PC)")
                 coins = coins - 6
             if coins < 0:
                 print("You could not afford that item")
                 loc = 999
         loc = 5
     elif loc == 4:
-        print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since you missionb with the Robo Lion in 1963")
+        print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since you mission with the Robo Lion in 1963")
         print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes willbe useful on your mission.")
         eqlist.append("stonerod")
         print("He shows you his inventions and says that you can choose two of them.")
@@ -127,13 +129,13 @@ while  True:
         if choice1 == "CBD" or choice2 == "CBD":
             eqlist.append("CPD")
         if choice1 == "IP" or choice2 == "IP":
-            eqlist.append("invisibility")
+            eqlist.append("invisibility potion (IP)")
         if choice1 == "SP" or choice2 == "SP":
-            eqlist.append("strengthp")
+            eqlist.append("strength potion (SP)")
         if choice1 == "MM" or choice2== "MM":
-            eqlist.append("magicalmap")
+            eqlist.append("magical map (MM)")
         if choice1 == "E" or choice2 == "E":
-            eqlist.append("energycrystal")
+            eqlist.append("energy crystal (EC)")
         print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
         print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
         choice = str(input())
@@ -230,29 +232,29 @@ while  True:
         print("The gorillas welcome you into their base and give you the choice of either a sticky banana bomb (SBB) or a medical kit (MK) to use on your mission. They tell you to take a rowing boat to the island as this is cheaper than the ferry.")
         choice = str(input())
         if choice == "SBB":
-            eqlist.append("stickybomb")
+            eqlist.append("sticky banana bomb (SBB)")
         elif choice == "MK":
-            eqlist.append("medicalkit")
+            eqlist.append("medical kit (MK)")
         print("You return to the town centre.")
         loc = 11
     elif loc == 16:
         print("You see many local shops selling a wide range of products.")
-        if "goldenblade" in eqlist:
+        if "golden blade (GB)" in eqlist:
             print("Before you have a chance to enter the shops, a monkey walks up to you and offers you 11 banana coins for your golden blade.")
             print("Do you accept the offer")
             choice = str(input())
             if choice == "YES":
-                destroy("goldenblade")
+                destroy("golden blade (GB)")
                 coins = coins + 11
         print("You enter the shops and you find some super strong rope (S) costing 3 coins and the helm of horror (H) which costs 6 coins")
         print("You have ", coins, "banana coins.")
         while choice != "E":
             choice = str(input("Type in an item code or type E to exit the shop.   "))
             if choice == "S":
-                eqlist.append("rope")
+                eqlist.append("super strong rope (SSR)")
                 coins = coins - 3
             elif choice == "H":
-                eqlist.append("helmet")
+                eqlist.append("helm of horror (HOH)")
                 coins = coins - 6
         print("You now return to the town centre.")
         loc = 11
@@ -269,9 +271,9 @@ while  True:
             loc = 21
     elif loc == 18:
         print("You carry on through the stormy weather but some of your equipment is washed overboard by the waves.")
-        text = random.choice(eqlist)
-        print(text, " is lost")
-        destroy(text)
+        text6 = random.choice(eqlist)
+        print(text6, " is lost")
+        destroy(text6)
         print("The storm has now ended and you continue on towards the island. ", islandtext)
         print("You are approaching the island from the South and you can see a small pier directly ahead of you (P) and a sandy beach to the East (B). Alternatively, you could circle around the island to the North side (N)")
         choice = str(input())
@@ -289,19 +291,18 @@ while  True:
     elif loc == 20:
         print("You attempt to land the helicopter but you notice an armoured turret on the 2nd floor turning to face you. You are shot down before you can react.")
         print("You scramble out from the wreckage of the helicopter and notice that some of your equipment has beeen destroyed in the collision.")
-        text = random.choice(eqlist)
-        print(text, " is lost")
-        destroy(text)
+        text7 = random.choice(eqlist)
+        print(text7, " is lost")
+        destroy(text7)
         alert = alert + 1
     elif loc == 21:
         print("On the North side of the mansion, there is a tower 3 storeys high with a large window on the ground floor looking out to Sea. To the East and West of the mansion, there are steep cliffs which would be impossible to land on.")
         print("You can break the window using a weapon (W) or turn back to the South side of the island (S).")
-        if "rope" in eqlist:
+        if "super strong rope (SSR)" in eqlist:
             print("Since you have a super strong rope in your possesion, you may also attempt to climb the cliff using this item (R).")
         choice = str(input())
         if choice == "W":
-            print("You can use the black dagger (BD), shortsword (SS), throwing stars (TS), golden blade (GB), time bomb (TB), warhammer (WH), portable cannon (PC), energy crystal (EC), complex brain destroyer (CBD) or sticky banana bomb (SBB)")
-            equip()
+            listweapons()
             choice = str(input())
             if choice == "BD" or choice == "GB" or choice == "WH":
                 print("The window shatters and an alarm sounds. You enter the room.")
@@ -311,15 +312,15 @@ while  True:
             elif choice == "SS":
                 print("The window shatters and an alarm sounds. Unfortunately, the reinforced glass of the window has broken your shortsword. You enter the room.")
                 alert = alert + 1
-                destroy("shortsword")
+                destroy("short sword (SS)")
                 loc = 26
                 window = 0
             elif choice == "TS":
                 print("Unfortunately, the glass of this window is reinforced so the throwing stars bounce off and fall into the sea.")
-                destroy("throwingstars")
+                destroy("throwing stars (TS)")
             elif choice == "TB":
                 print("You place the bomb and duck back down into the boat. A few seconds later, a loud explosion occurs and an alarm sounds nside the mansion. You walk into the room through the large hole that has beeen created in the window.")
-                destroy("timebomb")
+                destroy("time bomb (TB)")
                 alert= alert + 1
                 loc = 26
                 window = 0
@@ -333,22 +334,24 @@ while  True:
                     loc = 26
                     window = 0
                 elif crystal() == "failure":
-                    destroy("energycrystal")
+                    destroy("energy crystal (EC)")
                     print("After the improper use, the crystal falls into the sea.")
                 elif crystal() == "big failure":
                     endgame(1)
             elif choice == "CBD":
                 print("lala") #CBD#
-            elif choice == "stickybomb":
+            elif choice == "SBB":
                 print("You pull the bomb out of your pocket and place it near the window but it explodes before you can take cover.")
                 print("The window shatters and an alarm sounds. Unfortunately you are injured by the bomb and the broken glass.")
-                if "medicalkit" in eqlist:
+                if "medical kit (MK)" in eqlist:
                     print("Since you have a medical kit, you use it and after recovering, you enter the room.")
-                    destroy(medicalkit)
+                    destroy(medical kit (MK))
                     loc = 26
                     window = 0
                 else:
                     print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again")
+            else:
+                inap()
         elif choice == "S":
             loc = 17
         elif choice == "R":
@@ -366,7 +369,7 @@ while  True:
         print("The gorillas are displeased with your presence interrupting their naval excersise so they demand payment of 3 banana coins for you to continue your voyage (P) and otherwise you must return to Ooville (O).")
         print("You have ", coins, " banana coins.")
         print("You can also pay using equipment (E) or try to fight the gorillas (F).")
-        if medicalkit in eqlist or stickybomb in eqlist:
+        if "medical kit (MK)" in eqlist or "sticky banana bomb (SBB)" in eqlist:
              print("Since you posess a Gorilla made item, you can show this to the gorillas (S) to convince them that you are friendly.")
         choice = str(input())
         if choice == "P":
@@ -396,20 +399,19 @@ while  True:
             place = C
             loc = 30
             #move to loc 30#
-            print("You can use the black dagger (BD), shortsword (SS), golden blade (GB), time bomb (TB), warhammer (WH), shield of safety (SOS), portable cannon (PC) or energy crystal (EC)")
-            equip()
+            listweapons()
             choice = str(input())
             if choice == "GB" or choice == "SS" or choice == "SOS":
                 print("Your weapon is successful in clearing a path through the barbed wire.")
                 loc = 27
             elif choice == "BD":
                 print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
-                destroy("blackdagger")
+                destroy("black dagger (BD)")
                 loc = 27
             elif choice == "TB" or choice == "PC":
                 print("You are able to blast a path through the barbed wire.")
                 if choice == "TB":
-                    destroy("timebomb")
+                    destroy("time bomb (TB)")
                 loc = 27
             elif choice == "WH":
                 print("This weapon is not effective in cutting a path through the barbed wire.")
@@ -418,7 +420,7 @@ while  True:
                     print("The barbed wire is destroyed and you walk towards the mansion.")
                     loc = 27
                 elif crystal() == "failure":
-                    destroy("energycrystal")
+                    destroy("energy crystal (EC)")
                     print("The crystal rolls away into the middle of the wire")
                 elif crystal() == "big failure":
                     endgame(1)           
@@ -435,8 +437,8 @@ while  True:
         elif choice == "G":
             print("The gate looks very well armoured so only the most powerful weapons will be capable of breaching it.")
             print("The gate also has a handle which you could attempt to open (H), and there is also a box nearby with several switches (S).")
-            print("Weapons that may be able to breach the gate are: portable cannon (PC), time bomb (TB), energy crystal (EC) and helm of horror (HOH). You may also retreat to the South (R).")
-            equip()
+            listweapons()
+            print("You may also retreat to the South (R).")
             choice = str(input())
             if choice == "H":
                 if swicob != "4234":
