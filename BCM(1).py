@@ -108,7 +108,7 @@ while  True:
     elif loc == 4:
         print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since you mission with the Robo Lion in 1963")
         print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes willbe useful on your mission.")
-        eqlist.append("stonerod")
+        eqlist.append("stone rod (SR)")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted")
         print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magic map (MM), strength potion (SP) and the energy crystal (E)")
@@ -441,14 +441,15 @@ while  True:
             print("You may also retreat to the South (R).")
             choice = str(input())
             if choice == "H":
-                if swicob != "4234":
+                swicobs = random.randint(0, 9999)
+                if swicob != swicobs:
                     print("The gate will not open and an alarm sounds.")
                     alert = alert + 1
-                elif swicob == "4234" and alert < 2:
+                elif swicob == swicobs and alert < 2:
                     print("The gate opens and you walk up to the front of the mansion.")
                     loc = 27
             elif choice == "S":
-                print("There are four switches which can each be set to any position between 0 and 5. Currently they are all set to 0.")
+                print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0.")
                 print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
                 choice = input()
                 if choice == "W":
@@ -461,7 +462,7 @@ while  True:
                 loc = 27
             elif choice == "TB":
                 print("The bomb destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
-                destroy("timebomb")
+                destroy("time bomb (TB)")
                 alert = alert + 1
                 loc = 27
             elif choice == "EC":
@@ -476,7 +477,7 @@ while  True:
             elif choice == "HOH":
                 print("You put on the helmet and charge towards the gate. It collapses, but the helmet is also damaged beyond repair.")
                 print("An alarm sounds nearby so you advance cautiously towards the mansion.")
-                destroy("helmet")
+                destroy("helmet of horror (HOH)")
                 alert = alert + 1
                 loc = 27
         elif choice == "W":
@@ -487,21 +488,20 @@ while  True:
                 print("The door opens with a loud creaking noise.")
                 loc = 28
             elif choice == "W":
-                print("shortsword (SS), golden blade (GB), time bomb (TB), strength potion (SP), warhammer (WH), portable cannon (PC), energy crystal (EC), helm of horror (HOH), sticky banana bomb (SBB).")
-                equip()
+                listweapons()
                 choice = str(input())
                 if choice == "SS" or choice == "GB" or choice == "WH" or choice == "PC" or choice == "HOH":
                     print(towertext)
                     loc = 28
                 elif choice == "TB" or choice == "SBB" :
                     if choice == "TB":
-                        destroy("timebomb")
+                        destroy("time bomb (TB)")
                     elif choice == "SBB":
-                        destroy("stickybomb")
+                        destroy("sticky banana bomb (SBB)")
                     print(towertext)
                     loc = 28
                 elif choice == "SP":
-                    destroy("strengthp")
+                    destroy("strength potion (SP)")
                     print("You feel a sudden rush of strength and you force the door open. You enter the tower.")
                     loc = 28
                 elif choice == "EC":
@@ -512,6 +512,8 @@ while  True:
                         print("You used the crystal improperly.")
                     elif crystal() == "big failure":
                         endgame(1)
+                else:
+                    inap()
     elif loc == 25:
         print("you are East of the mansion and a barbed wire fence separates you from the mansion. You notice a square garden area enclosed with hedges nearby.")
         print("You can try to breach the fence (F), enter the garden area (G) or go to the South West (SW).")
