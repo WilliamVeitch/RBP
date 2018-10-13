@@ -28,7 +28,7 @@ while  True:
         if choice == "S":
             strike = str(input("Which symbol do you strike?   "))
             if strike == "HEXAGON":
-                destroy("energycrystal")
+                destroy("energy crystal (EC)")
                 return "success"
             elif strike != "HEXAGON":
                 return "failure"
@@ -661,11 +661,25 @@ while  True:
             print("You find the key to the door amongst your items and you open the door.")
             loc = 38
         else:
-            print("The door is locked.")
-            #list weapons#
+            print("The door is locked. You may retreat (R) or use weapons.")
+            listweapons()
+            choice = str(input())
+            if choice == "WH":
+                destroy("warhammer (WH)")
+                print("Your warhammer is successful in breaking the door but is destroyed by the impact.")
+                loc = 38
+            elif choice == "PC":
+                print("Your portable cannon is successful in breaking the door and you advance into the room.")
+                loc = 38
+            elif choice == "TB":
+                print("Your time bomb is successful in breaking the door and you advance into the room.")
+                destroy("time bomb (TB)")
+                loc = 38
+            elif choice == "EC":
+                print("crystal")
     elif loc == 34:
-        
-         
+        print("The door is open and you walk out onto a spiral staircase.")
+        #robot attack# 
                 
                 
                             
