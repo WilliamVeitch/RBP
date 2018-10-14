@@ -7,6 +7,7 @@ swicob = "0"
 ask = "A"
 alert = 0
 window = 1
+stairrobot = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 while  True:
@@ -593,8 +594,30 @@ while  True:
             choice = str(input())
             if choice == "S":
                 print("The shed door is locked so you may use a weapon against it.")
-                print("shortsword (SS), golden blade (GB), time bomb (TB), strength potion (SP), warhammer (WH), portable cannon (PC), energy crystal (EC), helm of horror (HOH), sticky banana bomb (SBB).")
-                #list weapons#
+                listweapons()
+                choice = str(input)
+                if choice == "SS":
+                    destroy("shortsword (SS)")
+                    print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
+                    loc = 39
+                elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC":
+                    print("your weapon succeeds in breaking down the door and you enter the shed.")
+                    loc = 39
+                elif choice == "TB":
+                    destoy("time bomb (TB)")
+                    print("The bomb works and you enter the shed.")
+                    loc = 39
+                elif choice == "EC":
+                    if crystal() == "success":
+                        print("You destroy the door and enter the shed.")
+                        loc = 39
+                    elif crystal() == "big failure":
+                        endgame(1)
+                elif choice == "SP":
+                    destroy("strength potion (SP)")
+                    print("You destroy the door and enter the shed.")
+                else:
+                    inap()
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -618,7 +641,7 @@ while  True:
             print(eqloss, " is lost")
             print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
             print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and exit the tower.")
-            eqlist.append("brasskey")
+            eqlist.append("brass key")
             print("You return to the path near the fence.")
             loc = 24
     elif loc == 29:
@@ -676,10 +699,23 @@ while  True:
                 destroy("time bomb (TB)")
                 loc = 38
             elif choice == "EC":
-                print("crystal")
+                if crystal() == "success":
+                    print("Your crystal breaks the door and you advance into the room.")
+                    loc = 38
+                elif crystal() == "failure":
+                    print("You cannot remember the correct way to use the crystal.")
+                elif crystal() == "big failure":
+                    endgame(2)
+            else:
+                inap()
     elif loc == 34:
-        print("The door is open and you walk out onto a spiral staircase.")
-        #robot attack# 
+        print("The door is open and you walk out onto a spiral staircase which has stairs leading off upwards and downwards.")
+        if stairrobot = 1:
+            print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
+            listweapons()
+            #robot attack#
+    elif loc == 35:
+        print("You walk into an elaborately furnished dining room.") 
                 
                 
                             
