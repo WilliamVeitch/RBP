@@ -587,7 +587,16 @@ while  True:
         print("You can attempt to get in through the main door (M), investigate the shed (S) or walk around to the East side of the mansion (E).")
         choice = str(input())
         if choice == "M":
-            print("M")
+            print("The main door looks very well protected with an elaborate security system.")
+            print("You may use a weapon to break down the door or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
+            choice = str(input())
+            if choice == "SW":
+                if "super strong rope (SSR)" in eqlist:
+                    print("You use your super strong rope to successfully climb up to the window. However, an alarm sounds.")
+                    alert = alert + 1
+                    print("You hurriedly use an object from your equipment bag to smash the window and you climb inside. Unfortunately, you are forced to leave behind the rope since you cannot reach it through the window without alerting the CCTV camera again.")
+                    destroy("super strong rope (SSR)")
+                    
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -671,7 +680,7 @@ while  True:
         elif choice = "WD":
             loc = 33
     elif loc == 32:
-        print("You are in a corridor which runs from North to South. There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
+        print("You are in a corridor which runs from North to South. To the South is the main door of the mansion. There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
         choice = str(input())
         if choice == "E":
             loc = 36
@@ -680,34 +689,35 @@ while  True:
         elif choice == "N":
             loc = 29
     elif loc == 33:
-        if "rusted keys" in eqlist:
-            print("You find the key to the door amongst your items and you open the door.")
-            loc = 38
-        else:
-            print("The door is locked. You may retreat (R) or use weapons.")
-            listweapons()
-            choice = str(input())
-            if choice == "WH":
-                destroy("warhammer (WH)")
-                print("Your warhammer is successful in breaking the door but is destroyed by the impact.")
+        if rustdoor == 1:
+            if "rusted keys" in eqlist:
+                print("You find the key to the door amongst your items and you open the door.")
                 loc = 38
-            elif choice == "PC":
-                print("Your portable cannon is successful in breaking the door and you advance into the room.")
-                loc = 38
-            elif choice == "TB":
-                print("Your time bomb is successful in breaking the door and you advance into the room.")
-                destroy("time bomb (TB)")
-                loc = 38
-            elif choice == "EC":
-                if crystal() == "success":
-                    print("Your crystal breaks the door and you advance into the room.")
-                    loc = 38
-                elif crystal() == "failure":
-                    print("You cannot remember the correct way to use the crystal.")
-                elif crystal() == "big failure":
-                    endgame(2)
             else:
-                inap()
+                print("The door is locked. You may retreat (R) or use weapons.")
+                listweapons()
+                choice = str(input())
+                if choice == "WH":
+                    destroy("warhammer (WH)")
+                    print("Your warhammer is successful in breaking the door but is destroyed by the impact.")
+                    loc = 38
+                elif choice == "PC":
+                    print("Your portable cannon is successful in breaking the door and you advance into the room.")
+                    loc = 38
+                elif choice == "TB":
+                    print("Your time bomb is successful in breaking the door and you advance into the room.")
+                    destroy("time bomb (TB)")
+                    loc = 38
+                elif choice == "EC":
+                    if crystal() == "success":
+                        print("Your crystal breaks the door and you advance into the room.")
+                        loc = 38
+                    elif crystal() == "failure":
+                        print("You cannot remember the correct way to use the crystal.")
+                    elif crystal() == "big failure":
+                        endgame(2)
+                else:
+                    inap()
     elif loc == 34:
         print("The door is open and you walk out onto a spiral staircase which has stairs leading off upwards and downwards.")
         if stairrobot = 1:
@@ -715,7 +725,7 @@ while  True:
             listweapons()
             #robot attack#
     elif loc == 35:
-        print("You walk into an elaborately furnished dining room.") 
+        print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room.") 
                 
                 
                             
