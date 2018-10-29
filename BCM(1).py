@@ -751,7 +751,17 @@ while  True:
             elif choice == "E":
                 loc = 31 
     elif loc == 35:
-        print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room.") 
+        print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room. On the table are several empty plates, pieces of cutlery and candles.")
+        print("There are doors to the North (N) and South (S). You could also stay in this room to investigate further (I).")
+        choice = str(input())
+        if choice == "N":
+            loc = 31
+        elif choice == "S":
+            loc = 42
+        elif choice == "I":
+            print("You can investigate the plates and cutlery (P), the candles (C) or the lighting (L).")
+            
+        
                
                 
                             
