@@ -340,7 +340,7 @@ while  True:
                 elif crystal() == "big failure":
                     endgame(1)
             elif choice == "CBD":
-                print("lala") #CBD#
+                inap()
             elif choice == "SBB":
                 print("You pull the bomb out of your pocket and place it near the window but it explodes before you can take cover.")
                 print("The window shatters and an alarm sounds. Unfortunately you are injured by the bomb and the broken glass.")
@@ -722,11 +722,37 @@ while  True:
         print("The door is open and you walk out onto a spiral staircase which has stairs leading off upwards and downwards.")
         if stairrobot = 1:
             print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
+            print("You must use a piece of equipment to defend against the attack")
             listweapons()
-            #robot attack#
+            choice = str(input())
+            if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD":
+                print("You parry the attack but your weapon is irrepairably damaged due to the impact.")
+                stairrobot = 0
+                if choice == "BD":
+                    destroy("black dagger (BD)")
+                elif choice == "SS":
+                    destroy("shortsword (SS)")
+                elif choice == "CBD":
+                    destroy("CBD")
+                else:
+                    destroy("warhammer (WH)")
+            elif choice == "GB" or choice == "SOS" or choice == "HOH":
+                stairrobot = 0
+                print("You successfully defend against the attack and your weapon is undamaged.")
+            else:
+                inap()
+        else:
+            Print("You can go upwards (U) or downwards (D) on the stairs or exit at this level (E).")
+            choice = str(input())
+            if choice == "U":
+                loc = 40
+            elif choice == "D":
+                loc = 41
+            elif choice == "E":
+                loc = 31 
     elif loc == 35:
         print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room.") 
-                
+               
                 
                             
                             
