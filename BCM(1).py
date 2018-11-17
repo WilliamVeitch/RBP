@@ -576,7 +576,7 @@ while  True:
                     print("The room is very small and you have to crouch down to get in.")
                     print("In the room is a low wooden table with a green candle and a set of rusted keys on it.")
                     print("You take the items and withdraw into the cylindrical room.")
-                    eqlist.append("gcandle")
+                    eqlist.append("green candle")
                     eqlist.append("rusted keys")
                 else:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
@@ -665,6 +665,7 @@ while  True:
             loc = 32
         elif choice == "BD":
             loc = 33
+            oriloc = 29
     elif loc == 30:
         print("30")
         #move to loc 30#
@@ -679,6 +680,7 @@ while  True:
             loc = 35
         elif choice = "WD":
             loc = 33
+            oriloc = 31
     elif loc == 32:
         print("You are in a corridor which runs from North to South. To the South is the main door of the mansion. There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
         choice = str(input())
@@ -716,6 +718,8 @@ while  True:
                         print("You cannot remember the correct way to use the crystal.")
                     elif crystal() == "big failure":
                         endgame(2)
+                elif choice == "R":
+                    loc = oriloc
                 else:
                     inap()
     elif loc == 34:
@@ -759,7 +763,44 @@ while  True:
         elif choice == "S":
             loc = 42
         elif choice == "I":
-            print("You can investigate the plates and cutlery (P), the candles (C) or the lighting (L).")
+            print("You can investigate the plates and cutlery (P), the candles (C) or the underside of the table (T).")
+            choice = str(input())
+            if choice == "P":
+                print("you notice that one of the forks has been magnetised. You take it with you. You notice nothing remarkable about any of the other cutlery or plates.")
+                eqlist.append("magnetic fork (MF)")
+            elif choice == "T":
+                print("You notice nothing remarkable about the table.")
+            elif choice == "C":
+                print("You notice that while all other candles in the room are white or yellow, one is a vibrant shade of blue. You decide to take it with you.")
+                eqlist.append("blue candle")
+    elif loc == 36:
+        print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W), a dirty wooden door leading to the North (N), a solid metal door to the East(E) and a colourfully painted door to the South (S).")
+        choice = str(input())
+        if choice == "N":
+            loc = 42
+        elif choice == "E":
+            loc = 43
+        elif choice == "S":
+            loc = 44
+        elif choice == "W":
+            loc = 32
+    elif loc == 37:
+        print(" You are in a sparsely furnished corridor running from East to West. There are two doors leading to the South (SE) and (SW), a junction with another corridor to the East (E) and to the North, a short passageway leading up to another door (N).")
+        choice = str(input())
+        if choice == "SE":
+            loc = 45
+        elif choice == "SW":
+            loc = 46
+        elif choice == "E":
+            loc = 32
+        elif choice == "N":
+            print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
+            print("You are able to escape from the trap unharmed and you open the door to the North.")
+            loc = 47
+            
+        
+        
+                              
             
         
                
