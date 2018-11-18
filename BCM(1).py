@@ -808,7 +808,7 @@ while  True:
         print("You walk into the room and notice a bank of switches in the far corner of the room. In the centre of the room is a small, round hole in the floor surrounded by inscriptions from a language you do not recognise. To one side of the room is a desk with various papers and tools on it. There are doors to the South and to the West.")
         print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
         choice = str(input())
-        if choice == "SW:
+        if choice == "SW":
             # stair control #
         elif choice == "H":
             if "metal rod" in eqlist:
