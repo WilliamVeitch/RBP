@@ -8,6 +8,7 @@ ask = "A"
 alert = 0
 window = 1
 stairrobot = 1
+rustdoor = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 while  True:
@@ -112,7 +113,7 @@ while  True:
         eqlist.append("stone rod (SR)")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted")
-        print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magic map (MM), strength potion (SP) and the energy crystal (E)")
+        print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (E)")
         while ask != "NO":
             ask = str(input("Do you want to ask Geelophisis about an invention?   "))
             if ask == "CBD":
@@ -548,8 +549,8 @@ while  True:
                             if choice == "C":
                                 print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
                                 print("You take the rods.")
-                                eqlist.append("woodenrod")
-                                eqlist.append("metalrod")
+                                eqlist.append("wooden rod")
+                                eqlist.append("metal rod")
                             elif choice == "B":
                                 eqlist.append("information book")
                                 print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
@@ -601,7 +602,7 @@ while  True:
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
             choice = str(input())
-            if choice == "S":
+            if choice == "D":
                 print("The shed door is locked so you may use a weapon against it.")
                 listweapons()
                 choice = str(input)
@@ -794,11 +795,49 @@ while  True:
         elif choice == "E":
             loc = 32
         elif choice == "N":
-            print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
-            print("You are able to escape from the trap unharmed and you open the door to the North.")
+            if "magical map (MM)" in eqlist:
+                print("You feel uneasy about this passageway so you consult the magical map. It shows that there is a pit trap. You carefully move around the trap and you open the door to the North")
+                destroy("magical map (MM)")
+            else:
+                print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
+                print("You are able to escape from the trap unharmed and you open the door to the North.")
+                alert = alert + 1
             loc = 47
-            
-        
+    elif loc == 38:
+        rustdoor = 0
+        print("You walk into the room and notice a bank of switches in the far corner of the room. In the centre of the room is a small, round hole in the floor surrounded by inscriptions from a language you do not recognise. To one side of the room is a desk with various papers and tools on it. There are doors to the South and to the West.")
+        print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
+        choice = str(input())
+        if choice == "SW:
+            # stair control #
+        elif choice == "H":
+            if "metal rod" in eqlist:
+                print("You notice that the symbols around the hole are similar to those engraved on the metal rod.")
+                print("You can attempt to insert the metal rod (MR) or you can withdraw (W)")
+                choice = str(input())
+                if choice == "MR":
+                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
+                    switchunlock = 1         
+            else:
+                print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
+        elif choice == "D":
+            print("You find a diagram which you believe corresponds to the switches you saw in the corner of the room.")
+        elif choice == "S":
+            loc = 31
+        elif choice == "W":
+            loc = 29
+    elif loc == 39: 
+        print("The shed is large with various pieces of garden related machinery. To the North and South are wooden doors (N) and (S). You could remain in the shed and investigate it further (I).")
+        choice = str(input())
+        if choice == "S":
+            print("You leave the shed by the Southern door.")
+            loc = 27
+        elif choice == "N":
+            loc = 48
+        elif choice == "I":
+            print("You find a logbook on a shelf at the back of the shed and you read the most recent entry.")
+            # collapsing room #
+              
         
                               
             
