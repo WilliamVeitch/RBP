@@ -837,6 +837,24 @@ while  True:
         elif choice == "I":
             print("You find a logbook on a shelf at the back of the shed and you read the most recent entry.")
             # collapsing room #
+    elif loc == 40:
+        print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit at this level (E)")
+        choice = str(input))
+        if choice == "U":
+            loc = 49
+        elif choice == "D":
+            loc = 34
+        elif choice == "E":
+            loc = 50
+    elif loc == 41:
+        print("You are standing at the bottom of the spiral staircase. You can go up (U) or exit at this level (E)")
+        choice = str(input())
+        if choice == "U":
+            loc = 34
+        elif choice == "E":
+            loc = 51
+    elif loc == 42:
+        print("Kitchen")
               
         
                               
