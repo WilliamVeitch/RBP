@@ -854,8 +854,24 @@ while  True:
         elif choice == "E":
             loc = 51
     elif loc == 42:
-        print("Kitchen")
-              
+        print("You are in a large kitchen with many utensils arranged neatly on top of work surfaces. There is a small elevator in the corner of the room, presumably for the transportation of cooking supplies. You could investigate the elevator (E) or the kitchen utensils (U). There are doors to the North and South (N and S).")
+        choice = str(input())
+        if choice == "E":
+            print() #elevator#
+        elif choice == "U":
+            print() #magnetic fork#
+        elif choice == "N":
+            loc = 35
+        elif choice == "S":
+            loc = 36
+    elif loc == 43:
+        print("You are in a small circular room with a narrow ascending staircase. There are no other objects of interest in the room. You can ascend the staircase (A) or exit the room to the West (W).")
+        choice = str(input())
+        if choice == "A":
+            loc = 52
+        elif choice == "W":
+            loc = 36
+
         
                               
             
