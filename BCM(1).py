@@ -854,10 +854,15 @@ while  True:
         elif choice == "E":
             loc = 51
     elif loc == 42:
-        print("You are in a large kitchen with many utensils arranged neatly on top of work surfaces. There is a small elevator in the corner of the room, presumably for the transportation of cooking supplies. You could investigate the elevator (E) or the kitchen utensils (U). There are doors to the North and South (N and S).")
+        print("You are in a large kitchen with many utensils arranged neatly on top of work surfaces. There is a small elevator shaft in the corner of the room, presumably for the transportation of cooking supplies. You could investigate the elevator (E) or the kitchen utensils (U). There are doors to the North and South (N and S).")
         choice = str(input())
         if choice == "E":
-            print() #elevator#
+            print("You examine the elevator shaft and discover that the elevator is not in working order.)
+            if "super strong rope (SSR)" in eqlist:
+                  print("You look up the shaft and at first you can see nothing. However, as your eyes become accustomed to the darkness, you notice a thin rod sticking out of the wall about halfway up the shaft. Using your super strong rope, you may attempt to climb up the shaft to this point (C).")
+            choice = str(input())
+            if choice == "C":
+                  print() #elavator#
         elif choice == "U":
             print() #magnetic fork#
         elif choice == "N":
