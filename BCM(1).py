@@ -862,7 +862,20 @@ while  True:
                   print("You look up the shaft and at first you can see nothing. However, as your eyes become accustomed to the darkness, you notice a thin rod sticking out of the wall about halfway up the shaft. Using your super strong rope, you may attempt to climb up the shaft to this point (C).")
             choice = str(input())
             if choice == "C":
-                  print() #elavator#
+                  print("You throw the rope up the shaft and it catches on the rod. you then ascend the elavator shaft. You find that the rod is securely fastened to the wall and that there is a small ledge just above it.")
+                  print("You can pull yourself up onto the ledge (L) or go back down the shaft to the kitchen (D).")
+                  choice = str(input())
+                  if choice == "L":
+                      print("You climb up to the ledge and discover that a locked chest sits upon it.")
+                  if "brass key" in eqlist:
+                      print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
+                      #chest#
+                  else:
+                      print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
+                      choice = str(input())
+                      if choice == "W":
+                          listweapons()
+                          #chest#
         elif choice == "U":
             print() #magnetic fork#
         elif choice == "N":
@@ -876,10 +889,24 @@ while  True:
             loc = 52
         elif choice == "W":
             loc = 36
-
-        
-                              
-            
+    elif loc == 44:
+        print("You are in a very spacious living room. Finely decorated rugs cover the floor and the walls have expensive paintings mounted upon them. There are two large sofas and several comfortable chairs and nearby is a small yet magnificent woodwn table")
+        print("you can leave the room through the door to the North (N). You could also investigate the paintings (P), the table (T) or the floor (F).")
+        choice = str(input())
+        if choice == "N":
+            loc = 36
+        elif coice == "P":
+            print("You investigate the paintings.")  #paintings#
+        elif choice == "F":
+            print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
+            choice = str(input())
+            if choice == "O":
+                trapnat = random.randint(1, 4)
+                #random trapdoors#
+        elif choice == "T":
+            print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
+    elif loc == 45:
+        print("Courtyard")        
         
                
                 
