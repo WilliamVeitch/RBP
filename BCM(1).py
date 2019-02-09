@@ -1,6 +1,6 @@
+import random
 print("The adventures of Broughtly in Crultney Mansion")
 loc = 1
-import random
 coins = 8
 eqlist = list()
 swicob = "0"
@@ -11,43 +11,51 @@ stairrobot = 1
 rustdoor = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
-while  True:
-    def inap():
-        print("The item you have chosen is not appropriate for the current situation")
-    def equip():
-        print("You possess ", eqlist,)     
-    def destroy(n):
-        x = 0
-        while n in eqlist:
-            if eqlist[x] == n:
-                del eqlist[x]
-            x = x + 1
-    def crystal():
-        print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
-        print("In clockwise order, starting with the pentagon, these are a pentagon, a triangle, a square and a hexagon")
-        print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
-        choice = str(input())
-        if choice == "S":
-            strike = str(input("Which symbol do you strike?   "))
-            if strike == "HEXAGON":
-                destroy("energy crystal (EC)")
-                return "success"
-            elif strike != "HEXAGON":
-                return "failure"
+def inap():
+    print("The item you have chosen is not appropriate for the current situation")
+def equip():
+    print("You possess ", eqlist,)     
+def destroy(n):
+    x = 0
+    while n in eqlist:
+        if eqlist[x] == n:
+            del eqlist[x]
+        x = x + 1
+def crystal():
+    print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
+    print("In clockwise order, starting with the pentagon, these are a pentagon, a triangle, a square and a hexagon")
+    print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
+    choice = str(input())
+    if choice == "S":
+        strike = str(input("Which symbol do you strike?   "))
+        if strike == "HEXAGON":
+            destroy("energy crystal (EC)")
+            return "success"
+        elif strike != "HEXAGON":
+            return "failure"
+    else:
+        if random.randint(1, 4) == 4:
+            print("The crystal strikes the target and releases a beam of energy which incinerates you")
+            return "big failure"
         else:
-            if random.randint(1, 4) == 4:
-                print("The crystal strikes the target and releases a beam of energy which incinerates you")
-                return "big failure"
-            else:
-                print("The crystal bounces off the target without releasing a beam of energy")
-                return "failure"
-    def endgame(n):
-        print(eqlist)
-        print("You have failed in your mission.")
-        print("You completed ", n, " out of 5 major events successfully.")
-        end = input() 
-    def listweapons():
-        print("You can attempt to use any of the folllowing:", eqlist)
+            print("The crystal bounces off the target without releasing a beam of energy")
+            return "failure"
+def endgame(n):
+    print(eqlist)
+    print("You have failed in your mission.")
+    print("You completed ", n, " out of 5 major events successfully.")
+    end = input() 
+def listweapons():
+    print("You can attempt to use any of the folllowing:", eqlist)
+def randomcontainer()
+    xx = random.randint(1,6)
+    if xx == 1:
+        contents = "a small robotic arm that lunges out at you."
+    elif xx == 2:
+        contents = "a sack containing vegetables and other provisions. You leave it as it would be too heavy to carry around."
+    elif xx == 3:
+        contents = "a radio transmitter. You take this with you."
+while  True:
     if loc == 1:
         print("The year is 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies or the mission")
