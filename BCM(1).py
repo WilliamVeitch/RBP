@@ -47,7 +47,7 @@ def endgame(n):
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing:", eqlist)
-def randomcontainer()
+def randomcontainer():
     xx = random.randint(1,6)
     if xx == 1:
         contents = "a small robotic arm that lunges out at you."
@@ -55,6 +55,7 @@ def randomcontainer()
         contents = "a sack containing vegetables and other provisions. You leave it as it would be too heavy to carry around."
     elif xx == 3:
         contents = "a radio transmitter. You take this with you."
+    return contents
 while  True:
     if loc == 1:
         print("The year is 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
@@ -116,11 +117,11 @@ while  True:
                 loc = 999
         loc = 5
     elif loc == 4:
-        print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since you mission with the Robo Lion in 1963")
+        print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since your mission with the Robo Lion in 1963")
         print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes willbe useful on your mission.")
         eqlist.append("stone rod (SR)")
         print("He shows you his inventions and says that you can choose two of them.")
-        print("You can ask Geelophisis about an invention by typing the item code when prompted")
+        print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
         print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (E)")
         while ask != "NO":
             ask = str(input("Do you want to ask Geelophisis about an invention?   "))
@@ -409,30 +410,7 @@ while  True:
             place = C
             loc = 30
             #move to loc 30#
-            listweapons()
-            choice = str(input())
-            if choice == "GB" or choice == "SS" or choice == "SOS":
-                print("Your weapon is successful in clearing a path through the barbed wire.")
-                loc = 27
-            elif choice == "BD":
-                print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
-                destroy("black dagger (BD)")
-                loc = 27
-            elif choice == "TB" or choice == "PC":
-                print("You are able to blast a path through the barbed wire.")
-                if choice == "TB":
-                    destroy("time bomb (TB)")
-                loc = 27
-            elif choice == "WH":
-                print("This weapon is not effective in cutting a path through the barbed wire.")
-            elif choice == "EC":
-                if  crystal() == "success":
-                    print("The barbed wire is destroyed and you walk towards the mansion.")
-                    loc = 27
-                elif crystal() == "failure":
-                    destroy("energy crystal (EC)")
-                    print("The crystal rolls away into the middle of the wire")
-                elif crystal() == "big failure":
+            
                     endgame(1)           
         elif choice == "E":
             print("The barbed wire continues on the Eastern side of the mansion until it reaches the sea on the North coast.")
@@ -572,7 +550,7 @@ while  True:
         if choice == "S":
             loc = 29
         elif choice == "B":
-            print("Inserted into one of the books you find a map of the mansion.")
+            print("Inserted into one of the books you find a map of the mansion. You take this with you so that you may refer to it later.")
             #map#
         elif choice == "F":
             print("You crawl into the fireplace and find a narrow passage to the side. The passage leads up to a small black door with no handle.")
@@ -597,7 +575,7 @@ while  True:
         choice = str(input())
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
-            print("You may use a weapon to break down the door or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
+            print("You may use a weapon to break down the door (W) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
             choice = str(input())
             if choice == "SW":
                 if "super strong rope (SSR)" in eqlist:
@@ -605,7 +583,12 @@ while  True:
                     alert = alert + 1
                     print("You hurriedly use an object from your equipment bag to smash the window and you climb inside. Unfortunately, you are forced to leave behind the rope since you cannot reach it through the window without alerting the CCTV camera again.")
                     destroy("super strong rope (SSR)")
-                    
+                else:
+                    print("You have no equipment for climbing so you abandon your attempt toscale the wall. However, as you climb down, an alarm sounds.")
+                    alert = alert + 1
+            elif choice == "W"
+            listweapons()
+            #main door#        
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -676,8 +659,33 @@ while  True:
             loc = 33
             oriloc = 29
     elif loc == 30:
-        print("30")
-        #move to loc 30#
+        listweapons()
+        choice = str(input())
+        if choice == "GB" or choice == "SS" or choice == "SOS":
+            print("Your weapon is successful in clearing a path through the barbed wire.")
+            loc = 27
+        elif choice == "BD":
+            print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
+            destroy("black dagger (BD)")
+            loc = 27
+        elif choice == "TB" or choice == "PC":
+            print("You are able to blast a path through the barbed wire.")
+            if choice == "TB":
+                destroy("time bomb (TB)")
+            loc = 27
+        elif choice == "WH":
+            print("This weapon is not effective in cutting a path through the barbed wire.")
+        elif choice == "EC":
+            if  crystal() == "success":
+                print("The barbed wire is destroyed and you walk towards the mansion.")
+                loc = 27
+            elif crystal() == "failure":
+                destroy("energy crystal (EC)")
+                print("The crystal rolls away into the middle of the wire")
+            elif crystal() == "big failure":
+        else:
+            if place == "C"
+       #move to loc 30#
     elif loc == 31:
         print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the WEstern side of the passage (WD).")
         choice = str(input())
@@ -843,7 +851,7 @@ while  True:
         elif choice == "N":
             loc = 48
         elif choice == "I":
-            print("You find a logbook on a shelf at the back of the shed and you read the most recent entry.")
+            print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing")
             # collapsing room #
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit at this level (E)")
@@ -885,7 +893,7 @@ while  True:
                           listweapons()
                           #chest#
         elif choice == "U":
-            print() #magnetic fork#
+            print("magnetic fork") #magnetic fork#
         elif choice == "N":
             loc = 35
         elif choice == "S":
@@ -909,8 +917,8 @@ while  True:
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input())
             if choice == "O":
-                trapnat = random.randint(1, 4)
-                #random trapdoors#
+                text = randomcontainer()
+                print("You open the trapdoor and find ", text)
         elif choice == "T":
             print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
     elif loc == 45:
