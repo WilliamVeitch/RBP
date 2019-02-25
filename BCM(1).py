@@ -55,6 +55,9 @@ def randomcontainer():
         contents = "a sack containing vegetables and other provisions. You leave it as it would be too heavy to carry around."
     elif xx == 3:
         contents = "a radio transmitter. You take this with you."
+    elif xx == 4:
+        coins = coins + 3
+        contents = "3 banana coins which you decide to take with you."
     return contents
 while  True:
     if loc == 1:
