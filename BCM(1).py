@@ -9,6 +9,7 @@ alert = 0
 window = 1
 stairrobot = 1
 rustdoor = 1
+observe = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -925,50 +926,28 @@ while  True:
         elif choice == "T":
             print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
     elif loc == 45:
-        print("Courtyard")        
-        
-               
-                
-                            
-                            
-                
-
-                
-
-                
-                
-                
-                    
-                
-
-        
-                
-
-                    
-                    
-                    
-            
-        
- 
-        
-        
-                
-                
-        
-            
-        
-        
-        
-            
-        
-
-        
-        
-        
-              
-    
-        
-        
+        print("You are in a courtyard which is enclosed on all sides by walls. In the centre is a medium sized tree surrounded by various other plants and benches. Above you is a large balcony which you cannot access from below.")        
+        print("The only door out of the courtyard is to the North (N). You could observe the balcony in greater detail (B) or observe the tree in the centre of the courtyard (T).")
+        choice = str(input())
+        if choice == "N":
+            loc = 37
+        elif choice == "B":
+            print("The balcony looks down on the courtyard from 3 sides. You observe that while two of these sides have only wooden railings, the other has a stone wall with only a small gap above it.")
+        elif choice == "T":
+            print("You notice nothing unusual about the tree, nor do you find anything of interest amongst the plants and benches nearby. You climb the tree for a better view of the 1st floor balcony. You can observe from this position that there are two security cameras mounted on the balcony.")
+            if "super strong rope (SSR)" in eqlist:
+                print("You could attempt to climb up to the balcony using your super strong rope (SSR).")
+                choice = str(input())
+                if choice == "SSR":
+                    if observe == 1:  
+                        print("You are able to climb up to the balcony, but not before an alarm sounds. You notice a security camera on the balcony. It must have noticed you and sounded the alarm.") 
+                    else:
+                        print("You successfully climb up to the balcony.")
+                    loc = 53
+            else:
+                print("Due to the presence of the security cameras and your lack of suitable climbing equipment, you climb down from the tree.")
+    elif loc == 46:
+        print("Inner collapsed room.")
         
 
             
