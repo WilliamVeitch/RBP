@@ -10,6 +10,8 @@ window = 1
 stairrobot = 1
 rustdoor = 1
 observe = 1
+screen = [4, 4]
+fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -60,6 +62,11 @@ def randomcontainer():
         coins = coins + 3
         contents = "3 banana coins which you decide to take with you."
     return contents
+def screencheck(a, d, p):
+    if d == screen[p]:
+        return 54
+    else:
+        return a
 while  True:
     if loc == 1:
         print("The year is 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
@@ -921,8 +928,7 @@ while  True:
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input())
             if choice == "O":
-                text = randomcontainer()
-                print("You open the trapdoor and find ", text)
+                print("You open the trapdoor and find ", randomcontainer())
         elif choice == "T":
             print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
     elif loc == 45:
@@ -948,7 +954,23 @@ while  True:
                 print("Due to the presence of the security cameras and your lack of suitable climbing equipment, you climb down from the tree.")
     elif loc == 46:
         print("Inner collapsed room.")
-        
+        #collapsed room#
+    elif loc == 47:
+        print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). There is also a small depression in the centre of the room which you could examine (D).")
+        choice = str(input())
+        if choice == "N":
+            loc = screencheck(55, 1, 0)
+        elif choice == "E":
+            loc = 56
+        elif choice == "S":
+            loc = 37
+        elif choice == "W":
+            loc = 57
+        elif choice == "D":
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
+    elif loc == 48:
+        print("Outer collapsed room.")
+        #collapsed room#
 
             
         
