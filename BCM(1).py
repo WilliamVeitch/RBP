@@ -751,7 +751,7 @@ while  True:
                 else:
                     inap()
     elif loc == 34:
-        print("The door is open and you walk out onto a spiral staircase which has stairs leading off upwards and downwards.")
+        print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
         if stairrobot = 1:
             print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
             print("You must use a piece of equipment to defend against the attack")
@@ -774,7 +774,7 @@ while  True:
             else:
                 inap()
         else:
-            Print("You can go upwards (U) or downwards (D) on the stairs or exit at this level (E).")
+            Print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input())
             if choice == "U":
                 loc = 40
@@ -865,7 +865,7 @@ while  True:
             print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing")
             # collapsing room #
     elif loc == 40:
-        print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit at this level (E)")
+        print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
         choice = str(input))
         if choice == "U":
             loc = 49
@@ -874,7 +874,7 @@ while  True:
         elif choice == "E":
             loc = 50
     elif loc == 41:
-        print("You are standing at the bottom of the spiral staircase. You can go up (U) or exit at this level (E)")
+        print("You are standing at the bottom of the spiral staircase. You can go up (U) or exit to the South at this level (E)")
         choice = str(input())
         if choice == "U":
             loc = 34
@@ -972,14 +972,22 @@ while  True:
         print("Outer collapsed room.")
         #collapsed room#
     elif loc == 49:
-        print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit into the corridor (E).")
+        print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit to the corridor in the South.")
         choice = str(input())
         if choice == "D":
             loc = 40
         elif choice == "E":
             loc = 58
     elif loc == 50:
-        print("corridor")
+        print("You are in a corridor which runs from East to West. There are two doors to the North (NW and NE) there is also a door to the South (S).")
+        choice = str(input())
+        if choice == "NW":
+            print("observation room")
+            #observation room#
+        elif choice == "NE":
+            loc = 40
+        elif choice == "S":
+            loc = 59
 
             
         
