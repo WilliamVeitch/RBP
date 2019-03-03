@@ -971,6 +971,15 @@ while  True:
     elif loc == 48:
         print("Outer collapsed room.")
         #collapsed room#
+    elif loc == 49:
+        print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit into the corridor (E).")
+        choice = str(input())
+        if choice == "D":
+            loc = 40
+        elif choice == "E":
+            loc = 58
+    elif loc == 50:
+        print("corridor")
 
             
         
