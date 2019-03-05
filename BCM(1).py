@@ -988,7 +988,17 @@ while  True:
             loc = 40
         elif choice == "S":
             loc = 59
-
-            
+    elif loc == 51:
+        print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North (SS).") 
+        choice = str(input())
+        if choice == "N":
+            loc = 60
+        elif choice == "S":
+            loc = 61
+        elif choice == "SS":
+            loc = 41
+    elif loc == 52:
+        print("You are in a small room with no doors and a narrow descending staircase (D).")
+        #tower room#
         
                   
