@@ -959,6 +959,7 @@ while  True:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). There is also a small depression in the centre of the room which you could examine (D).")
         choice = str(input())
         if choice == "N":
+            acloc = 47
             loc = screencheck(55, 1, 0)
         elif choice == "E":
             loc = 56
@@ -998,7 +999,33 @@ while  True:
         elif choice == "SS":
             loc = 41
     elif loc == 52:
-        print("You are in a small room with no doors and a narrow descending staircase (D).")
+        print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. On the floor below the window is a scrap of paper which you pick up.")
         #tower room#
-        
+    elif loc == 53:
+        print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On this part of the balcony, there is a small bench and an elaborate candle holder as well as several potted plants.")
+        print("You can go North (N), investigate the candle holder (C) or investigate the plants (P).")
+        choice = str(input())
+        if choice == "N":
+            loc = 62
+        elif choice == "C":
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist:
+                print("You may place a candle from your inventory into the holder (P) or you may discontinue your investigation of the candle holder (D).")
+                choice = str(input())
+                if choice == "P":
+                    print(eqlist)
+                    candleid = input("Which candle should be placed here?   ")
+                    #candles#
+            else:
+                print("You notice nothing unusual about the candle holder.")
+        elif choice == "P":
+            if observe == 1:
+                print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
+            else:
+                print("You notice nothing unusual about the plants.")
+    elif loc == 54:
+        print("You open the door but find your way blocked by a metal screen so you return to the room.")
+        loc = acloc
+    elif loc == 55:
+        print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W).")
+        choice = str(input())
                   
