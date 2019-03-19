@@ -960,7 +960,7 @@ while  True:
         choice = str(input())
         if choice == "N":
             acloc = 47
-            loc = screencheck(55, 1, 0)
+            loc = screencheck(55, 3, 0)
         elif choice == "E":
             loc = 56
         elif choice == "S":
@@ -1026,6 +1026,16 @@ while  True:
         print("You open the door but find your way blocked by a metal screen so you return to the room.")
         loc = acloc
     elif loc == 55:
-        print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W).")
+        print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). The room has no features worthy of further investigation.")
         choice = str(input())
-                  
+        acloc = 55
+        if choice == "N":
+            loc = screencheck(63, 1, 0)
+        elif choice == "E":
+            loc = screencheck(64, 2, 0)
+        elif choice == "S":
+            loc = screencheck(47, 3, 0)
+        elif choice == "W":
+            loc = screencheck(65, 4, 0)
+    elif loc == 56:
+        print("pool")
