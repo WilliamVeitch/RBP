@@ -980,7 +980,7 @@ while  True:
         elif choice == "E":
             loc = 58
     elif loc == 50:
-        print("You are in a corridor which runs from East to West. There are two doors to the North (NW and NE) there is also a door to the South (S).")
+        print("You are in a corridor which runs from East to West. The corridor borders a North-South corridor to the West (W). There are two doors to the North (NW and NE) there is also a door to the South (S).")
         choice = str(input())
         if choice == "NW":
             print("observation room")
@@ -989,6 +989,8 @@ while  True:
             loc = 40
         elif choice == "S":
             loc = 59
+        elif choice == "W":
+            loc = 66
     elif loc == 51:
         print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North (SS).") 
         choice = str(input())
