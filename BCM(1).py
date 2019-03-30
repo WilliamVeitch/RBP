@@ -1041,3 +1041,24 @@ while  True:
             loc = screencheck(65, 4, 0)
     elif loc == 56:
         print("pool")
+        #pool#
+    elif loc == 57:
+        print("You are in a dimly lit room with many wooden boxes piled up along the western wall. There is a door to the East (E). You could search through the boxes (B).")
+        choice = str(input())
+        if choice == "E":
+            loc = 47
+        elif choice == "B":
+            print("You find that the boxes contain a small metal wheel which you take with you. The boxes also contain many uninteresting items.")
+            smallwheels = smallwheels + 1
+    elif loc == 58:
+        print("You are in a corridor running from East to West. There are doors to the North and South (N and S) and there is a junction with a North-South corridor to the West (W).")
+        choice = str(input())
+        if choice == "N":
+            loc = 49
+        elif choice == "S":
+            loc = 67
+        elif choice == "W":
+            loc = 68
+    elif loc == 59:
+        print("Bedroom")
+            
