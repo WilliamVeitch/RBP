@@ -58,9 +58,16 @@ def randomcontainer():
         contents = "a sack containing vegetables and other provisions. You leave it as it would be too heavy to carry around."
     elif xx == 3:
         contents = "a radio transmitter. You take this with you."
+        eqlist.append("radio")
     elif xx == 4:
         coins = coins + 3
-        contents = "3 banana coins which you decide to take with you."
+        contents = "3 banana coins, which you decide to take with you."
+    elif xx == 5:
+        contents = "a box of matches, which you take with you."
+        eqlist.append("matches")
+    elif xx == 6:
+        contents = "a scrap of paper with indecipherable symbols on it."
+        
     return contents
 def screencheck(a, d, p):
     if d == screen[p]:
