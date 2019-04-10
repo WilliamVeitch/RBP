@@ -1068,4 +1068,12 @@ while  True:
             loc = 68
     elif loc == 59:
         print("Bedroom")
-            
+    elif loc == 60:
+        print("You are in a long rectangular room with a narrow staircase occupying around half the space in the room at the top of which is a door to the North (D). There is a door to the South (S) and there are no other objects of interest in the room.")
+        choice = str(input())
+        if choice == "N":
+            loc = 65
+        elif choice == "S":
+            loc = 51
+    elif loc == 61:
+        print("storage")
