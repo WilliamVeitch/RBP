@@ -1011,8 +1011,8 @@ while  True:
         print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. On the floor below the window is a scrap of paper which you pick up.")
         #tower room#
     elif loc == 53:
-        print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On this part of the balcony, there is a small bench and an elaborate candle holder as well as several potted plants.")
-        print("You can go North (N), investigate the candle holder (C) or investigate the plants (P).")
+        print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder as well as several potted plants.")
+        print("You can go North (N), investigate the candle holder (C), investigate the plants (P) or climb down into the courtyard (D).")
         choice = str(input())
         if choice == "N":
             loc = 62
@@ -1031,6 +1031,8 @@ while  True:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
             else:
                 print("You notice nothing unusual about the plants.")
+        elif choice == "D":
+            loc = 45
     elif loc == 54:
         print("You open the door but find your way blocked by a metal screen so you return to the room.")
         loc = acloc
@@ -1076,4 +1078,14 @@ while  True:
         elif choice == "S":
             loc = 51
     elif loc == 61:
-        print("storage")
+        print("You are in a musty room with a low ceiling. There are a few boxes piled up against the far wall and nearby there is an interesting looking panel on the wall. You could investigate the contents of the boxes (B), investigate the panel (P) or withdraw from the room (W).")
+        choice = str(input())
+        if choice == "B":
+            print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
+            eqlist.append("fuses")
+        elif choice == "P":
+            print("panel") #electronics#
+        elif choice == "W":
+            loc = 51
+    elif loc == 62:
+        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder which is currently empty (C). You could attempt to climb down into the courtyard below (D).") 
