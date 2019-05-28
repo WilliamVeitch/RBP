@@ -1089,3 +1089,14 @@ while  True:
             loc = 51
     elif loc == 62:
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder which is currently empty (C). You could attempt to climb down into the courtyard below (D).") 
+        choice = str(input())
+        if choice == "N":
+            loc = 67
+        elif choice == "S":
+            loc =53
+        
+        
+        
+        
+        
+        
