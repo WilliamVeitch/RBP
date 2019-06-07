@@ -377,7 +377,7 @@ while  True:
                 print("The window shatters and an alarm sounds. Unfortunately you are injured by the bomb and the broken glass.")
                 if "medical kit (MK)" in eqlist:
                     print("Since you have a medical kit, you use it and after recovering, you enter the room.")
-                    destroy(medical kit (MK))
+                    destroy("medical kit (MK)")
                     loc = 26
                     window = 0
                 else:
@@ -432,7 +432,7 @@ while  True:
             loc = 30
             #move to loc 30#
             
-                    endgame(1)           
+            endgame(1)           
         elif choice == "E":
             print("The barbed wire continues on the Eastern side of the mansion until it reaches the sea on the North coast.")
             loc = 25
@@ -607,8 +607,8 @@ while  True:
                 else:
                     print("You have no equipment for climbing so you abandon your attempt toscale the wall. However, as you climb down, an alarm sounds.")
                     alert = alert + 1
-            elif choice == "W"
-            listweapons()
+            elif choice == "W":
+                listweapons()
             #main door#        
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
@@ -704,19 +704,21 @@ while  True:
                 destroy("energy crystal (EC)")
                 print("The crystal rolls away into the middle of the wire")
             elif crystal() == "big failure":
+                endgame(1)
         else:
-            if place == "C"
+            if place == "C":
+                loc = 30
        #move to loc 30#
     elif loc == 31:
         print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the WEstern side of the passage (WD).")
         choice = str(input())
         if choice == "W":
             loc = 29
-        elif choice = "NED":
+        elif choice == "NED":
             loc = 34
-        elif choice = "SED":
+        elif choice == "SED":
             loc = 35
-        elif choice = "WD":
+        elif choice == "WD":
             loc = 33
             oriloc = 31
     elif loc == 32:
@@ -762,7 +764,7 @@ while  True:
                     inap()
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if stairrobot = 1:
+        if stairrobot == 1:
             print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
             print("You must use a piece of equipment to defend against the attack")
             listweapons()
@@ -846,6 +848,7 @@ while  True:
         print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
         choice = str(input())
         if choice == "SW":
+            print("stair control")
             # stair control #
         elif choice == "H":
             if "metal rod" in eqlist:
@@ -876,7 +879,7 @@ while  True:
             # collapsing room #
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
-        choice = str(input))
+        choice = str(input())
         if choice == "U":
             loc = 49
         elif choice == "D":
