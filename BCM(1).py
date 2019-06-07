@@ -11,6 +11,9 @@ stairrobot = 1
 rustdoor = 1
 observe = 1
 screen = [4, 4]
+candleN = ""
+candleC = ""
+candleS = ""
 fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -1018,12 +1021,19 @@ while  True:
             loc = 62
         elif choice == "C":
             if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist:
-                print("You may place a candle from your inventory into the holder (P) or you may discontinue your investigation of the candle holder (D).")
+                scs = "You may place a candle from your inventory into the holder (P) "
+                if len(candleS) > 3:
+                    scs = "You may retrieve the ", candleS, "from the candle holder (R)" 
+                print(scs, " or you may discontinue your investigation of the candle holder (D).")
                 choice = str(input())
                 if choice == "P":
                     print(eqlist)
                     candleid = input("Which candle should be placed here?   ")
-                    #candles#
+                    destroy(candleid)
+                    cndleS = candleid
+                elif choice == "R":
+                    eqlist.append(candleS)
+                    candleS = ""
             else:
                 print("You notice nothing unusual about the candle holder.")
         elif choice == "P":
