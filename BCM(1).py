@@ -207,7 +207,7 @@ while  True:
             loc = 12
     elif loc == 8:
         print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons.")
-        print("The ninja leaders also show you a map of the islands and the surrounding area")
+        print("The ninja leaders also show you a map of the islands and the surrounding area.")
         #map#
         print("You now travel to the port.")
         loc = 7
