@@ -14,6 +14,7 @@ screen = [4, 4]
 candleN = ""
 candleC = ""
 candleS = ""
+GB = 0
 fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -261,13 +262,17 @@ while  True:
         elif choice == "T":
             loc = 11
     elif loc == 15:
-        print("The gorillas welcome you into their base and give you the choice of either a sticky banana bomb (SBB) or a medical kit (MK) to use on your mission. They tell you to take a rowing boat to the island as this is cheaper than the ferry.")
-        choice = str(input())
-        if choice == "SBB":
-            eqlist.append("sticky banana bomb (SBB)")
-        elif choice == "MK":
-            eqlist.append("medical kit (MK)")
-        print("You return to the town centre.")
+        if GB == 0:
+            print("The gorillas welcome you into their base and give you the choice of either a sticky banana bomb (SBB) or a medical kit (MK) to use on your mission. They tell you to take a rowing boat to the island as this is cheaper than the ferry.")
+            choice = str(input())
+            if choice == "SBB":
+                eqlist.append("sticky banana bomb (SBB)")
+            elif choice == "MK":
+                eqlist.append("medical kit (MK)")
+            print("You return to the town centre.")
+            GB = 1
+        else:
+            print("The gorillas tell you that they will be unable to help you any further so you leave the base.")
         loc = 11
     elif loc == 16:
         print("You see many local shops selling a wide range of products.")
@@ -1023,20 +1028,7 @@ while  True:
         if choice == "N":
             loc = 62
         elif choice == "C":
-            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist:
-                scs = "You may place a candle from your inventory into the holder (P) "
-                if len(candleS) > 3:
-                    scs = "You may retrieve the ", candleS, "from the candle holder (R)" 
-                print(scs, " or you may discontinue your investigation of the candle holder (D).")
-                choice = str(input())
-                if choice == "P":
-                    print(eqlist)
-                    candleid = input("Which candle should be placed here?   ")
-                    destroy(candleid)
-                    cndleS = candleid
-                elif choice == "R":
-                    eqlist.append(candleS)
-                    candleS = ""
+            
             else:
                 print("You notice nothing unusual about the candle holder.")
         elif choice == "P":
@@ -1101,15 +1093,34 @@ while  True:
         elif choice == "W":
             loc = 51
     elif loc == 62:
-        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder which is currently empty (C). You could attempt to climb down into the courtyard below (D).") 
+        ccs = ""
+        if len(candleC)>3:
+            ccs = ""
+        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this.") 
+        if candleN == "red candle" and candleC == "green candle" and candleS == "blue candle":
+            print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
         choice = str(input())
         if choice == "N":
             loc = 67
         elif choice == "S":
-            loc =53
-        
-        
-        
-        
+            loc = 53
+        elif choice == "C":
+            
+        elif choice == "D"
+            luck = random.randint(1,5)
+            if luck == 1: 
+                print("You climb down but are injured in the process.")
+                if "medical kit (MK)" in eqlist:
+                      print("Since you have a medical kit you use it and are able to continue with your investigation of the mansion.")
+                      destroy("medical kit (MK)")
+                else:
+                    print("You are so severely injured that you must abort your mission")
+                    endgame(2)
+            elif luck == 2:
+                print("You climb down but an alarm sounds as you do so.")
+                alert = alert + 1
+            loc = 45
+                      
+                
         
         
