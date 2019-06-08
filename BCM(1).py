@@ -1028,7 +1028,20 @@ while  True:
         if choice == "N":
             loc = 62
         elif choice == "C":
-            
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candleS) > 3:
+                scs = "You may place a candle from your inventory into the holder (P) "
+                if len(candleS) > 3:
+                    scs = "You may retrieve the ", candleS, "from the candle holder (R)" 
+                print(scs, " or you may discontinue your investigation of the candle holder (D).")
+                choice = str(input())
+                if choice == "P":
+                    print(eqlist)
+                    candleid = input("Which candle should be placed here?   ")
+                    destroy(candleid)
+                    candleS = candleid
+                elif choice == "R":
+                    eqlist.append(candleS)
+                    candleS = ""
             else:
                 print("You notice nothing unusual about the candle holder.")
         elif choice == "P":
@@ -1099,13 +1112,29 @@ while  True:
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this.") 
         if candleN == "red candle" and candleC == "green candle" and candleS == "blue candle":
             print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
+            eqlist.append("silver key")
         choice = str(input())
         if choice == "N":
             loc = 67
         elif choice == "S":
             loc = 53
         elif choice == "C":
-            
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candleC) > 3:
+                scs = "You may place a candle from your inventory into the holder (P) "
+                if len(candleC) > 3:
+                    scs = "You may retrieve the ", candleC, "from the candle holder (R)" 
+                print(scs, " or you may discontinue your investigation of the candle holder (D).")
+                choice = str(input())
+                if choice == "P":
+                    print(eqlist)
+                    candleid = input("Which candle should be placed here?   ")
+                    destroy(candleid)
+                    candleC = candleid
+                elif choice == "R":
+                    eqlist.append(candleC)
+                    candleC = ""
+            else:
+                print("You notice nothing unusual about the candle holder.")
         elif choice == "D"
             luck = random.randint(1,5)
             if luck == 1: 
@@ -1120,7 +1149,27 @@ while  True:
                 print("You climb down but an alarm sounds as you do so.")
                 alert = alert + 1
             loc = 45
-                      
+    elif loc == 63:
+        print("You are in a small, cylidrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
+        choice = str(input())
+        acloc = 63
+        if choice == "E":      
+            loc = screencheck(69, 2, 1)
+        elif choice == "S":
+            loc = screencheck(55, 3, 1)
+        elif choice == "W":
+            loc = screencheck(71, 4, 1)
+    elif loc == 64:
+        print("Puzzle room")
+              
+              
+              
+    elif loc == 68:
+        loc = screencheck(63, 3, 1)
+                
+                
+    elif loc = 70:
+        loc = screencheck(55, 1, 0)
                 
         
         
