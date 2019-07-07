@@ -667,6 +667,10 @@ while  True:
                 tomrin = 1
                 while tomrin == 1:
                     eqloss = random.choice(eqlist)
+                    if eqloss == "timebomb" or eqloss == "stickybomb" or eqloss == "invisibility" or eqloss == "strengthp":
+                        tomrin = 1
+                    else:
+                        tomrin = 0
                 destroy(eqloss)
                 print(eqloss, " is lost")
                 print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
