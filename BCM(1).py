@@ -1175,7 +1175,7 @@ while  True:
         loc = screencheck(63, 3, 1)
                 
                 
-    elif loc = 70:
+    elif loc == 70:
         loc = screencheck(55, 1, 0)
                 
         
