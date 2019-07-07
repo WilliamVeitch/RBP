@@ -3,6 +3,7 @@ print("The adventures of Broughtly in Crultney Mansion")
 loc = 1
 coins = 8
 eqlist = list()
+dlist = list()
 swicob = "0"
 ask = "A"
 alert = 0
@@ -14,7 +15,6 @@ screen = [4, 4]
 candleN = ""
 candleC = ""
 candleS = ""
-GB = 0
 fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -23,6 +23,7 @@ def inap():
 def equip():
     print("You possess ", eqlist,)     
 def destroy(n):
+    dlist.append(n)
     x = 0
     while n in eqlist:
         if eqlist[x] == n:
@@ -141,7 +142,7 @@ while  True:
     elif loc == 4:
         print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since your mission with the Robo Lion in 1963")
         print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes willbe useful on your mission.")
-        eqlist.append("stone rod (SR)")
+        eqlist.append("stone rod")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
         print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (E)")
@@ -213,7 +214,7 @@ while  True:
         print("You now travel to the port.")
         loc = 7
     elif loc == 9:
-        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you but he can tell you that Crultney's main living and work areas are on the irst floor of the mansion.")
+        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that Crultney's main living and work areas are on the first floor of the mansion.")
         print("After the meeting with Furfoot, you find a banana coin on the ground near the palace and you put this in your pocket.")
         print("You now travel to the port.")
         loc = 7
@@ -262,7 +263,7 @@ while  True:
         elif choice == "T":
             loc = 11
     elif loc == 15:
-        if GB == 0:
+        if "sticky banana bomb (SBB)" not in eqlist and "sticky banana bomb (SBB)" not in dlist and "medical kit (MK)" not in eqlist and "medical kit (MK)" not in dlist:
             print("The gorillas welcome you into their base and give you the choice of either a sticky banana bomb (SBB) or a medical kit (MK) to use on your mission. They tell you to take a rowing boat to the island as this is cheaper than the ferry.")
             choice = str(input())
             if choice == "SBB":
@@ -270,7 +271,6 @@ while  True:
             elif choice == "MK":
                 eqlist.append("medical kit (MK)")
             print("You return to the town centre.")
-            GB = 1
         else:
             print("The gorillas tell you that they will be unable to help you any further so you leave the base.")
         loc = 11
@@ -326,12 +326,13 @@ while  True:
         print("You land at the airport in Ooville Town and arrange for a local pilot to return the helicopter to Geelophisis.")
         loc = 11
     elif loc == 20:
-        print("You attempt to land the helicopter but you notice an armoured turret on the 2nd floor turning to face you. You are shot down before you can react.")
+        print("You attempt to land the helicopter but you notice an arcane looking device on the 2nd floor turning to face you. You suddenly lose control of the helicopter and it crashes near the mansion.")
         print("You scramble out from the wreckage of the helicopter and notice that some of your equipment has beeen destroyed in the collision.")
         text7 = random.choice(eqlist)
         print(text7, " is lost")
         destroy(text7)
         alert = alert + 1
+        loc = 27
     elif loc == 21:
         print("On the North side of the mansion, there is a tower 3 storeys high with a large window on the ground floor looking out to Sea. To the East and West of the mansion, there are steep cliffs which would be impossible to land on.")
         print("You can break the window using a weapon (W) or turn back to the South side of the island (S).")
@@ -584,13 +585,16 @@ while  True:
             print("You can withdraw into the room (W) or use an object in your possesion to stand in for the handle (H).")
             choice = str(input())
             if choice == "H":
-                if "shortsword" in eqlist or "metalrod" in eqlist or "goldenblade" in eqlist or "stonerod" in eqlist:
+                if "shortsword" in eqlist or "metal rod" in eqlist or "goldenblade" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
                     print("You find a suitable item and open the door.")
                     print("The room is very small and you have to crouch down to get in.")
-                    print("In the room is a low wooden table with a green candle and a set of rusted keys on it.")
-                    print("You take the items and withdraw into the cylindrical room.")
-                    eqlist.append("green candle")
-                    eqlist.append("rusted keys")
+                    if "rusted keys" not in eqlist and "rusted keys" not in dlist:
+                        print("In the room is a low wooden table with a green candle and a set of rusted keys on it.")
+                        print("You take the items and withdraw into the cylindrical room.")
+                        eqlist.append("green candle")
+                        eqlist.append("rusted keys")
+                    else: 
+                        print("There are no items of interest in the room")
                 else:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
                     
@@ -655,21 +659,20 @@ while  True:
             print("You return to the path near the fence.")
             loc = 24
         elif choice == "S": 
-            print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the room towards you.")
-            print("You must hold up a piece of equipment to protect yourself.")
-            tomrin = 1
-            while tomrin == 1:
-                eqloss = random.choice(eqlist)
-                if eqloss == "timebomb" or eqloss == "stickybomb" or eqloss == "invisibility" or eqloss == "strengthp":
-                    tomrin = 1
-                else:
-                    tomrin = 0
-            destroy(eqloss)
-            print(eqloss, " is lost")
-            print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
-            print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and exit the tower.")
-            eqlist.append("brass key")
-            print("You return to the path near the fence.")
+            if "brass key" in eqlist or "brass key" in dlist:
+                print("You ascend the stairs into a room similar to the one below. There are no items of interest in the room.")
+            else:
+                print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the room towards you.")
+                print("You must hold up a piece of equipment to protect yourself.")
+                tomrin = 1
+                while tomrin == 1:
+                    eqloss = random.choice(eqlist)
+                destroy(eqloss)
+                print(eqloss, " is lost")
+                print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
+                print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and exit the tower.")
+                eqlist.append("brass key")
+                print("You return to the path near the fence.")
             loc = 24
     elif loc == 29:
         print("You are in a corridor which runs from North to South. To the North, there is a grey door leading into a room (GD). To the South, there is a junction with two passages leading off it, one to the East (E) and one to the South (S).")
