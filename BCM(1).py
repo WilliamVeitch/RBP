@@ -1142,7 +1142,7 @@ while  True:
                     candleC = ""
             else:
                 print("You notice nothing unusual about the candle holder.")
-        elif choice == "D"
+        elif choice == "D":
             luck = random.randint(1,5)
             if luck == 1: 
                 print("You climb down but are injured in the process.")
