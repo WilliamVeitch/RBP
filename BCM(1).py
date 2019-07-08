@@ -15,6 +15,7 @@ screen = [4, 4]
 candleN = ""
 candleC = ""
 candleS = ""
+loclog = list()
 fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -624,31 +625,35 @@ while  True:
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
             choice = str(input())
             if choice == "D":
-                print("The shed door is locked so you may use a weapon against it.")
-                listweapons()
-                choice = str(input)
-                if choice == "SS":
-                    destroy("shortsword (SS)")
-                    print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
+                if 39 in loclog:
+                    print("The shed door is unlocked and you step inside")
                     loc = 39
-                elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC":
-                    print("your weapon succeeds in breaking down the door and you enter the shed.")
-                    loc = 39
-                elif choice == "TB":
-                    destoy("time bomb (TB)")
-                    print("The bomb works and you enter the shed.")
-                    loc = 39
-                elif choice == "EC":
-                    if crystal() == "success":
-                        print("You destroy the door and enter the shed.")
-                        loc = 39
-                    elif crystal() == "big failure":
-                        endgame(1)
-                elif choice == "SP":
-                    destroy("strength potion (SP)")
-                    print("You destroy the door and enter the shed.")
                 else:
-                    inap()
+                    print("The shed door is locked so you may use a weapon against it.")
+                    listweapons()
+                    choice = str(input)
+                    if choice == "SS":
+                        destroy("shortsword (SS)")
+                        print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
+                        loc = 39
+                    elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC":
+                        print("your weapon succeeds in breaking down the door and you enter the shed.")
+                        loc = 39
+                    elif choice == "TB":
+                        destoy("time bomb (TB)")
+                        print("The bomb works and you enter the shed.")
+                        loc = 39
+                    elif choice == "EC":
+                        if crystal() == "success":
+                            print("You destroy the door and enter the shed.")
+                            loc = 39
+                        elif crystal() == "big failure":
+                            endgame(1)
+                    elif choice == "SP":
+                        destroy("strength potion (SP)")
+                        print("You destroy the door and enter the shed.")
+                    else:
+                        inap()
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -879,7 +884,7 @@ while  True:
         elif choice == "W":
             loc = 29
     elif loc == 39: 
-        print("The shed is large with various pieces of garden related machinery. To the North and South are wooden doors (N) and (S). You could remain in the shed and investigate it further (I).")
+        print("You are in a large shed with various pieces of garden related machinery. To the North and South are wooden doors (N) and (S). You could remain in the shed and investigate it further (I).")
         choice = str(input())
         if choice == "S":
             print("You leave the shed by the Southern door.")
@@ -1177,6 +1182,7 @@ while  True:
                 
     elif loc == 70:
         loc = screencheck(55, 1, 0)
-                
+    
+    loclog.append(loc)             
         
         
