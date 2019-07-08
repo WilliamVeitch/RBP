@@ -823,8 +823,11 @@ while  True:
             print("You can investigate the plates and cutlery (P), the candles (C) or the underside of the table (T).")
             choice = str(input())
             if choice == "P":
-                print("you notice that one of the forks has been magnetised. You take it with you. You notice nothing remarkable about any of the other cutlery or plates.")
-                eqlist.append("magnetic fork (MF)")
+                if "magnetic fork (MF)" in eqlist or "magnetic fork (MF)" in dlist:
+                    print("You notice nothing interesting about the plates and cutlery.")
+                else:
+                    print("you notice that one of the forks has been magnetised. You take it with you. You notice nothing remarkable about any of the other cutlery or plates.")
+                    eqlist.append("magnetic fork (MF)")
             elif choice == "T":
                 print("You notice nothing remarkable about the table.")
             elif choice == "C":
@@ -1162,7 +1165,7 @@ while  True:
                 alert = alert + 1
             loc = 45
     elif loc == 63:
-        print("You are in a small, cylidrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
+        print("You are in a small, cylindrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
         choice = str(input())
         acloc = 63
         if choice == "E":      
@@ -1184,5 +1187,9 @@ while  True:
         loc = screencheck(55, 1, 0)
     
     loclog.append(loc)             
-        
+    if len(eqlist) > 12:
+        print("You have too many items to carry. Please type the index of the item to discard.")
+        print(eqlist)
+        choice = int(input())
+        destroy(eqlist[])
         
