@@ -33,7 +33,7 @@ def lastloc():
     return loclog[oriid]
 def findconnect(a):
     conreport = list()
-    for i in range len(loclog):
+    for i in range(len(loclog)):
         if loclog[i] == a:
             conreport.append(loclog[i-1])
     return conreport
