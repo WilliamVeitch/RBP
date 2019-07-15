@@ -7,7 +7,6 @@ dlist = list()
 swicob = "0"
 ask = "A"
 alert = 0
-window = 1
 observe = 1
 screen = [4, 4]
 candleN = ""
@@ -354,13 +353,11 @@ while  True:
                 print("The window shatters and an alarm sounds. You enter the room.")
                 alert = alert + 1
                 loc = 26
-                window = 0
             elif choice == "SS":
                 print("The window shatters and an alarm sounds. Unfortunately, the reinforced glass of the window has broken your shortsword. You enter the room.")
                 alert = alert + 1
                 destroy("short sword (SS)")
                 loc = 26
-                window = 0
             elif choice == "TS":
                 print("Unfortunately, the glass of this window is reinforced so the throwing stars bounce off and fall into the sea.")
                 destroy("throwing stars (TS)")
@@ -369,16 +366,13 @@ while  True:
                 destroy("time bomb (TB)")
                 alert= alert + 1
                 loc = 26
-                window = 0
             elif choice == "PC":
-                window = 0
                 loc = 26
                 print("You load the cannon and fire at the window. The window shatters and an alarm sounds. You enter the room.")
             elif choice == "EC":
                 if  crystal() == "success":
                     print("The window is incinerated and an alarm sounds. You enter the room.")
                     loc = 26
-                    window = 0
                 elif crystal() == "failure":
                     destroy("energy crystal (EC)")
                     print("After the improper use, the crystal falls into the sea.")
@@ -393,7 +387,6 @@ while  True:
                     print("Since you have a medical kit, you use it and after recovering, you enter the room.")
                     destroy("medical kit (MK)")
                     loc = 26
-                    window = 0
                 else:
                     print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again")
             else:
@@ -577,8 +570,10 @@ while  True:
                                 print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
     elif loc == 26:
         print("You are in a circular room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
-        if window == 1:
-            print("There is also a large window in the North looking out towards the Sea.")
+        if 21 in findconnect(26):
+            print("There are also several shards of glass on the floor, probably because the large window looking out towards the sea has been shattered.")
+        else:
+            print("There is also a large window in the North looking out towards the sea.")
         print("The only door is to the South.")
         print("You can go through the door (S), investigate the bookshelf (B) or investigate the fireplace (F).")
         choice = str(input())
