@@ -8,8 +8,6 @@ swicob = "0"
 ask = "A"
 alert = 0
 window = 1
-stairrobot = 1
-rustdoor = 1
 observe = 1
 screen = [4, 4]
 candleN = ""
@@ -30,6 +28,15 @@ def destroy(n):
         if eqlist[x] == n:
             del eqlist[x]
         x = x + 1
+def lastloc():
+    oriid = len(loclog) - 1
+    return loclog[oriid]
+def findconnect(a):
+    conreport = list()
+    for i in range len(loclog):
+        if loclog[i] == a:
+            conreport.append(loclog[i-1])
+    return conreport
 def crystal():
     print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
     print("In clockwise order, starting with the pentagon, these are a pentagon, a triangle, a square and a hexagon")
@@ -695,7 +702,6 @@ while  True:
             loc = 32
         elif choice == "BD":
             loc = 33
-            oriloc = 29
     elif loc == 30:
         listweapons()
         choice = str(input())
@@ -737,7 +743,6 @@ while  True:
             loc = 35
         elif choice == "WD":
             loc = 33
-            oriloc = 31
     elif loc == 32:
         print("You are in a corridor which runs from North to South. To the South is the main door of the mansion. There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
         choice = str(input())
@@ -748,7 +753,9 @@ while  True:
         elif choice == "N":
             loc = 29
     elif loc == 33:
-        if rustdoor == 1:
+        if 38 in loclog:
+            print("You walk back into the control room.")
+        else:
             if "rusted keys" in eqlist:
                 print("You find the key to the door amongst your items and you open the door.")
                 loc = 38
@@ -776,12 +783,22 @@ while  True:
                     elif crystal() == "big failure":
                         endgame(2)
                 elif choice == "R":
-                    loc = oriloc
+                    loc = lastloc()
                 else:
                     inap()
+        
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if stairrobot == 1:
+        if 34 in loclog:
+            Print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
+            choice = str(input())
+            if choice == "U":
+                loc = 40
+            elif choice == "D":
+                loc = 41
+            elif choice == "E":
+                loc = 31 
+        else:
             print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
             print("You must use a piece of equipment to defend against the attack")
             listweapons()
@@ -802,15 +819,6 @@ while  True:
                 print("You successfully defend against the attack and your weapon is undamaged.")
             else:
                 inap()
-        else:
-            Print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
-            choice = str(input())
-            if choice == "U":
-                loc = 40
-            elif choice == "D":
-                loc = 41
-            elif choice == "E":
-                loc = 31 
     elif loc == 35:
         print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room. On the table are several empty plates, pieces of cutlery and candles.")
         print("There are doors to the North (N) and South (S). You could also stay in this room to investigate further (I).")
@@ -854,6 +862,8 @@ while  True:
         elif choice == "E":
             loc = 32
         elif choice == "N":
+            if 37 in findconnect 47 or 47 in findconnect 37:
+                print("Avoiding the pit, you make your way into the cylindrical room.")
             if "magical map (MM)" in eqlist:
                 print("You feel uneasy about this passageway so you consult the magical map. It shows that there is a pit trap. You carefully move around the trap and you open the door to the North")
                 destroy("magical map (MM)")
@@ -863,7 +873,6 @@ while  True:
                 alert = alert + 1
             loc = 47
     elif loc == 38:
-        rustdoor = 0
         print("You walk into the room and notice a bank of switches in the far corner of the room. In the centre of the room is a small, round hole in the floor surrounded by inscriptions from a language you do not recognise. To one side of the room is a desk with various papers and tools on it. There are doors to the South and to the West.")
         print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
         choice = str(input())
@@ -1186,7 +1195,7 @@ while  True:
     elif loc == 70:
         loc = screencheck(55, 1, 0)
     
-    loclog.append(loc)             
+    loclog.append(loc)
     if len(eqlist) > 12:
         print("You have too many items to carry. Please type the index of the item to discard.")
         print(eqlist)
