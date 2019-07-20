@@ -1042,7 +1042,6 @@ while  True:
             loc = 62
         elif choice == "C":
             if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
-                candle(2)
                 if candle(2) == 1:
                     choice = str(input())
                     if choice == "P":
@@ -1135,7 +1134,6 @@ while  True:
         elif choice == "S":
             loc = 53
         elif choice == "C":
-            candle(1)
             if candle(1) == 1:
                 choice = str(input())
                 if choice == "P":
