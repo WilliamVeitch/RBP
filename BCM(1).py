@@ -582,7 +582,7 @@ while  True:
             print("You can withdraw into the room (W) or use an object in your possesion to stand in for the handle (H).")
             choice = str(input())
             if choice == "H":
-                if "shortsword" in eqlist or "metal rod" in eqlist or "goldenblade" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
+                if "shortsword (SS)" in eqlist or "metal rod" in eqlist or "golden blade (GB)" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
                     print("You find a suitable item and open the door.")
                     print("The room is very small and you have to crouch down to get in.")
                     if "rusted keys" not in eqlist and "rusted keys" not in dlist:
