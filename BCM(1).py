@@ -62,25 +62,6 @@ def endgame(n):
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing:", eqlist)
-def randomcontainer():
-    xx = random.randint(1,6)
-    if xx == 1:
-        contents = "a small robotic arm that lunges out at you."
-    elif xx == 2:
-        contents = "a sack containing vegetables and other provisions. You leave it as it would be too heavy to carry around."
-    elif xx == 3:
-        contents = "a radio transmitter. You take this with you."
-        eqlist.append("radio")
-    elif xx == 4:
-        coins = coins + 3
-        contents = "3 banana coins, which you decide to take with you."
-    elif xx == 5:
-        contents = "a box of matches, which you take with you."
-        eqlist.append("matches")
-    elif xx == 6:
-        contents = "a scrap of paper with indecipherable symbols on it."
-        
-    return contents
 def screencheck(a, d, p):
     if d == screen[p]:
         return 54
@@ -933,7 +914,7 @@ while  True:
                       print("You climb up to the ledge and discover that a locked chest sits upon it.")
                   if "brass key" in eqlist:
                       print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
-                      #chest#
+                      print("You find that the chest contains")
                   else:
                       print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
                       choice = str(input())
@@ -1139,9 +1120,10 @@ while  True:
             loc = 53
         elif choice == "C":
             if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candleC) > 3:
-                scs = "You may place a candle from your inventory into the holder (P) "
+                scs = "You may place a candle from your inventory into the holder (P). "
                 if len(candleC) > 3:
-                    scs = "You may retrieve the ", candleC, "from the candle holder (R)" 
+                    scs = "You may retrieve the ", candleC, "from the candle holder (R)."
+                    if "matches"
                 print(scs, " or you may discontinue your investigation of the candle holder (D).")
                 choice = str(input())
                 if choice == "P":
