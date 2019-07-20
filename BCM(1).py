@@ -382,6 +382,7 @@ while  True:
                     loc = 26
                 else:
                     print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again")
+                    endgame(1)
             else:
                 inap()
         elif choice == "S":
@@ -850,7 +851,7 @@ while  True:
         elif choice == "E":
             loc = 32
         elif choice == "N":
-            if 37 in findconnect 47 or 47 in findconnect 37:
+            if 37 in findconnect(47) or 47 in findconnect(37):
                 print("Avoiding the pit, you make your way into the cylindrical room.")
             if "magical map (MM)" in eqlist:
                 print("You feel uneasy about this passageway so you consult the magical map. It shows that there is a pit trap. You carefully move around the trap and you open the door to the North")
@@ -1140,17 +1141,17 @@ while  True:
                 if choice == "P":
                     print(eqlist)
                     candleid = input("Which candle should be placed here?   ")
-                        if candleid in eqlist:
-                            destroy(candleid)
-                            candlelist[1] = candleid
-                    elif choice == "R":
-                        eqlist.append(candlelist[1])
-                        lcandlelist[1] = 0
-                        candlelist[1] = ""
-                    elif choice == "L":
-                        if "matches" in eqlist:
-                            print("You light the candle.")
-                            lcandlelist[1] = 1
+                    if candleid in eqlist:
+                        destroy(candleid)
+                        candlelist[1] = candleid
+                elif choice == "R":
+                    eqlist.append(candlelist[1])
+                    lcandlelist[1] = 0
+                    candlelist[1] = ""
+                elif choice == "L":
+                    if "matches" in eqlist:
+                        print("You light the candle.")
+                        lcandlelist[1] = 1
         elif choice == "D":
             luck = random.randint(1,5)
             if luck == 1: 
@@ -1194,5 +1195,5 @@ while  True:
         print("You have too many items to carry. Please type the index of the item to discard.")
         print(eqlist)
         choice = int(input())
-        destroy(eqlist[])
+        destroy(eqlist[choice])
         
