@@ -1117,7 +1117,7 @@ while  True:
             print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
             eqlist.append("fuses")
         elif choice == "P":
-            print("")
+            print("Panel") #electronics#
         elif choice == "W":
             loc = 51
     elif loc == 62:
