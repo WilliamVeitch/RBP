@@ -9,15 +9,14 @@ ask = "A"
 alert = 0
 observe = 1
 screen = [4, 4]
-candleN = ""
-candleC = ""
-candleS = ""
+candlelist = ["", "", ""]
+lcandlelist = [0, 0, 0] #NCS
 loclog = list()
 fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
-    print("The item you have chosen is not appropriate for the current situation")
+    print("The item you have chosen is not appropriate for the current situation.")
 def equip():
     print("You possess ", eqlist,)     
 def destroy(n):
@@ -55,6 +54,19 @@ def crystal():
         else:
             print("The crystal bounces off the target without releasing a beam of energy")
             return "failure"
+def candle(n):
+    if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[n]) > 3:
+        scs = "You may place a candle from your inventory into the holder (P). "
+        if len(candlelist[n]) > 3:
+            scs = "You may retrieve the ", candlelist[n], "from the candle holder (R). "
+            if "matches" in eqlist:
+                print("You may use the matches in your possesion to light the ", candlelist[n], " in the candle holder (L).")
+        print(scs, " or you may discontinue your investigation of the candle holder (D).")
+        return 1
+    else:
+        print("You notice nothing unusual about the candle holder.")    
+        return 0
+                        
 def endgame(n):
     print(eqlist)
     print("You have failed in your mission.")
@@ -914,7 +926,7 @@ while  True:
                       print("You climb up to the ledge and discover that a locked chest sits upon it.")
                   if "brass key" in eqlist:
                       print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
-                      print("You find that the chest contains")
+                      print("You find that the chest contains a ")
                   else:
                       print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
                       choice = str(input())
@@ -1028,22 +1040,25 @@ while  True:
         if choice == "N":
             loc = 62
         elif choice == "C":
-            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candleS) > 3:
-                scs = "You may place a candle from your inventory into the holder (P) "
-                if len(candleS) > 3:
-                    scs = "You may retrieve the ", candleS, "from the candle holder (R)" 
-                print(scs, " or you may discontinue your investigation of the candle holder (D).")
-                choice = str(input())
-                if choice == "P":
-                    print(eqlist)
-                    candleid = input("Which candle should be placed here?   ")
-                    destroy(candleid)
-                    candleS = candleid
-                elif choice == "R":
-                    eqlist.append(candleS)
-                    candleS = ""
-            else:
-                print("You notice nothing unusual about the candle holder.")
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
+                candle(2)
+                if candle(2) == 1:
+                    choice = str(input())
+                    if choice == "P":
+                        print(eqlist)
+                        candleid = input("Which candle should be placed here?   ")
+                        if candleid in eqlist:
+                            destroy(candleid)
+                            candlelist[2] = candleid
+                    elif choice == "R":
+                        eqlist.append(candlelist[2])
+                        lcandlelist[2] = 0
+                        candlelist[2] = ""
+                    elif choice == "L":
+                        if "matches" in eqlist:
+                            print("You light the candle.")
+                            lcandlelist[2] = 1
+
         elif choice == "P":
             if observe == 1:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
@@ -1102,15 +1117,15 @@ while  True:
             print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
             eqlist.append("fuses")
         elif choice == "P":
-            print("panel") #electronics#
+            print("")
         elif choice == "W":
             loc = 51
     elif loc == 62:
         ccs = ""
-        if len(candleC)>3:
+        if len(candlelist[1]) > 3:
             ccs = ""
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this.") 
-        if candleN == "red candle" and candleC == "green candle" and candleS == "blue candle":
+        if candlelist == ["red candle", "green candle", "blue candle"] and lcandlelist == [1, 1, 1]:
             print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
             eqlist.append("silver key")
         choice = str(input())
@@ -1119,23 +1134,23 @@ while  True:
         elif choice == "S":
             loc = 53
         elif choice == "C":
-            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candleC) > 3:
-                scs = "You may place a candle from your inventory into the holder (P). "
-                if len(candleC) > 3:
-                    scs = "You may retrieve the ", candleC, "from the candle holder (R)."
-                    if "matches"
-                print(scs, " or you may discontinue your investigation of the candle holder (D).")
+            candle(1)
+            if candle(1) == 1:
                 choice = str(input())
                 if choice == "P":
                     print(eqlist)
                     candleid = input("Which candle should be placed here?   ")
-                    destroy(candleid)
-                    candleC = candleid
-                elif choice == "R":
-                    eqlist.append(candleC)
-                    candleC = ""
-            else:
-                print("You notice nothing unusual about the candle holder.")
+                        if candleid in eqlist:
+                            destroy(candleid)
+                            candlelist[1] = candleid
+                    elif choice == "R":
+                        eqlist.append(candlelist[1])
+                        lcandlelist[1] = 0
+                        candlelist[1] = ""
+                    elif choice == "L":
+                        if "matches" in eqlist:
+                            print("You light the candle.")
+                            lcandlelist[1] = 1
         elif choice == "D":
             luck = random.randint(1,5)
             if luck == 1: 
@@ -1149,6 +1164,8 @@ while  True:
             elif luck == 2:
                 print("You climb down but an alarm sounds as you do so.")
                 alert = alert + 1
+            else:
+                print("You climb down successfully.")
             loc = 45
     elif loc == 63:
         print("You are in a small, cylindrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
