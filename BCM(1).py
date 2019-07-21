@@ -12,7 +12,6 @@ screen = [4, 4]
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 loclog = list()
-fcode = random.randint(1000, 9999)
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -73,7 +72,7 @@ def endgame(n):
     print("You completed ", n, " out of 5 major events successfully.")
     end = input() 
 def listweapons():
-    print("You can attempt to use any of the folllowing:", eqlist)
+    print("You can attempt to use any of the folllowing: ", eqlist)
 def screencheck(a, d, p):
     if d == screen[p]:
         return 54
@@ -145,7 +144,7 @@ while  True:
         eqlist.append("stone rod")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
-        print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (E)")
+        print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (EC)")
         while ask != "NO":
             ask = str(input("Do you want to ask Geelophisis about an invention?   "))
             if ask == "CBD":
@@ -168,7 +167,7 @@ while  True:
             eqlist.append("strength potion (SP)")
         if choice1 == "MM" or choice2== "MM":
             eqlist.append("magical map (MM)")
-        if choice1 == "E" or choice2 == "E":
+        if choice1 == "E" or choice2 == "EC":
             eqlist.append("energy crystal (EC)")
         print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
         print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
@@ -216,6 +215,7 @@ while  True:
     elif loc == 9:
         print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that Crultney's main living and work areas are on the first floor of the mansion.")
         print("After the meeting with Furfoot, you find a banana coin on the ground near the palace and you put this in your pocket.")
+        coins = coins + 1
         print("You now travel to the port.")
         loc = 7
     elif loc == 10:
@@ -241,7 +241,7 @@ while  True:
         if choice == "O":
             print("You arrive in Ooville and wait for the storm to end. Eventually it does and you are able to go out in the ship to Crultney Island.")
             loc = 17
-        else:
+        elif choice =="C":
             loc = 18
     elif loc == 13:
         print("As you approach the island, you can see the majestic mansion in front of you. Suddenly, a loud siren sounds from the mansion. You could try to land near the mansion (M) or fly back towards Ooville (O).")
@@ -419,7 +419,7 @@ while  True:
             destroy(eqlist[kkjj])
             loc = 17
         elif choice == "F":
-            print("The gorillas overwhelm you and detain you. They take you to be questioned at their base in Gorillia Monkeyland.")
+            print("The gorillas overwhelm you and detain you. They take you to be questioned at their base in Gorillia Monkeyland. Your mission is over.")
             endgame(0)
         elif choice == "S":
             print("The gorillas recognise your item and will allow you to continue your journey. They also give you a map of the nearby islands if you do not already have one.")
@@ -429,11 +429,7 @@ while  True:
         print("You can use a weapon to break the barbed wire (W), or you could go East to try to find another way to access the mansion (E).")
         choice = str(input())
         if choice == "W":
-            place = C
-            loc = 30
-            #move to loc 30#
-            
-            endgame(1)           
+            loc = 30      
         elif choice == "E":
             print("The barbed wire continues on the Eastern side of the mansion until it reaches the sea on the North coast.")
             loc = 25
@@ -442,7 +438,6 @@ while  True:
         print("You can attempt to breach the fence (F), attempt to open the gate (G) or go West towards the tower (W).")
         choice = str(input())
         if choice == "F":
-            place = W
             loc = 30
         elif choice == "G":
             print("The gate looks very well armoured so only the most powerful weapons will be capable of breaching it.")
@@ -451,7 +446,7 @@ while  True:
             print("You may also retreat to the South (R).")
             choice = str(input())
             if choice == "H":
-                swicobs = random.randint(0, 9999)
+                swicobs = random.randint(1000, 9999)
                 if swicob != swicobs:
                     print("The gate will not open and an alarm sounds.")
                     alert = alert + 1
@@ -459,7 +454,7 @@ while  True:
                     print("The gate opens and you walk up to the front of the mansion.")
                     loc = 27
             elif choice == "S":
-                print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0.")
+                print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
                 print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
                 choice = input()
                 if choice == "W":
@@ -529,7 +524,6 @@ while  True:
         print("You can try to breach the fence (F), enter the garden area (G) or go to the South West (SW).")
         choice = str(input())
         if choice == "F":
-            place = E
             loc = 30
         elif choice == "SW":
             loc = 23
@@ -615,7 +609,7 @@ while  True:
                     alert = alert + 1
             elif choice == "W":
                 listweapons()
-            #main door#        
+                #main door# 
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -693,6 +687,7 @@ while  True:
             loc = 33
     elif loc == 30:
         listweapons()
+        print("You may also withdraw (W).")
         choice = str(input())
         if choice == "GB" or choice == "SS" or choice == "SOS":
             print("Your weapon is successful in clearing a path through the barbed wire.")
@@ -708,6 +703,9 @@ while  True:
             loc = 27
         elif choice == "WH":
             print("This weapon is not effective in cutting a path through the barbed wire.")
+        elif choice == "SBB":
+            print("The bomb explodes but does not help and leaves a mass of tangled barbed wire covered in sticky banana juices.")
+            destroy("sticky banana bomb (SBB)")
         elif choice == "EC":
             if  crystal() == "success":
                 print("The barbed wire is destroyed and you walk towards the mansion.")
@@ -717,10 +715,10 @@ while  True:
                 print("The crystal rolls away into the middle of the wire")
             elif crystal() == "big failure":
                 endgame(1)
+        elif choice == "W":
+            loc = lastloc()
         else:
-            if place == "C":
-                loc = 30
-       #move to loc 30#
+            inap()
     elif loc == 31:
         print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the WEstern side of the passage (WD).")
         choice = str(input())
@@ -733,7 +731,7 @@ while  True:
         elif choice == "WD":
             loc = 33
     elif loc == 32:
-        print("You are in a corridor which runs from North to South. To the South is the main door of the mansion. There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
+        print("You are in a corridor which runs from North to South. To the South is the main door of the mansion (S). There are passages leading off to the East and West (E) and (W). You could also follow the corridor to the North (N).")
         choice = str(input())
         if choice == "E":
             loc = 36
@@ -741,6 +739,8 @@ while  True:
             loc = 37
         elif choice == "N":
             loc = 29
+        elif choice == "S":
+            loc = 72
     elif loc == 33:
         if 38 in loclog:
             print("You walk back into the control room.")
@@ -842,6 +842,10 @@ while  True:
         elif choice == "W":
             loc = 32
     elif loc == 37:
+        if lastloc() == 47 and 37 not in findconnect(47) and 47 not in findconnect(37):
+                print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
+                print("You are able to escape from the trap unharmed and you open the door to the North.")
+                alert = alert + 1
         print(" You are in a sparsely furnished corridor running from East to West. There are two doors leading to the South (SE) and (SW), a junction with another corridor to the East (E) and to the North, a short passageway leading up to another door (N).")
         choice = str(input())
         if choice == "SE":
