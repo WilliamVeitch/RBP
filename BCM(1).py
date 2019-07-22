@@ -434,7 +434,7 @@ while  True:
             print("The barbed wire continues on the Eastern side of the mansion until it reaches the sea on the North coast.")
             loc = 25
     elif loc == 24:
-        print("There is a small path ahead which leads up to a gate in a barbed wire fence. You can see the mansion beyond the fence and to the West you can see a tower in the distance next to the fence.")
+        print("You are standing on the SOuth coast of the island near a small pier. There is a small path ahead which leads up to a gate in a barbed wire fence. You can see the mansion beyond the fence and to the West you can see a tower in the distance next to the fence.")
         print("You can attempt to breach the fence (F), attempt to open the gate (G) or go West towards the tower (W).")
         choice = str(input())
         if choice == "F":
@@ -590,9 +590,9 @@ while  True:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
                     
     elif loc == 27:
-        print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion.")
+        print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion. You can also see a small pier to the South.")
         print("To the West is a shed which is connected directly to the mansion.")
-        print("You can attempt to get in through the main door (M), investigate the shed (S) or walk around to the East side of the mansion (E).")
+        print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P) or walk around to the East side of the mansion (E).")
         choice = str(input())
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
@@ -609,7 +609,11 @@ while  True:
                     alert = alert + 1
             elif choice == "W":
                 listweapons()
-                #main door# 
+                choice = str(input())
+                if choice == "back dagger (BD)" or choice == "shortsword (SS)":
+                    print("The weapon you have chosen is not powerful to do anything more than scratch the door.")
+                elif choice == "portable cannon (PC)":
+                    
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -644,6 +648,8 @@ while  True:
                         print("You destroy the door and enter the shed.")
                     else:
                         inap()
+        elif choice == "P":
+            loc = 24
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
