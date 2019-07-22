@@ -36,22 +36,22 @@ def findconnect(a):
     return conreport
 def crystal():
     print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
-    print("In clockwise order, starting with the pentagon, these are a pentagon, a triangle, a square and a hexagon")
+    print("In clockwise order, starting with the pentagon, these are a pentagon (P), a triangle (T), a square (S) and a hexagon (X)")
     print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
     choice = str(input())
     if choice == "S":
-        strike = str(input("Which symbol do you strike?   "))
-        if strike == "HEXAGON":
+        strike = str(input("Which symbol do you strike?  (P/T/S/X) "))
+        if strike == "H":
             destroy("energy crystal (EC)")
             return "success"
-        elif strike != "HEXAGON":
+        elif strike != "H":
             return "failure"
     else:
         if random.randint(1, 4) == 4:
-            print("The crystal strikes the target and releases a beam of energy which incinerates you")
+            print("The crystal strikes the target and releases a beam of energy which incinerates you.")
             return "big failure"
         else:
-            print("The crystal bounces off the target without releasing a beam of energy")
+            print("The crystal bounces off the target without releasing a beam of energy.")
             return "failure"
 def candle(n):
     if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[n]) > 3:
@@ -590,30 +590,78 @@ while  True:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
                     
     elif loc == 27:
+        if lastloc == 32:
+            if 27 in findconnect(32):
+                print("You step outside past the destroyed door.")
+            else:
+                print("You unlock the door and step outside.")
         print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion. You can also see a small pier to the South.")
         print("To the West is a shed which is connected directly to the mansion.")
         print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P) or walk around to the East side of the mansion (E).")
         choice = str(input())
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
-            print("You may use a weapon to break down the door (W) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
+            if 32 in loclog():
+                print("You may enter through the door (D) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
+            else:
+                print("You may use a weapon to break down the door (W) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
             choice = str(input())
             if choice == "SW":
                 if "super strong rope (SSR)" in eqlist:
-                    print("You use your super strong rope to successfully climb up to the window. However, an alarm sounds.")
-                    alert = alert + 1
-                    print("You hurriedly use an object from your equipment bag to smash the window and you climb inside. Unfortunately, you are forced to leave behind the rope since you cannot reach it through the window without alerting the CCTV camera again.")
-                    destroy("super strong rope (SSR)")
+                    print("You use your super strong rope to successfully climb up to the window. You hurriedly use an object from your equipment bag to smash the window and you climb inside. ")
+                    print("It will be difficult to pull up the rope through the window without alerting the nearby security cameras. You can try to pull up the rope (SSR) or abandon it and climb inside (C).")
+                    choice = str(input())
+                    if choice == "SSR":
+                        print("You pull up the rope but an alarm sounds as you do so.")
+                        alert = alert + 1
+                    else:
+                        destroy("super strong rope (SSR)")
+                    loc = 72
                 else:
-                    print("You have no equipment for climbing so you abandon your attempt toscale the wall. However, as you climb down, an alarm sounds.")
+                    print("You have no equipment for climbing so you abandon your attempt to scale the wall while halfway up. However, as you climb down, an alarm sounds.")
                     alert = alert + 1
             elif choice == "W":
                 listweapons()
                 choice = str(input())
-                if choice == "back dagger (BD)" or choice == "shortsword (SS)":
+                if choice == "BD" or choice == "SS" or choice == "HOH":
                     print("The weapon you have chosen is not powerful to do anything more than scratch the door.")
-                elif choice == "portable cannon (PC)":
-                    
+                elif choice == "TS":
+                    print("The throwing stars bounce off the door and are bent out of shape by the impact so cannot be used again.")
+                    destroy("throwing stars (TS)")
+                elif choice == "GB":
+                    print("The golden blade is able to break down the main door of the mansion but is broken in the process of doing so. An alarm sounds from within the mansion. You walk through the door into a corridor.")
+                    destroy("golden blade (GB)")
+                    alert = alert +1
+                    loc = 32
+                elif choice == "TB":
+                    print("You set up the bomb and take cover. You look up after the explosion and find the door destroyed. You walk in while an alarm sounds from within the mansion.")
+                    destroy("time bomb (TB)")
+                    alert = alert + 1
+                    loc = 32
+                elif choice == "SP":
+                    print("With the strength granted to you by the potion, you are able to pull the door from its hinges. You walk in while an alarm sounds from within the mansion.")
+                    destroy("strength potion (SP)")
+                    alert = alert + 1
+                    loc = 32
+                elif choice == "WH" or choice == "PC":
+                    print("Your weapon succesfully destroys the door and you walk inside, while an alarm sounds from within the mansion.")
+                    alert = alert + 1
+                    loc = 32
+                elif choice == "EC":
+                if  crystal() == "success":
+                    print("The door is destroyed by the energy blast and an alarm sounds. You enter the mansion.")
+                    alert = alert + 1
+                    loc = 32
+                elif crystal() == "failure":
+                    print("The crystal has no effect on the door.")
+                elif crystal() == "big failure":
+                    endgame(1)
+                elif choice == "SBB":
+                    print("The sticky banana bomb is ineffective in breaking down the door.")
+                    destroy("sticky banana bomb (SBB)")
+        elif choice == "D" and 32 in loclog:
+            print("You walk through the door into the main corridor.")
+            loc = 32
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -746,7 +794,7 @@ while  True:
         elif choice == "N":
             loc = 29
         elif choice == "S":
-            loc = 72
+            loc = 27
     elif loc == 33:
         if 38 in loclog:
             print("You walk back into the control room.")
