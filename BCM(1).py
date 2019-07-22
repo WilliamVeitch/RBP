@@ -904,7 +904,7 @@ while  True:
                 print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
                 print("You are able to escape from the trap unharmed and you open the door to the North.")
                 alert = alert + 1
-        print(" You are in a sparsely furnished corridor running from East to West. There are two doors leading to the South (SE) and (SW), a junction with another corridor to the East (E) and to the North, a short passageway leading up to another door (N).")
+        print("You are in a sparsely furnished corridor running from East to West. There are two doors leading to the South (SE) and (SW), a junction with another corridor to the East (E) and to the North, a short passageway leading up to another door (N).")
         choice = str(input())
         if choice == "SE":
             loc = 45
@@ -1021,7 +1021,8 @@ while  True:
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input())
             if choice == "O":
-                print("You open the trapdoor and find ", randomcontainer())
+                print("You open the trapdoor and find ")
+                #living room treasure#
         elif choice == "T":
             print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
     elif loc == 45:
@@ -1076,8 +1077,7 @@ while  True:
         print("You are in a corridor which runs from East to West. The corridor borders a North-South corridor to the West (W). There are two doors to the North (NW and NE) there is also a door to the South (S).")
         choice = str(input())
         if choice == "NW":
-            print("observation room")
-            #observation room#
+            loc = 73
         elif choice == "NE":
             loc = 40
         elif choice == "S":
