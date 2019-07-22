@@ -12,6 +12,7 @@ screen = [4, 4]
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 loclog = list()
+stairrobot = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -592,12 +593,12 @@ while  True:
     elif loc == 27:
         if lastloc == 32:
             if 27 in findconnect(32):
-                print("You step outside past the destroyed door.")
+                print("You step outside, passing the destroyed door.")
             else:
                 print("You unlock the door and step outside.")
         print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion. You can also see a small pier to the South.")
         print("To the West is a shed which is connected directly to the mansion.")
-        print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P) or walk around to the East side of the mansion (E).")
+        print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P), walk towards the fence (F), or walk around to the East side of the mansion (E).")
         choice = str(input())
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
@@ -698,6 +699,9 @@ while  True:
                         inap()
         elif choice == "P":
             loc = 24
+        elif choice == "F":
+            if 30 in findconnect(27):
+                print("You walk back following the path you cleared earlier.")
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -832,7 +836,7 @@ while  True:
         
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if 34 in loclog:
+        if 34 in loclog or stairrobot == 0:
             Print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input())
             if choice == "U":
