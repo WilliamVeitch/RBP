@@ -8,7 +8,7 @@ swicob = "0"
 ask = "A"
 alert = 0
 observe = 1
-screen = [4, 4]
+screen = [4, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 loclog = list()
@@ -26,6 +26,12 @@ def destroy(n):
         if eqlist[x] == n:
             del eqlist[x]
         x = x + 1
+def poswheel(n): #N=0, S=1
+    poslist = ["top", "right", "down", "left"]
+    if n == 3:
+        return poslist[2*stairrobot]
+    else:
+        return poslist[screen[n]-1]
 def lastloc():
     oriid = len(loclog) - 1
     return loclog[oriid]
@@ -74,7 +80,7 @@ def endgame(n):
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
-def screencheck(a, d, p):
+def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired location
     if d == screen[p]:
         return 54
     else:
@@ -540,7 +546,7 @@ while  True:
                     print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                     choice = str(input())
                     if choice == "S":
-                        destroy("stonerod")
+                        destroy("stone rod")
                         print("By pushing and turning the rod, you are able to get two thirds of it to go into the hole.")
                         print("You now try to force the rod completely into the hole. This is hard to do, but eventually you succeed and the remainder of the rod descends into the hole. A loud mechanical noise occurs and you notice with surprise that one of the stone tiles in the garden has moved aside to reveal a hidden ladder leading underground.")
                         print("You can descend the ladder (L) or withdraw from the garden (W).")
@@ -928,20 +934,33 @@ while  True:
         print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
         choice = str(input())
         if choice == "SW":
-            print("stair control")
-            # stair control #
+            print("On the right of the panel there are two circular wheels, one above the other. To the right is a small lever which is hidden behind a glass screen. You could investigate the wheels (W), investigate the lever (L) or withdraw into the room (R).")
+            choice = str(input())
+            if choice == "W":
+                print("Each wheel has four spokes with a marker attached to one of these.")
+                print("Currently, the marker of the upper wheel is in the ", poswheel(0), " position and that of the lower wheel is in the ", poswheel(1), "position.")
+                print("Let the positions of each wheel be numbered clockwise from 0 to 4, starting with the upper position.")
+                screen[1] = int(input("Set position of first wheel (1/2/3/4).    "))
+                screen[2] = int(input("Set position of second wheel (1/2/3/4).   "))
+            elif choice == "L":
+                if "metal rod" in dlist:
+                    print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
+                    stairrobot = int(input("Set position of lever (0/1).   "))
+                else:
+                    print("Unfortunately, you are unable to lift the glass screen so you must withdraw into the room.")
         elif choice == "H":
             if "metal rod" in eqlist:
                 print("You notice that the symbols around the hole are similar to those engraved on the metal rod.")
                 print("You can attempt to insert the metal rod (MR) or you can withdraw (W)")
                 choice = str(input())
                 if choice == "MR":
-                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
-                    switchunlock = 1         
+                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")   
+                    destroy("metal rod")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
         elif choice == "D":
-            print("You find a diagram which you believe corresponds to the switches you saw in the corner of the room.")
+            print("You find a note which you believe corresponds to the switches you saw in the corner of the room.")
+            print("You read the note: 'West wing - cylindrical room rotation screens. The positions marked on the wheels are the positions of the blocking screens of the two Northern cylindrical rooms. These extend to all floors.'")
         elif choice == "S":
             loc = 31
         elif choice == "W":
@@ -955,7 +974,7 @@ while  True:
         elif choice == "N":
             loc = 48
         elif choice == "I":
-            print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing")
+            print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing.")
             # collapsing room #
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
@@ -1136,7 +1155,7 @@ while  True:
         choice = str(input())
         acloc = 55
         if choice == "N":
-            loc = screencheck(63, 1, 0)
+            loc = screencheck(68, 1, 0)
         elif choice == "E":
             loc = screencheck(64, 2, 0)
         elif choice == "S":
@@ -1162,7 +1181,7 @@ while  True:
         elif choice == "S":
             loc = 67
         elif choice == "W":
-            loc = 68
+            loc = 74
     elif loc == 59:
         print("Bedroom")
     elif loc == 60:
@@ -1235,14 +1254,23 @@ while  True:
         if choice == "E":      
             loc = screencheck(69, 2, 1)
         elif choice == "S":
-            loc = screencheck(55, 3, 1)
+            loc = screencheck(70, 3, 1)
         elif choice == "W":
             loc = screencheck(71, 4, 1)
     elif loc == 64:
         print("Puzzle room")
+    elif loc == 65:
+        print("You are in a very small room with no features worthy of investigation. There are doors to the East and South (E and S).")
+        choice = str(input())
+        if choice == "E":
+            loc = screencheck(55, 4, 0)
+        elif choice == "S":
+            print("You open the door and descend a narrow staircase.")
+            loc = 60
               
-              
-              
+                
+                
+    
     elif loc == 68:
         loc = screencheck(63, 3, 1)
                 
