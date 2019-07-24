@@ -583,7 +583,7 @@ while  True:
             print("You can withdraw into the room (W) or use an object in your possesion to stand in for the handle (H).")
             choice = str(input())
             if choice == "H":
-                if "shortsword (SS)" in eqlist or "metal rod" in eqlist or "golden blade (GB)" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
+                if "shortsword (SS)" in eqlist or "metal rod" in eqlist or "large knife (LK)" in eqlist or "golden blade (GB)" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
                     print("You find a suitable item and open the door.")
                     print("The room is very small and you have to crouch down to get in.")
                     if "rusted keys" not in eqlist and "rusted keys" not in dlist:
@@ -1016,7 +1016,9 @@ while  True:
                           listweapons()
                           #chest#
         elif choice == "U":
-            print("magnetic fork") #magnetic fork#
+            print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
+            if choice == "W":
+                eqlist.append("large knife (LK)")
         elif choice == "N":
             loc = 35
         elif choice == "S":
@@ -1198,7 +1200,25 @@ while  True:
             print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
             eqlist.append("fuses")
         elif choice == "P":
-            print("Panel") #electronics#
+            print("Implanted into the panel are two large iron discs and above these is a symbol of a trident. You may attempt to interact with the panel using an item in your possesion (I), you may try to remove the iron discs using a weapon (R) or you may end your investigation into the panel (E).")
+            choice = str(input())
+            if choice == "I":
+                listweapons()
+                choice = str(input("Which item do you want to use?   "))
+                if choice == "MF" and "magnetic fork (MF) in eqlist":
+                    print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.") 
+                    destroy() 
+            elif choice == "R":
+                listweapons()
+                choice = str(input())
+                if random.randint(1,6) <=2:
+                    print("Unfortunately, you were unable to remove the discs and the weapon you were using was destroyed.")
+                    dindex = 0
+                    while choice not in eqlist[dindex]:
+                        dindex = dindex + 1
+                    destroy(eqlist[dindex])
+            else:
+                print("Unfortunately, you were unable to remove the discs.")
         elif choice == "W":
             loc = 51
     elif loc == 62:
