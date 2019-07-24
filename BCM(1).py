@@ -1118,8 +1118,29 @@ while  True:
         print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. On the floor below the window is a scrap of paper which you pick up.")
         #tower room#
     elif loc == 53:
-        Unfortunately, you were unable to remove the discs.
-
+        print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder as well as several potted plants.")
+        print("You can go North (N), investigate the candle holder (C), investigate the plants (P) or climb down into the courtyard (D).")
+        choice = str(input())
+        if choice == "N":
+            loc = 62
+        elif choice == "C":
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
+                if candle(2) == 1:
+                    choice = str(input())
+                    if choice == "P":
+                        print(eqlist)
+                        candleid = input("Which candle should be placed here?   ")
+                        if candleid in eqlist:
+                            destroy(candleid)
+                            candlelist[2] = candleid
+                    elif choice == "R":
+                        eqlist.append(candlelist[2])
+                        lcandlelist[2] = 0
+                        candlelist[2] = ""
+                    elif choice == "L":
+                        if "matches" in eqlist:
+                            print("You light the candle.")
+                            lcandlelist[2] = 1
         elif choice == "P":
             if observe == 1:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
@@ -1282,19 +1303,44 @@ while  True:
         elif choice == "W":
             loc = 77
     elif loc == 67:
-        
-    
+        print("You are standing on the Northern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the South (S). A yellow tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder. There is also a door to the North.")
+        print("You can go South along the balcony (S), investigate the candle holder (C), climb down into the coutyard (D) or go through the door to the North (N).")
+        choice = str(input())
+        if choice == "S":
+            loc = 62
+        elif choice == "C":
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
+                if candle(0) == 1:
+                    choice = str(input())
+                    if choice == "P":
+                        print(eqlist)
+                        candleid = input("Which candle should be placed here?   ")
+                        if candleid in eqlist:
+                            destroy(candleid)
+                            candlelist[0] = candleid
+                    elif choice == "R":
+                        eqlist.append(candlelist[0])
+                        lcandlelist[0] = 0
+                        candlelist[0] = ""
+                    elif choice == "L":
+                        if "matches" in eqlist:
+                            print("You light the candle.")
+                            lcandlelist[0] = 1
+        elif choice == "D":
+            loc = 45
+        elif choice == "N":
+            loc = 77
     elif loc == 68:
         loc = screencheck(63, 3, 1)
-                
+    elif loc == 69:
+        print("small room")        
                 
     elif loc == 70:
         loc = screencheck(55, 1, 0)
     
     loclog.append(loc)
-    if len(eqlist) > 12:
-        print("You have too many items to carry. Please type the index of the item to discard.")
-        print(eqlist)
-        choice = int(input())
-        destroy(eqlist[choice])
+
+        
+        
+        
         
