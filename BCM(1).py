@@ -1118,29 +1118,7 @@ while  True:
         print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. On the floor below the window is a scrap of paper which you pick up.")
         #tower room#
     elif loc == 53:
-        print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder as well as several potted plants.")
-        print("You can go North (N), investigate the candle holder (C), investigate the plants (P) or climb down into the courtyard (D).")
-        choice = str(input())
-        if choice == "N":
-            loc = 62
-        elif choice == "C":
-            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
-                if candle(2) == 1:
-                    choice = str(input())
-                    if choice == "P":
-                        print(eqlist)
-                        candleid = input("Which candle should be placed here?   ")
-                        if candleid in eqlist:
-                            destroy(candleid)
-                            candlelist[2] = candleid
-                    elif choice == "R":
-                        eqlist.append(candlelist[2])
-                        lcandlelist[2] = 0
-                        candlelist[2] = ""
-                    elif choice == "L":
-                        if "matches" in eqlist:
-                            print("You light the candle.")
-                            lcandlelist[2] = 1
+        Unfortunately, you were unable to remove the discs.
 
         elif choice == "P":
             if observe == 1:
@@ -1207,7 +1185,8 @@ while  True:
                 choice = str(input("Which item do you want to use?   "))
                 if choice == "MF" and "magnetic fork (MF) in eqlist":
                     print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.") 
-                    destroy() 
+                    destroy("magnetic fork (MF)")
+                    smallwheels = smallwheels + 1
             elif choice == "R":
                 listweapons()
                 choice = str(input())
@@ -1225,7 +1204,7 @@ while  True:
         ccs = ""
         if len(candlelist[1]) > 3:
             ccs = ""
-        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this.") 
+        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).") 
         if candlelist == ["red candle", "green candle", "blue candle"] and lcandlelist == [1, 1, 1]:
             print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
             eqlist.append("silver key")
@@ -1267,6 +1246,8 @@ while  True:
             else:
                 print("You climb down successfully.")
             loc = 45
+        elif choice == "E":
+            loc = 76
     elif loc == 63:
         print("You are in a small, cylindrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
         choice = str(input())
@@ -1287,9 +1268,21 @@ while  True:
         elif choice == "S":
             print("You open the door and descend a narrow staircase.")
             loc = 60
-              
-                
-                
+    elif loc == 66:
+        print("You are in a corridor which runs from North to South. To the North there is a white door (WD). To the East there is a brown door (BD) and South of this is another corridor leading off to the East (E). To the South there is a junction with passages leading to the South (S) and West (W).") 
+        choice = str(input())
+        if choice == "WD":
+            loc = 75
+        elif choice == "BD":
+            loc = 73
+        elif choice == "E":
+            loc = 50
+        elif choice == "S":
+            loc = 76
+        elif choice == "W":
+            loc = 77
+    elif loc == 67:
+        
     
     elif loc == 68:
         loc = screencheck(63, 3, 1)
