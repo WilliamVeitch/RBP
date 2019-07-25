@@ -1368,7 +1368,30 @@ while  True:
             print("You notice nothing unusual about the toilet.")
     elif loc == 73:
         print("Guardroom")
-            
+    elif loc == 74:
+        print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
+        choice = str(input())
+        if choice == "N":
+            print("You find that the door is locked.") 
+            if "iron key" in eqlist:
+                print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
+                destroy("iron key")
+                loc = 79
+            else:
+                print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).") 
+                choice = str(input())
+                if choice == "W":
+                    listweapons()
+                    choice = str(input())
+                    #astronomy tower#
+        elif choice == "EN":
+            loc = 58
+        elif choice == "ES":
+            loc = 80
+           
+                    
+
+                    
     loclog.append(loc)
 
         
