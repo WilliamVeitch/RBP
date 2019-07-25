@@ -34,7 +34,7 @@ def poswheel(n): #N=0, S=1
     else:
         return poslist[screen[n]-1]
 def lastloc():
-    oriid = len(loclog) - 1
+    oriid = len(loclog) - 2
     return loclog[oriid]
 def findconnect(a):
     conreport = list()
@@ -44,15 +44,15 @@ def findconnect(a):
     return conreport
 def crystal():
     print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
-    print("In clockwise order, starting with the pentagon, these are a pentagon (P), a triangle (T), a square (S) and a hexagon (X)")
+    print("In clockwise order, starting with the pentagon, these are a pentagon (P), a triangle (T), a square (S) and a hexagon (H)")
     print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
     choice = str(input())
     if choice == "S":
-        strike = str(input("Which symbol do you strike?  (P/T/S/X) "))
+        strike = str(input("Which symbol do you strike?  (P/T/S/H) "))
         if strike == "H":
             destroy("energy crystal (EC)")
             return "success"
-        elif strike != "H":
+        else:
             return "failure"
     else:
         if random.randint(1, 4) == 4:
@@ -158,12 +158,12 @@ while  True:
             if ask == "CBD":
                 print("Geelophisis tells you that the current version of the CBD is much safer than the prototype used in the 1960s. He says that it should only be used on intelligent opponents with larger brains as this makes it easier for the CBD to identify them.")
             elif ask == "IP":
-                print("Geelophisis tells you that this is the standard invisibility potion used by the ninjas in Oland and it makes the user invisible for 2 minutes")
+                print("Geelophisis tells you that this is the standard invisibility potion used by the ninjas in Oland and it makes the user invisible for 2 minutes.")
             elif ask == "SP":
                 print("Geelophisis tells you that this invention grants a sudden burst of extreme strength to the user for a short period of time.")
             elif ask == "MM":
-                print("Geelophisis tells you that this invention will allow you to find your way to any place but it can only be used once")
-            elif ask == "E":
+                print("Geelophisis tells you that this invention will allow you to find your way to any place.")
+            elif ask == "EC":
                 print("Geelophisis tells you that the energy crystal is a highly dangerous weapon that will release a blast of energy from the end of the crystal marked with a triangle when the end marked with a hexagon is struck. It can only be used once as the crystal is consumed on use.")
         choice1 = str(input("choice 1   "))
         choice2 = str(input("choice 2   "))
@@ -175,7 +175,7 @@ while  True:
             eqlist.append("strength potion (SP)")
         if choice1 == "MM" or choice2== "MM":
             eqlist.append("magical map (MM)")
-        if choice1 == "E" or choice2 == "EC":
+        if choice1 == "EC" or choice2 == "EC":
             eqlist.append("energy crystal (EC)")
         print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
         print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
@@ -305,7 +305,9 @@ while  True:
         loc = 11
     elif loc == 17:
         print(islandtext)
-        print("You are approaching the island from the South and you can see a small pier directly ahead of you (P) and a sandy beach to the East (B). Alternatively, you could circle around the island to the North side (N)")
+        print("You are approaching the island from the South and you can see a small pier directly ahead of you (P) and a sandy beach to the East (B). Alternatively, you could circle around the island to the North side (N).")
+        if "magical map (MM)" in eqlist:
+            print("You may also consult the magical map (MM).")
         choice = str(input())
         if choice == "P":
             loc = 24
@@ -314,22 +316,15 @@ while  True:
             print("You disembark from the boat and climb out onto the beach.")
         elif choice == "N":
             loc = 21
+        elif choice == "MM" and "magical map (MM)" in eqlist:
+            print("The magical map appears to suggest that circling around to the North would be the most direct way to gain access to the mansion.")
     elif loc == 18:
         print("You carry on through the stormy weather but some of your equipment is washed overboard by the waves.")
         text6 = random.choice(eqlist)
         print(text6, " is lost")
         destroy(text6)
         print("The storm has now ended and you continue on towards the island. ", islandtext)
-        print("You are approaching the island from the South and you can see a small pier directly ahead of you (P) and a sandy beach to the East (B). Alternatively, you could circle around the island to the North side (N)")
-        choice = str(input())
-        if choice == "P":
-            print("You dock at the pier and disembark.")
-            loc = 24
-        elif choice == "B":
-            loc = 23
-            print("You disembark from the boat and climb out onto the beach.")
-        elif choice == "N":
-            loc = 21
+        loc = 17
     elif loc == 19:
         print("You land at the airport in Ooville Town and arrange for a local pilot to return the helicopter to Geelophisis.")
         loc = 11
@@ -371,13 +366,14 @@ while  True:
                 loc = 26
                 print("You load the cannon and fire at the window. The window shatters and an alarm sounds. You enter the room.")
             elif choice == "EC":
-                if  crystal() == "success":
+                crystsample = crystal()
+                if  crystsample == "success":
                     print("The window is incinerated and an alarm sounds. You enter the room.")
                     loc = 26
-                elif crystal() == "failure":
+                elif crystsample == "failure":
                     destroy("energy crystal (EC)")
                     print("After the improper use, the crystal falls into the sea.")
-                elif crystal() == "big failure":
+                elif crystsample == "big failure":
                     endgame(1)
             elif choice == "CBD":
                 inap()
@@ -481,13 +477,14 @@ while  True:
                 alert = alert + 1
                 loc = 27
             elif choice == "EC":
-                if crystal() == "success":
+                crystsample = crystal()
+                if crystsample == "success":
                     alert = alert + 1
                     print("The crystal destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
                     loc = 27
-                elif crystal() == "failure":
+                elif crystsample == "failure":
                     print("After the improper use, you pick up the crystal.")
-                elif crystal() == "big failure":
+                elif crystsample == "big failure":
                     endgame(1)
             elif choice == "HOH":
                 print("You put on the helmet and charge towards the gate. It collapses, but the helmet is also damaged beyond repair.")
@@ -520,12 +517,13 @@ while  True:
                     print("You feel a sudden rush of strength and you force the door open. You enter the tower.")
                     loc = 28
                 elif choice == "EC":
-                    if crystal() == "success":
+                    crystsample = crystal()
+                    if crystsample == "success":
                         print(towertext)
                         loc = 28
-                    elif crystal() == "failure":
+                    elif crystsample == "failure":
                         print("You used the crystal improperly.")
-                    elif crystal() == "big failure":
+                    elif crystsample == "big failure":
                         endgame(1)
                 else:
                     inap()
@@ -663,13 +661,14 @@ while  True:
                     alert = alert + 1
                     loc = 32
                 elif choice == "EC":
-                    if  crystal() == "success":
+                    crystsample = crystal()
+                    if  crystsample == "success":
                         print("The door is destroyed by the energy blast and an alarm sounds. You enter the mansion.")
                         alert = alert + 1
                         loc = 32
-                    elif crystal() == "failure":
+                    elif crystsample == "failure":
                         print("The crystal has no effect on the door.")
-                    elif crystal() == "big failure":
+                    elif crystsample == "big failure":
                         endgame(1)
                 elif choice == "SBB":
                     print("The sticky banana bomb is ineffective in breaking down the door.")
@@ -701,10 +700,13 @@ while  True:
                         print("The bomb works and you enter the shed.")
                         loc = 39
                     elif choice == "EC":
-                        if crystal() == "success":
+                        crystsample = crystal() 
+                        if crystsample == "success":
                             print("You destroy the door and enter the shed.")
                             loc = 39
-                        elif crystal() == "big failure":
+                        elif crystsample == "failure":
+                            print("The crystal is ineffective.")
+                        elif crystsample == "big failure":
                             endgame(1)
                     elif choice == "SP":
                         destroy("strength potion (SP)")
@@ -779,13 +781,14 @@ while  True:
             print("The bomb explodes but does not help and leaves a mass of tangled barbed wire covered in sticky banana juices.")
             destroy("sticky banana bomb (SBB)")
         elif choice == "EC":
-            if  crystal() == "success":
+            crystsample = crystal()
+            if  crystsample == "success":
                 print("The barbed wire is destroyed and you walk towards the mansion.")
                 loc = 27
-            elif crystal() == "failure":
+            elif crystsample() == "failure":
                 destroy("energy crystal (EC)")
-                print("The crystal rolls away into the middle of the wire")
-            elif crystal() == "big failure":
+                print("The crystal rolls away into the middle of the wire.")
+            elif crystsample() == "big failure":
                 endgame(1)
         elif choice == "W":
             loc = lastloc()
@@ -836,12 +839,13 @@ while  True:
                     destroy("time bomb (TB)")
                     loc = 38
                 elif choice == "EC":
-                    if crystal() == "success":
+                    crystsample = crystal()
+                    if crystsample == "success":
                         print("Your crystal breaks the door and you advance into the room.")
                         loc = 38
-                    elif crystal() == "failure":
+                    elif crystsample == "failure":
                         print("You cannot remember the correct way to use the crystal.")
-                    elif crystal() == "big failure":
+                    elif crystsample == "big failure":
                         endgame(2)
                 elif choice == "R":
                     loc = lastloc()
@@ -880,6 +884,8 @@ while  True:
                 print("You successfully defend against the attack and your weapon is undamaged.")
             else:
                 inap()
+                print("The sharp blades strikes you and you fall unconscious. Your mission is over.")
+                endgame(2)                
     elif loc == 35:
         print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room. On the table are several empty plates, pieces of cutlery and candles.")
         print("There are doors to the North (N) and South (S). You could also stay in this room to investigate further (I).")
@@ -900,8 +906,11 @@ while  True:
             elif choice == "T":
                 print("You notice nothing remarkable about the table.")
             elif choice == "C":
-                print("You notice that while all other candles in the room are white or yellow, one is a vibrant shade of blue. You decide to take it with you.")
-                eqlist.append("blue candle")
+                if "blue candle" in eqlist or "blue candle" in dlist:
+                    print("You notice nothing interesting about the candles.")
+                else: 
+                    print("You notice that while all other candles in the room are white or yellow, one is a vibrant shade of blue. You decide to take it with you.")
+                    eqlist.append("blue candle")
     elif loc == 36:
         print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W), a dirty wooden door leading to the North (N), a solid metal door to the East(E) and a colourfully painted door to the South (S).")
         choice = str(input())
