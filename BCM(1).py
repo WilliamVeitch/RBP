@@ -12,6 +12,7 @@ screen = [4, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 loclog = list()
+bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -87,7 +88,7 @@ def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired locat
         return a
 while  True:
     if loc == 1:
-        print("The year is 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
+        print("The date is 8th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies or the mission")
         print("You can go to the Ninja Armoury (N), Royal Weaponary Supply Company (R) or Geelophisis' Lab (G)")
         choice = str(input())
@@ -120,7 +121,7 @@ while  True:
     elif loc == 3:
         print("The chairmonkey of the Royal Weaponary Supply Company welcomes you into his office and tells you that you may use any of his equipment so long as you can pay for it.")
         print("You have 8 banana coins to spend")
-        print("The available items are a shortsword (SS, 2 coins), the shield of safety (SOS, 3 coins), a strength potion (SP, 3 coins), the warhammer (W, 4 coins), the golden blade (G, 5 coins) and the portable cannon (P, 6 coins)")
+        print("The available items are a shortsword (SS, 2 coins), the shield of safety (SOS, 3 coins), a strength potion (SP, 3 coins), the warhammer (WH, 4 coins), the golden blade (GB, 5 coins) and the portable cannon (PC, 6 coins).")
         while choice != "E":
             choice = str(input("Type in an item code or type E to exit the office.   "))
             if choice == "SS":
@@ -132,13 +133,13 @@ while  True:
             elif choice == "SP":
                 eqlist.append("strength potion (SP)")
                 coins = coins - 3
-            elif choice  == "W":
+            elif choice  == "WH":
                 eqlist.append("warhammer (WH)")
                 coins = coins - 4
-            elif choice == "G":
+            elif choice == "GB":
                 eqlist.append("golden blade (GB)")
                 coins = coins - 5
-            elif choice == "P":
+            elif choice == "PC":
                 eqlist.append("portable cannon (PC)")
                 coins = coins - 6
             if coins < 0:
@@ -196,7 +197,7 @@ while  True:
         elif choice == "L":
             loc = 7
     elif loc == 6:
-        print("Geelophisis tells you that Crultney Mansion is 3 storeys high and also has a set of underground rooms. He tells you that the easiest way to access the island is by first travelling to Ooville and then departing for the island in a smaller vessel")
+        print("Geelophisis tells you that Crultney Mansion is 3 storeys high and also has a set of underground rooms. He tells you that the easiest way to access the island is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
         print("Geelophisis also offers for you to travel in his helicopter to the mansion if you do not want to follow this advice. However, Geelophisis is a very busy monkey at the moment so you would have to fly the helicopter yourself.")
         choice = str(input("Type 'H' if you travel in the helicopter or type 'P' if you go to the port to find the ship to Ooville.   "))
         if choice == "H":
@@ -220,7 +221,7 @@ while  True:
         print("You now travel to the port.")
         loc = 7
     elif loc == 9:
-        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that Crultney's main living and work areas are on the first floor of the mansion.")
+        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that Crultney's main living and work areas are on the second floor of the mansion.")
         print("After the meeting with Furfoot, you find a banana coin on the ground near the palace and you put this in your pocket.")
         coins = coins + 1
         print("You now travel to the port.")
@@ -975,7 +976,9 @@ while  True:
             loc = 48
         elif choice == "I":
             print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing.")
-            # collapsing room #
+            print("'September 16th, 1971")
+            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am now tring to '")
+            print("A significant fragment of the page has been torn off so you do not know how the sentence finishes.")
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
         choice = str(input())
@@ -1337,7 +1340,35 @@ while  True:
                 
     elif loc == 70:
         loc = screencheck(55, 1, 0)
-    
+    elif loc == 71:
+        print("You are standing in a short hallway with a door to the East (E) and an ascending staircase to the West (W).")
+        choice = str(input())
+        if choice == "E":
+            loc = screencheck(63, 4 , 1)
+        elif choice == "W":
+            loc = 78
+    elif loc == 72:
+        print("You are in a bathroom containing a large bathtub (B), a sink (S) and a toilet (T). The only door is to the North (N). ")
+        choice = str(input())
+        bwlist = ["left", "right", "on", "off"]
+        if choice == "B":
+            print("You notice a strange lever attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], " .")
+            print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
+            choice = str(input())
+            if choice == "L":
+                bathwater[0] = input("You may move the lever to the left (0) or to the right (1).   ")
+            elif choice == "T":
+                bathwater[1] = input("You may turn the tap on (2) or off (3).   ")
+        elif choice == "S":
+            print("Above the sink is a collection of soaps. One bar of soap is bright orange and has a strange odour. You may take this with you (T) or leave it (L).")
+            choice = str(input())
+            if choice == "T":
+                eqlist.append("soap")
+        elif choice == "T":
+            print("You notice nothing unusual about the toilet.")
+    elif loc == 73:
+        print("Guardroom")
+            
     loclog.append(loc)
 
         
