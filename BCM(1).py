@@ -759,7 +759,7 @@ while  True:
             loc = 33
     elif loc == 30:
         listweapons()
-        print("You may also withdraw (W).")
+        print("You may also withdraw (W).") #broken
         choice = str(input())
         if choice == "GB" or choice == "SS" or choice == "SOS":
             print("Your weapon is successful in clearing a path through the barbed wire.")
