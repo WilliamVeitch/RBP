@@ -433,17 +433,19 @@ while  True:
             print("The gorillas recognise your item and will allow you to continue your journey. They also give you a map of the nearby islands if you do not already have one.")
             loc = 17
     elif loc == 23:
-        print("The mansion is to the North of you and there is a barbed wire fence ahead of you.")
-        print("You can use a weapon to break the barbed wire (W), or you could go East to try to find another way to access the mansion (E).")
+        print("You are standing on a beach on the island's South coast. The mansion is to the North of you and there is a barbed wire fence ahead of you. To the West is a small pier. ")
+        print("You can use a weapon to break the barbed wire (W), you can walk towards the pier (P) or you can go East to try to find another way to access the mansion (E).")
         choice = str(input())
         if choice == "W":
-            loc = 30      
+            loc = 30
+        elif choice == "P":
+            loc = 24
         elif choice == "E":
             print("The barbed wire continues on the Eastern side of the mansion until it reaches the sea on the North coast.")
             loc = 25
     elif loc == 24:
-        print("You are standing on the SOuth coast of the island near a small pier. There is a small path ahead which leads up to a gate in a barbed wire fence. You can see the mansion beyond the fence and to the West you can see a tower in the distance next to the fence.")
-        print("You can attempt to breach the fence (F), attempt to open the gate (G) or go West towards the tower (W).")
+        print("You are standing on the South coast of the island near a small pier. There is a sandy beach to the East. There is a small path ahead which leads up to a gate in a barbed wire fence. You can see the mansion beyond the fence and to the West you can see a tower in the distance next to the fence.")
+        print("You can attempt to breach the fence (F), attempt to open the gate (G), go East towards the beach (E) or go West towards the tower (W).")
         choice = str(input())
         if choice == "F":
             loc = 30
@@ -527,8 +529,10 @@ while  True:
                         endgame(1)
                 else:
                     inap()
+        elif choice == "E":
+            loc = 23
     elif loc == 25:
-        print("you are East of the mansion and a barbed wire fence separates you from the mansion. You notice a square garden area enclosed with hedges nearby.")
+        print("You are East of the mansion and a barbed wire fence separates you from the mansion. You notice a square garden area enclosed with hedges nearby.")
         print("You can try to breach the fence (F), enter the garden area (G) or go to the South West (SW).")
         choice = str(input())
         if choice == "F":
@@ -536,34 +540,37 @@ while  True:
         elif choice == "SW":
             loc = 23
         elif choice == "G":
-            print("You enter the garden. In the centre of the garden is a large cylindrical stone with a hole in the centre set into the ground.")
-            print("In the North of the garden is a pool containing aquatic plants. there is a wooden bench in each of the other sides of the garden and these benches are surrounded by numerous plant species.")
-            print("You can investigate the cylindrical stone (S) or withdraw from the garden (W).")
-            choice = str(input())
-            if choice == "S":
-                print("The stone looks rather old and worn. There are some strange symbols on the stone but they are difficult to read and understand.")
-                if "stonerod" in eqlist:
-                    print("You immediatly notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
-                    print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
-                    choice = str(input())
-                    if choice == "S":
-                        destroy("stone rod")
-                        print("By pushing and turning the rod, you are able to get two thirds of it to go into the hole.")
-                        print("You now try to force the rod completely into the hole. This is hard to do, but eventually you succeed and the remainder of the rod descends into the hole. A loud mechanical noise occurs and you notice with surprise that one of the stone tiles in the garden has moved aside to reveal a hidden ladder leading underground.")
-                        print("You can descend the ladder (L) or withdraw from the garden (W).")
+            if "stone rod" in dlist:
+                print("You have already accomplished all there is to do in the garden so you withdraw.")
+            else:
+                print("You enter the garden. In the centre of the garden is a large cylindrical stone with a hole in the centre set into the ground.")
+                print("In the North of the garden is a pool containing aquatic plants. there is a wooden bench in each of the other sides of the garden and these benches are surrounded by numerous plant species.")
+                print("You can investigate the cylindrical stone (S) or withdraw from the garden (W).")
+                choice = str(input())
+                if choice == "S":
+                    print("The stone looks rather old and worn. There are some strange symbols on the stone but they are difficult to read and understand.")
+                    if "stone rod" in eqlist:
+                        print("You immediatly notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
+                        print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                         choice = str(input())
-                        if choice == "L":
-                            print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
-                            print("You can look in the cabinet (C), look in the book (B) or withdraw (W).")
+                        if choice == "S":
+                            destroy("stone rod")
+                            print("By pushing and turning the rod, you are able to get two thirds of it to go into the hole.")
+                            print("You now try to force the rod completely into the hole. This is hard to do, but eventually you succeed and the remainder of the rod descends into the hole. A loud mechanical noise occurs and you notice with surprise that one of the stone tiles in the garden has moved aside to reveal a hidden ladder leading underground.")
+                            print("You can descend the ladder (L) or withdraw from the garden (W).")
                             choice = str(input())
-                            if choice == "C":
-                                print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
-                                print("You take the rods.")
-                                eqlist.append("wooden rod")
-                                eqlist.append("metal rod")
-                            elif choice == "B":
-                                eqlist.append("information book")
-                                print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
+                            if choice == "L":
+                                print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
+                                print("You can look in the cabinet (C), look in the book (B) or withdraw (W).")
+                                choice = str(input())
+                                if choice == "C":
+                                    print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
+                                    print("You take the rods.")
+                                    eqlist.append("wooden rod")
+                                    eqlist.append("metal rod")
+                                elif choice == "B":
+                                    eqlist.append("information book")
+                                    print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
     elif loc == 26:
         print("You are in a circular room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
         if 21 in findconnect(26):
@@ -656,14 +663,14 @@ while  True:
                     alert = alert + 1
                     loc = 32
                 elif choice == "EC":
-                if  crystal() == "success":
-                    print("The door is destroyed by the energy blast and an alarm sounds. You enter the mansion.")
-                    alert = alert + 1
-                    loc = 32
-                elif crystal() == "failure":
-                    print("The crystal has no effect on the door.")
-                elif crystal() == "big failure":
-                    endgame(1)
+                    if  crystal() == "success":
+                        print("The door is destroyed by the energy blast and an alarm sounds. You enter the mansion.")
+                        alert = alert + 1
+                        loc = 32
+                    elif crystal() == "failure":
+                        print("The crystal has no effect on the door.")
+                    elif crystal() == "big failure":
+                        endgame(1)
                 elif choice == "SBB":
                     print("The sticky banana bomb is ineffective in breaking down the door.")
                     destroy("sticky banana bomb (SBB)")
