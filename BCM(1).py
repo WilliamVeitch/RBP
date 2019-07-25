@@ -1382,6 +1382,8 @@ while  True:
                 eqlist.append("soap")
         elif choice == "T":
             print("You notice nothing unusual about the toilet.")
+        elif choice == "N":
+            loc = 81
     elif loc == 73:
         print("Guardroom")
     elif loc == 74:
@@ -1393,6 +1395,8 @@ while  True:
                 print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
                 destroy("iron key")
                 loc = 79
+            elif 74 in findconnect(75):
+                print("You go North into the cylindrical room.")
             else:
                 print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).") 
                 choice = str(input())
@@ -1404,13 +1408,54 @@ while  True:
             loc = 58
         elif choice == "ES":
             loc = 80
-           
-                    
+    elif loc == 75:
+        print("You are in a cylindrical room with a door to the South (S) and an ascending staircase (A).")
+        choice = str(input())   
+            if choice == "S":
+                loc = 66
+            elif choice == "A":
+                if 79 in loclog():
+                    print("You ascend the staircase.")
+                else:
+                    print("The staircase is barred. You may use weapons (W) or withdraw (I).")
+                    choice = str(input())
+                    if choice == "W":
+                        listweapons()
+                        choice = str(input())
+                        #astronomy tower#
+    elif loc == 76:
+        print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). There is also a door to the West (D).")
+        choice = str(input())
+        if choice == "N":
+            loc = 66
+        elif choice == "W":
+            loc = 77
+        elif choice == "E":
+            loc = 81
+        elif choice == "D":
+            loc = 62
+    elif loc == 77:
+        print("You are in a corridor which runs from East to West. To the East is a junction with passages leading off to the North (N) and South (S). There are two doors to the South (SE and SW) and one to the North (ND). To the West, the corridor terminates in a wall with a small window in it.")
+        choice = str(input())
+        if choice == "N":
+            loc = 66
+        elif choice == "S":
+            loc = 76
+        elif choice == "SE":
+            loc = 67
+        elif choice == "SW":
+            loc = 82
+        elif choice == "ND":
+            loc = 83
+        
+        
+        
 
-                    
-    loclog.append(loc)
-
         
         
         
         
+        
+        
+        
+loclog.append(loc)
