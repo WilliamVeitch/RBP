@@ -8,12 +8,15 @@ swicob = "0"
 ask = "A"
 alert = 0
 observe = 1
+ncode = 0
+fcode = random.randint(0, 999)
 screen = [4, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 loclog = list()
 bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
+wunlock = 0
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -1352,8 +1355,22 @@ while  True:
     elif loc == 68:
         loc = screencheck(63, 3, 1)
     elif loc == 69:
-        print("small room")        
-                
+        print("You are standing in an extremely small room whose only notable features are a number input device affixed to the wall (N) and a door to the West (W).")        
+        choice = str(input())
+        if choice == "N":
+            print("The device consists of three wheels with the numbers 0-9 enscribed upon them. These are arranged from left to right. Above the leftmost wheel is written the number 0. Above the centre wheel is written the number 1. Above the rightmost wheel is written the number 2. Below the wheels is a button. You can adjust the positions of the wheels (A), press the button (B) or withdraw (W).")
+            choice = str(input())
+            if choice == "A":
+                ncode = input("Type the numbers to which you set the wheels, from left to right.   ")
+            elif choice == "B":
+                if ncode == fcode:
+                    print("You here a mechanical noise from above you.")
+                    wunlock = 1
+                else:
+                    print("An alarm sounds.")
+                    alert = alert + 1
+        elif choice == "W":
+            loc = screencheck(63, 2, 1)
     elif loc == 70:
         loc = screencheck(55, 1, 0)
     elif loc == 71:
@@ -1447,8 +1464,22 @@ while  True:
             loc = 82
         elif choice == "ND":
             loc = 83
-        
-        
+    elif loc == 78:
+        print("You are standing in a corridor which runs from East to West. To the West is a descending staircase (W). To the East is a door (E).")
+        choice = str(input())
+        if choice == "W":
+            loc = 71
+        elif choice == "E":
+            loc = screencheck(84, 4, 1)
+    elif loc == 79:
+        print("You are in a cylindrical room with a staircase and a door to the South. There are many star charts and astronomical instruments on the wall. You notice that the staircase below is shut off by a door which you can pull up from this side so you decide to do that in order to enable you to travel on this staircase. You may ascend (A) or descend (D) the staircase or leave through the door to the South (S).")
+        choice = str(input())
+        if choice == "A":
+            loc = 85
+        elif choice == "D":
+            loc = 75
+        elif choice == "S":
+            loc = 74
         
 
         
