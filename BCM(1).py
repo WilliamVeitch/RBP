@@ -1480,8 +1480,15 @@ while  True:
             loc = 75
         elif choice == "S":
             loc = 74
-        
-
+    elif loc == 80:
+        print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W). There are two doors on this corridor, one to the North (N) and one to the South (S).")
+        choice = str(input())
+        if choice == "W":
+            loc = 74
+        elif choice == "N":
+            loc = 86
+        elif choice == "S":
+            loc = 87
         
         
         
