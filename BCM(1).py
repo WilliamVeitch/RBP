@@ -1441,7 +1441,7 @@ while  True:
                         choice = str(input())
                         #astronomy tower#
     elif loc == 76:
-        print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). There is also a door to the West (D).")
+        print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). South of this there is a door to the West (D).")
         choice = str(input())
         if choice == "N":
             loc = 66
@@ -1489,7 +1489,22 @@ while  True:
             loc = 86
         elif choice == "S":
             loc = 87
+    elif loc == 81:
+        print("You are in a corridor which runs from East to West. There are doors to the North and South (N and S). There is also a junction with a North-South corridor to the West (W).")
+        choice = str(input())
+        if choice == "N":
+            loc = 88
+        elif choice == "S":
+            loc = 72
+        elif choice == "W":
+            loc = 76
+    elif loc == 82:
+        print("collapsing room upper")
         
+        
+        
+        
+
         
         
         
