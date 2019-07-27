@@ -1105,7 +1105,7 @@ while  True:
         elif choice == "W":
             loc = 57
         elif choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[0], " written upon it.")
     elif loc == 48:
         print("Outer collapsed room.")
         #collapsed room#
@@ -1500,12 +1500,26 @@ while  True:
             loc = 76
     elif loc == 82:
         print("collapsing room upper")
-        
-        
-        
-        
-
-        
+    elif loc == 83:
+        print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards the North, South and West (N, S and W). There is also a small depression in the centre of the room which you could examine (D).")
+        choice = str(input())
+        if choice == "N":
+            loc = screencheck(89, 3, 0)
+        elif choice == "S":
+            loc = 77
+        elif choice == "W":
+            loc = 91
+        elif choice == "D":
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
+    elif loc == 84:
+        print("You are standing in a cylindrical room with no interesting features. There are doors to the South and to the West (S and W).")
+        choice = str(input())
+        if choice == "S":
+            loc = screencheck(92, 3, 1)
+        elif choice == "W":
+            loc = 78
+    elif loc == 85:
+        print("Astronomy tower")
         
         
         
