@@ -4,6 +4,7 @@ loc = 1
 coins = 8
 eqlist = list()
 dlist = list()
+ulist = list()
 swicob = "0"
 ask = "A"
 alert = 0
@@ -30,7 +31,10 @@ def destroy(n):
         if eqlist[x] == n:
             del eqlist[x]
         x = x + 1
-def poswheel(n): #N=0, S=1
+def udestroy(n):
+    ulist.append(n)
+    destroy(n)
+def poswheel(n): #S=0, N=1
     poslist = ["top", "right", "down", "left"]
     if n == 3:
         return poslist[2*stairrobot]
@@ -80,7 +84,7 @@ def candle(n):
 def endgame(n):
     print(eqlist)
     print("You have failed in your mission.")
-    print("You completed ", n, " out of 5 major events successfully.")
+    print("You completed ", n, " out of 4 major events successfully.")
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -146,8 +150,9 @@ while  True:
                 eqlist.append("portable cannon (PC)")
                 coins = coins - 6
             if coins < 0:
-                print("You could not afford that item")
-                loc = 999
+                print("You could not afford that item.")
+                del eqlist[len(eqlist) - 1]
+                coins = 0
         loc = 5
     elif loc == 4:
         print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since your mission with the Robo Lion in 1963")
@@ -211,16 +216,18 @@ while  True:
         print("You arrive at the port and see many ships which you could use to get to Crultney Mansion.")
         print("You could travel for free on the ship to Ooville (O) or you could travel for 2 banana coins on a boat going directly to Crultney's Island (C).")
         print("You have ", coins, "banana coins")
+        if "magical map (MM)" in eqlist:
+            print("You may also consult the magical map (MM).")
         choice = str(input())
         if choice == "O":
             loc = 11
         elif choice == "C":
             coins = coins - 2
             loc = 12
+        elif choice == "MM" and "magical map (MM)" in eqlist:
+            print("The magical map appears to suggest that the wisest course of action would be to take the ship to Ooville.")
     elif loc == 8:
         print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons.")
-        print("The ninja leaders also show you a map of the islands and the surrounding area.")
-        #map#
         print("You now travel to the port.")
         loc = 7
     elif loc == 9:
@@ -231,7 +238,7 @@ while  True:
         loc = 7
     elif loc == 10:
         print("After travelling for a great length of time over the sea, you can see the island of Ooville.")
-        print("You could land the helicopter in Ooville (O) or travel South to try to find Crultney's Island(C)")
+        print("You could land the helicopter in Ooville (O) or travel South to try to find Crultney's Island(C).")
         choice = str(input())
         if choice == "O":
             loc = 19
@@ -256,6 +263,7 @@ while  True:
             loc = 18
     elif loc == 13:
         print("As you approach the island, you can see the majestic mansion in front of you. Suddenly, a loud siren sounds from the mansion. You could try to land near the mansion (M) or fly back towards Ooville (O).")
+        alert = alert + 1
         choice = str(input())
         if choice == "M":
             loc = 20
@@ -388,7 +396,7 @@ while  True:
                     destroy("medical kit (MK)")
                     loc = 26
                 else:
-                    print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again")
+                    print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again.")
                     endgame(1)
             else:
                 inap()
@@ -541,7 +549,7 @@ while  True:
         elif choice == "SW":
             loc = 23
         elif choice == "G":
-            if "stone rod" in dlist:
+            if "stone rod" in ulist:
                 print("You have already accomplished all there is to do in the garden so you withdraw.")
             else:
                 print("You enter the garden. In the centre of the garden is a large cylindrical stone with a hole in the centre set into the ground.")
@@ -555,7 +563,7 @@ while  True:
                         print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                         choice = str(input())
                         if choice == "S":
-                            destroy("stone rod")
+                            udestroy("stone rod")
                             print("By pushing and turning the rod, you are able to get two thirds of it to go into the hole.")
                             print("You now try to force the rod completely into the hole. This is hard to do, but eventually you succeed and the remainder of the rod descends into the hole. A loud mechanical noise occurs and you notice with surprise that one of the stone tiles in the garden has moved aside to reveal a hidden ladder leading underground.")
                             print("You can descend the ladder (L) or withdraw from the garden (W).")
@@ -584,8 +592,9 @@ while  True:
         if choice == "S":
             loc = 29
         elif choice == "B":
-            print("Inserted into one of the books you find a map of the mansion. You take this with you so that you may refer to it later.")
-            #map#
+            print("Inserted into one of the books you find a note which you read:")
+            print("'Never did I think before that such a mode of transportation would be possible, yet upon building the device as described I found that it works, under certain circumstances. However, the consequences of its use could be grave so I have dismantled it and am storing the parts in the astronomy tower.'")
+            print("The book into which this is inserted is very old and the text makes little sense to you.")
         elif choice == "F":
             print("You crawl into the fireplace and find a narrow passage to the side. The passage leads up to a small black door with no handle.")
             print("There is a lever for opening the door but the handle is missing and it is too heavy to move without the handle.")
@@ -601,7 +610,7 @@ while  True:
                         eqlist.append("green candle")
                         eqlist.append("rusted keys")
                     else: 
-                        print("There are no items of interest in the room")
+                        print("There are no items of interest in the room.")
                 else:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
                     
@@ -676,6 +685,8 @@ while  True:
                 elif choice == "SBB":
                     print("The sticky banana bomb is ineffective in breaking down the door.")
                     destroy("sticky banana bomb (SBB)")
+                else:
+                    inap()
         elif choice == "D" and 32 in loclog:
             print("You walk through the door into the main corridor.")
             loc = 32
@@ -764,7 +775,7 @@ while  True:
             loc = 33
     elif loc == 30:
         listweapons()
-        print("You may also withdraw (W).") #broken
+        print("You may also withdraw (W).")
         choice = str(input())
         if choice == "GB" or choice == "SS" or choice == "SOS":
             print("Your weapon is successful in clearing a path through the barbed wire.")
@@ -871,7 +882,7 @@ while  True:
             print("You must use a piece of equipment to defend against the attack")
             listweapons()
             choice = str(input())
-            if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD":
+            if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD" or choice == "LK":
                 print("You parry the attack but your weapon is irrepairably damaged due to the impact.")
                 stairrobot = 0
                 if choice == "BD":
@@ -880,8 +891,10 @@ while  True:
                     destroy("shortsword (SS)")
                 elif choice == "CBD":
                     destroy("CBD")
-                else:
+                elif choice == "WH":
                     destroy("warhammer (WH)")
+                elif choice == "LK":
+                    destroy("large knife (LK)")
             elif choice == "GB" or choice == "SOS" or choice == "HOH":
                 stairrobot = 0
                 print("You successfully defend against the attack and your weapon is undamaged.")
@@ -941,9 +954,8 @@ while  True:
         elif choice == "N":
             if 37 in findconnect(47) or 47 in findconnect(37):
                 print("Avoiding the pit, you make your way into the cylindrical room.")
-            if "magical map (MM)" in eqlist:
-                print("You feel uneasy about this passageway so you consult the magical map. It shows that there is a pit trap. You carefully move around the trap and you open the door to the North")
-                destroy("magical map (MM)")
+            elif "magical map (MM)" in eqlist:
+                print("You feel uneasy about this passageway so you consult the magical map. It shows that there is a pit trap. You carefully move around the trap and you open the door to the North.")
             else:
                 print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
                 print("You are able to escape from the trap unharmed and you open the door to the North.")
@@ -958,12 +970,12 @@ while  True:
             choice = str(input())
             if choice == "W":
                 print("Each wheel has four spokes with a marker attached to one of these.")
-                print("Currently, the marker of the upper wheel is in the ", poswheel(0), " position and that of the lower wheel is in the ", poswheel(1), "position.")
+                print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
                 print("Let the positions of each wheel be numbered clockwise from 0 to 4, starting with the upper position.")
-                screen[1] = int(input("Set position of first wheel (1/2/3/4).    "))
-                screen[2] = int(input("Set position of second wheel (1/2/3/4).   "))
+                screen[1] = int(input("Set position of upper wheel (1/2/3/4).   "))
+                screen[0] = int(input("Set position of lower wheel (1/2/3/4).   "))
             elif choice == "L":
-                if "metal rod" in dlist:
+                if "metal rod" in ulist:
                     print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
                     stairrobot = int(input("Set position of lever (0/1).   "))
                 else:
@@ -975,7 +987,7 @@ while  True:
                 choice = str(input())
                 if choice == "MR":
                     print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")   
-                    destroy("metal rod")
+                    udestroy("metal rod")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
         elif choice == "D":
@@ -1020,23 +1032,79 @@ while  True:
         if choice == "E":
             print("You examine the elevator shaft and discover that the elevator is not in working order.")
             if "super strong rope (SSR)" in eqlist:
-                  print("You look up the shaft and at first you can see nothing. However, as your eyes become accustomed to the darkness, you notice a thin rod sticking out of the wall about halfway up the shaft. Using your super strong rope, you may attempt to climb up the shaft to this point (C).")
-            choice = str(input())
-            if choice == "C":
-                  print("You throw the rope up the shaft and it catches on the rod. you then ascend the elavator shaft. You find that the rod is securely fastened to the wall and that there is a small ledge just above it.")
-                  print("You can pull yourself up onto the ledge (L) or go back down the shaft to the kitchen (D).")
-                  choice = str(input())
-                  if choice == "L":
-                      print("You climb up to the ledge and discover that a locked chest sits upon it.")
-                  if "brass key" in eqlist:
-                      print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
-                      print("You find that the chest contains a ")
-                  else:
-                      print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
-                      choice = str(input())
-                      if choice == "W":
-                          listweapons()
-                          #chest#
+                print("You look up the shaft and at first you can see nothing. However, as your eyes become accustomed to the darkness, you notice a thin rod sticking out of the wall about halfway up the shaft. Using your super strong rope, you may attempt to climb up the shaft to this point (C) or you may withdraw into the kitchen (W).")
+                choice = str(input())
+                if choice == "C":
+                    print("You throw the rope up the shaft and it catches on the rod. you then ascend the elavator shaft. You find that the rod is securely fastened to the wall and that there is a small ledge just above it.")
+                    print("You can pull yourself up onto the ledge (L) or go back down the shaft to the kitchen (D).")
+                    choice = str(input())
+                    if choice == "L":
+                        if "brass key" in ulist:
+                            print("You have already opened the chest so you feel no need to climb back up to the ledge.")
+                        else:
+                            print("You climb up to the ledge and discover that a locked chest sits upon it.")
+                        if "brass key" in eqlist:
+                            print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
+                            print("You find that the chest contains a ")
+                            udestroy("brass key")
+                        else:
+                            print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
+                            choice = str(input())
+                            if choice == "W":
+                                listweapons()
+                            if choice == "BD" or1062
+
+            loc = 35
+
+1063
+
+        elif choice == "S":
+
+1064
+
+            loc = 36
+
+1065
+
+    elif loc == 43:
+
+1066
+
+        print("You are in a small circular room with a narrow ascending staircase. There are no other objects of interest in the room. You can ascend the staircase (A) or exit the room to the West (W).")
+
+1067
+
+        choice = str(input())
+
+1068
+
+        if choice == "A":
+
+1069
+
+            loc = 52
+
+1070
+
+        elif choice == "W":
+
+1071
+
+            loc = 36
+
+1072
+
+    elif loc == 44:
+
+1073
+
+        print("You are in a very spacious living room. Finely decorated rugs cover the floor and the walls have expensive paintings mounted upon them. There are two large sofas and several comfortable chairs and nearby is a small yet magnificent woodwn table") choice == "SS" or choice == "GB":
+                                print("You hack open the chest and find ")
+                            if choice == "PC":
+                                print("The portable cannon succeeds in destroying the chest but also destroys whatever was inside.")
+                            elif choice == "TB":
+                                destroy("time bomb (TB)")
+                                print("The time bomb succeeds in destroying the chest but also destroys whatever was inside.")
         elif choice == "U":
             print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
             if choice == "W":
