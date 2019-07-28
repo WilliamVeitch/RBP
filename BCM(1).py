@@ -973,7 +973,7 @@ while  True:
             if choice == "W":
                 print("Each wheel has four spokes with a marker attached to one of these.")
                 print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
-                print("Let the positions of each wheel be numbered clockwise from 0 to 4, starting with the upper position.")
+                print("Let the positions of each wheel be numbered clockwise from 1 to 4, starting with the upper position.")
                 screen[1] = int(input("Set position of upper wheel (1/2/3/4).   "))
                 screen[0] = int(input("Set position of lower wheel (1/2/3/4).   "))
             elif choice == "L":
@@ -1565,6 +1565,7 @@ while  True:
         elif choice == "D":
             print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
     elif loc == 84:
+        acloc = 84
         print("You are standing in a cylindrical room with no interesting features. There are doors to the South and to the West (S and W).")
         choice = str(input())
         if choice == "S":
@@ -1578,17 +1579,60 @@ while  True:
         print("You could investigate the desk (D), investigate the cabinet (C) or leave through the door to the South (S).")
         choice = str(input())
         if choice == "D":
-            print()
+            print("You cannot make sense of most of the papers on the desk.")
+            if 39 in loclog:
+                print("You notice a small scrap of paper recording the location of three small wheels in the mansion. The locations are described as 'basement panel', 'West wing storeroom - ground floor' and ''")
         elif choice == "C":
-            print()
+            print("Inside the cabinet you find an iron key which you decide to take with you.")
+            eqlist.append("iron key")
         elif choice == "S":
             loc = 80
     elif loc == 87:
-        print("You are standing in a small bedroom which looks as though it is not currently being used or that purpose, since there are several architechtural plans and scientific instruments piled on top of the bed.")
+        print("You are standing in a small bedroom which looks as though it is not currently being used for that purpose, since there are several architechtural plans and scientific instruments piled on top of the bed.")
     elif loc == 88:
         print("bedroom 2")
+    elif loc == 89:
+        acloc = 89
+        print("You are in a cylindrical room with doors to the North, East and South (N, E and S) and an ascending staircase (A).")
+        choice = str(input())
+        if choice == "N":
+            loc = screencheck(90, 1, 0)
+        elif choice == "E":
+            loc = screencheck(93, 2, 0)
+        elif choice == "S":
+            loc = screencheck(83, 3, 0)
+        elif choice == "A":
+            loc = 94
+    elif loc == 90:
+        loc = screencheck(84, 3, 1)
+    elif loc == 91:
+        print("1st floor storeroom")
+    elif loc == 92:
+        loc = screencheck(89, 1, 0)
+    elif loc == 93:
+        print("small room")
+    elif loc == 94:
+        print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
+        choice = str(input())
+        if choice == "E":
+            loc = screencheck(95, 2, 0)
+        elif choice == "S":
+            loc = screencheck(96, 3, 0)
+        elif choice == "D":
+            loc = 89
+    elif loc == 95:
+        print("West Tower")
+    elif loc == 96:
+        print("You are in a cylindrical room with a small depression in the centre (D) and a door to the North (N).")
+        choice = str(input())
+        if choice == "D":
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[2], " written upon it.")
+        elif choice == "N":
+            loc = 94
         
-
+        
+        
+        
         
         
         
