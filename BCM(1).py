@@ -18,6 +18,7 @@ loclog = list()
 bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
 wunlock = 0
+craneunlock = 0
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -1103,8 +1104,8 @@ while  True:
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input())
             if choice == "O":
-                print("You open the trapdoor and find ")
-                #living room treasure#
+                print("You open the trapdoor and find a box of matches which you decide to take with you.")
+                eqlist.append("matches")
         elif choice == "T":
             print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
     elif loc == 45:
@@ -1146,8 +1147,15 @@ while  True:
         elif choice == "D":
             print("At the bottom of the depression, you find a small plate with the number ", fcode[0], " written upon it.")
     elif loc == 48:
-        print("Outer collapsed room.")
-        #collapsed room#
+        print("You are standing in a room with a collapsed ceiling. Rubble blocks your way to the North, but you can see that the room continues beyond the rubble and that there is a small structure in the North side of the room. To the South is a wooden door (S).")
+        if craneunlock == 0:
+            print("There is a temporary panel near the rubble with wires connecting this device to the distant structure. On the panel is a single switch which you may press (P).")
+        choice = str(input())
+        if choice == "S":
+            loc = 39
+        elif choice == "P":
+            print("You notice no immediate effect.")
+            craneunlock = 1
     elif loc == 49:
         print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit to the corridor in the South.")
         choice = str(input())
@@ -1176,8 +1184,13 @@ while  True:
         elif choice == "SS":
             loc = 41
     elif loc == 52:
-        print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. On the floor below the window is a scrap of paper which you pick up.")
-        #tower room#
+        print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. In the centre of the room is a turntable with a marker on it. You can turn the table so that the marker points towards the Garden (G), Astronomy Tower (A) or West Tower (W).")
+        print("The turntable is currently in the ", towerpos, " position.")
+        choice = str(input())
+        if choice == "D":
+            loc = 43
+        else:
+            towerpos = choice
     elif loc == 53:
         print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder as well as several potted plants.")
         print("You can go North (N), investigate the candle holder (C), investigate the plants (P) or climb down into the courtyard (D).")
@@ -1538,7 +1551,8 @@ while  True:
         elif choice == "W":
             loc = 76
     elif loc == 82:
-        print("collapsing room upper")
+        print("You open the door but notice immediatly that the room has no stable floor to walk upon. Therefore, you decide that it would be wise to withdraw from the room.")
+        loc = 77    
     elif loc == 83:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards the North, South and West (N, S and W). There is also a small depression in the centre of the room which you could examine (D).")
         choice = str(input())
@@ -1559,6 +1573,25 @@ while  True:
             loc = 78
     elif loc == 85:
         print("Astronomy tower")
+    elif loc == 86:
+        print("You are in a rather untidy room with an elaborate wooden desk and a cabinet mounted to the wall. Many pieces of paper are scattered over both the desk and the floor. You believe this is Crultney's study. There is a door to the South.")
+        print("You could investigate the desk (D), investigate the cabinet (C) or leave through the door to the South (S).")
+        choice = str(input())
+        if choice == "D":
+            print()
+        elif choice == "C":
+            print()
+        elif choice == "S":
+            loc = 80
+    elif loc == 87:
+        print("You are standing in a small bedroom which looks as though it is not currently being used or that purpose, since there are several architechtural plans and scientific instruments piled on top of the bed.")
+    elif loc == 88:
+        print("bedroom 2")
+        
+
+        
+        
+        
         
         
         
