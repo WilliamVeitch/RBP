@@ -57,6 +57,7 @@ def crystal():
     if choice == "S":
         strike = str(input("Which symbol do you strike?  (P/T/S/H) "))
         if strike == "H":
+            print("The crystal releases a beam which strikes your target.") 
             destroy("energy crystal (EC)")
             return "success"
         else:
@@ -1069,6 +1070,12 @@ while  True:
                                     destroy("sticky banana bomb (SBB)")
                                 elif choice == "EC":
                                     crystsample = crystal()
+                                    if crystsample == "success":
+                                        print("You break open the chest and find ")
+                                    elif crystsample == "failure":
+                                        print("The crystal has no effect on the chest.")
+                                    elif crystsample == "big failure":
+                                        endgame(2)
         elif choice == "U":
             print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
             if choice == "W":
