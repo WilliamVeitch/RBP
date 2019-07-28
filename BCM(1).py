@@ -19,6 +19,7 @@ bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
 wunlock = 0
 craneunlock = 0
+towerpos = "G"
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -1615,13 +1616,53 @@ while  True:
         print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
         choice = str(input())
         if choice == "E":
-            loc = screencheck(95, 2, 0)
+            if wunlock == 1:
+                loc = screencheck(95, 2, 0)
+            else:
+                print("The door is locked. You may withdraw (I) or use weapons (W).")
+                choice = str(input())
+                if choice == "W":
+                    listweapons()
+                    choice = str(input())
+                    if choice == "WH":
+                        destroy("warhammer(WH)")
+                        print("Your warhammer is successful in breaking the door but is destroyed by the impact.")
+                        loc = screencheck(95, 2, 0)
+                    elif choice == "PC":
+                        print("Your portable cannon is successful in breaking the door and you advance into the room.")
+                        loc = screencheck(95, 2, 0)
+                    elif choice == "TB":
+                        print("Your time bomb is successful in breaking the door and you advance into the room.")
+                        destroy("time bomb (TB)")
+                        loc = screencheck(95, 2, 0)
+                    elif choice == "EC":
+                        crystsample = crystal()
+                        if crystsample == "success":
+                            print("Your crystal breaks the door and you advance into the room.")
+                            loc = screencheck(95, 2, 0)
+                        elif crystsample == "failure":
+                            print("You cannot remember the correct way to use the crystal.")
+                        elif crystsample == "big failure":
+                            endgame(2)
+                    else:
+                        inap()
+                    if loc == 95 or loc == 54:
+                        print("An alarm sounds as you break down the door.")
+                        alert = alert + 1
         elif choice == "S":
             loc = screencheck(96, 3, 0)
         elif choice == "D":
-            loc = 89
+            loc = 89          
     elif loc == 95:
-        print("West Tower")
+        print("You are in a small room near the top of the West tower of the mansion. There is an ascending staircase (A) and a door to the West (W).")
+        choice = str(input())
+        if choice == "A":
+            if towerpos == "W":
+                loc = 97
+            else:
+                print("Unfortunately, the staircase is barred and you cannot ascend it.")
+        elif choice == "W":
+            loc = 94
     elif loc == 96:
         print("You are in a cylindrical room with a small depression in the centre (D) and a door to the North (N).")
         choice = str(input())
@@ -1629,10 +1670,12 @@ while  True:
             print("At the bottom of the depression, you find a small plate with the number ", fcode[2], " written upon it.")
         elif choice == "N":
             loc = 94
+    elif loc == 97:
+        print("west tower")
         
         
         
-        
+    
         
         
         
