@@ -1052,59 +1052,23 @@ while  True:
                             choice = str(input())
                             if choice == "W":
                                 listweapons()
-                            if choice == "BD" or1062
-
-            loc = 35
-
-1063
-
-        elif choice == "S":
-
-1064
-
-            loc = 36
-
-1065
-
-    elif loc == 43:
-
-1066
-
-        print("You are in a small circular room with a narrow ascending staircase. There are no other objects of interest in the room. You can ascend the staircase (A) or exit the room to the West (W).")
-
-1067
-
-        choice = str(input())
-
-1068
-
-        if choice == "A":
-
-1069
-
-            loc = 52
-
-1070
-
-        elif choice == "W":
-
-1071
-
-            loc = 36
-
-1072
-
-    elif loc == 44:
-
-1073
-
-        print("You are in a very spacious living room. Finely decorated rugs cover the floor and the walls have expensive paintings mounted upon them. There are two large sofas and several comfortable chairs and nearby is a small yet magnificent woodwn table") choice == "SS" or choice == "GB":
-                                print("You hack open the chest and find ")
-                            if choice == "PC":
-                                print("The portable cannon succeeds in destroying the chest but also destroys whatever was inside.")
-                            elif choice == "TB":
-                                destroy("time bomb (TB)")
-                                print("The time bomb succeeds in destroying the chest but also destroys whatever was inside.")
+                                if choice == "BD" or choice == "GB" or choice == "SS" or choice == "WH" or choice == "HOH":
+                                    print("You break open the chest and find ")
+                                elif choice == "SP":
+                                    print("You break open the chest and find ")
+                                    destroy("strength potion (SP)")
+                                elif choice == "PC":
+                                    print("The portable cannon succeeds in destroying the chest but also destroys whatever was inside.")
+                                elif choice == "TB":
+                                    destroy("time bomb (TB)")
+                                    print("The time bomb succeeds in destroying the chest but also destroys whatever was inside.")
+                                elif choice == "LK":
+                                    print("You are able to open the chest but you break the knife in the process of doing so. Inside the chest you find ")
+                                elif choice == "SBB":
+                                    print("The sticky banana bomb fails to break open the chest.")
+                                    destroy("sticky banana bomb (SBB)")
+                                elif choice == "EC":
+                                    crystsample = crystal()
         elif choice == "U":
             print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
             if choice == "W":
