@@ -113,19 +113,19 @@ while  True:
     elif loc == 2:
         print("You have arrived at the Ninja Armoury. A monkey wearing white robes walks in and offers you the black dagger, a powerful weapon which is the symbol of the ninjas of Oland.")
         print("He also shows you a wooden table with an assortment of objects on it and tells you that you may choose two of them")
-        print("You can choose from the throwing stars (T), invisibility potion (I), golden blade, (G), time bomb (B) or super strong rope (S)")
+        print("You can choose from the throwing stars (TS), invisibility potion (IP), golden blade, (GB), time bomb (TB) or super strong rope (SSR)")
         choice1 = str(input("choice 1   "))
         choice2 = str(input("choice 2   "))
         eqlist.append("black dagger (BD)")
-        if choice1 == "T" or choice2 == "T":
+        if choice1 == "TS" or choice2 == "TS":
             eqlist.append("throwing stars (TS)")
-        if choice1 == "I" or choice2 == "I":
+        if choice1 == "IP" or choice2 == "IP":
             eqlist.append("invisibility potion (IP)")
-        if choice1 == "G" or choice2 == "G":
+        if choice1 == "GB" or choice2 == "GB":
             eqlist.append("golden blade (GB)")
-        if choice1 == "B" or choice2== "B":
+        if choice1 == "TB" or choice2== "TB":
             eqlist.append("time bomb (TB)")
-        if choice1 == "S" or choice2 == "S":
+        if choice1 == "SSR" or choice2 == "SSR":
             eqlist.append("super strong rope (SSR)")
         loc = 5
     elif loc == 3:
@@ -159,7 +159,7 @@ while  True:
         loc = 5
     elif loc == 4:
         print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since your mission with the Robo Lion in 1963")
-        print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes willbe useful on your mission.")
+        print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes will be useful on your mission.")
         eqlist.append("stone rod")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
@@ -470,7 +470,7 @@ while  True:
                 if swicob != swicobs:
                     print("The gate will not open and an alarm sounds.")
                     alert = alert + 1
-                elif swicob == swicobs and alert < 2:
+                elif swicob == swicobs and alert <= 2:
                     print("The gate opens and you walk up to the front of the mansion.")
                     loc = 27
             elif choice == "S":
@@ -877,7 +877,7 @@ while  True:
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
         if 34 in loclog or stairrobot == 0:
-            Print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
+            print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input())
             if choice == "U":
                 loc = 40
@@ -1580,13 +1580,13 @@ while  True:
     elif loc == 75:
         print("You are in a cylindrical room with a door to the South (S) and an ascending staircase (A).")
         choice = str(input())   
-            if choice == "S":
-                loc = 66
-            elif choice == "A":
-                if 79 in loclog():
-                    print("You ascend the staircase.")
-                else:
-                    print("The staircase is barred so you may not ascend.")
+        if choice == "S":
+            loc = 66
+        elif choice == "A":
+            if 79 in loclog():
+                print("You ascend the staircase.")
+            else:
+                print("The staircase is barred so you may not ascend.")
     elif loc == 76:
         print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). South of this there is a door to the West (D).")
         choice = str(input())
@@ -1813,7 +1813,7 @@ while  True:
             iktext = "."
         else:
             iktext = " or pick up an iron key from a hook on the wall (IK)."
-        print("you are at the top of the West Tower and have a great view of the mansion. You can descend the staircase (D)", iktext.)
+        print("you are at the top of the West Tower and have a great view of the mansion. You can descend the staircase (D)", iktext)
         choice = str(input())
         if choice == "IK" and "iron key" not in eqlist and "iron key" not in dlist:
             print("You pick up the iron key")
@@ -1840,11 +1840,16 @@ while  True:
     if alert >= 4 and observe == 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage throught the mansion has become impossible.")
         endgame(2)
-    if alert == 3:
-        if randint(1, 5) == 1:
+    elif alert == 3:
+        rprob = 5
+    elif alert == 2:
+        rprob = 10 
+    if alert >= 2 and observe == 1:
+        if random.randint(1, rprob) == 1:
+            print("You are attacked by a security robot of Crultney mansion.")
+            listweapons()
             
-    if alert == 2:
-        if randint(1, 10) == 1:
+            
             
               
               
