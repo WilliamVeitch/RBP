@@ -14,11 +14,13 @@ fcode = random.randint(0, 999)
 screen = [4, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
+wcollect = [0, 0]
 loclog = list()
 bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
 wunlock = 0
 craneunlock = 0
+smallwheels = 0
 towerpos = "G"
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
@@ -1037,7 +1039,7 @@ while  True:
         elif choice == "I":
             print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing.")
             print("'September 16th, 1971")
-            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am now tring to '")
+            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to '")
             print("A significant fragment of the page has been torn off so you do not know how the sentence finishes.")
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
@@ -1161,8 +1163,47 @@ while  True:
             else:
                 print("Due to the presence of the security cameras and your lack of suitable climbing equipment, you climb down from the tree.")
     elif loc == 46:
-        print("Inner collapsed room.")
-        #collapsed room#
+        print("You are standing in a room with a collapsed ceilling. Nearby is a crane which you could investigate (C). Rubble blocks your way to the South. there is a door to the North (N).")
+        choice = str(input()).upper()
+        if choice == "C":
+            if bathwater == [1, 2]:
+                print("You notice that there is a stream of water running down a pipe from the ceiling and then passing closeby to the crane.")
+                if "water wheel" in eqlist:
+                    print("You may place the waterwheel here (W) or not (N).")
+                    choice = str(input()).upper()
+                    if choice == "W":
+                        udestroy("water wheel")
+                        print("You attach the water wheel here and it rotates an axle connecting to the gearbox of the crane.")
+                elif "water wheel" in ulist:
+                    print("The water is driving a water wheel which you have connected to the gearbox of the crane.") 
+            else:
+                print("You notice a channel running from the end of a vertical pipe and then passing closeby to the crane.")
+            print("The crane has a set of controls which you could attempt to use (C). Nearby is a paper note (N).")
+            choice = str(input()).upper()
+            if choice == "C":
+                print("You may attempt to use the crane to shift the rubble (R), investigate the crane's gearbox (G) or withdraw from investigating the crane (W).")
+                choice = str(input()).upper()
+                if choice == "R":
+                    if "water wheel" in ulist and craneunlock == 1 and smallwheels == 4 and "control card (CC)" not in eqlist and "control card (CC)" not in dlist:
+                        print("You move the rubble to clear a path to the Southern side of the room Unfortunately, the reach of the crane is insufficient for you to be able to do this. However, buried under the rubble you find an ID card which you take with you.")
+                        eqlist.append("control card (CC)")
+                    else:
+                        print("You are unable to operate the crane.")
+                elif choice == "G":
+                    if smallwheels == 3:
+                        print("There are three vacant positions in the gearbox and you insert your small wheels into these.")
+                        smallwheels = 4
+                    elif smallwheels == 4:
+                        print("The gearbox appears to be functioning properly.")
+                    else:
+                        print("There are three vacant spaces in the gearbox but you only have ", smallwheels, " small wheels.")
+            elif choice == "N":
+                print("You read the note and find that it is a checklist for operating the crane.")
+                print(" '1. Connect the crane to a mechanical energy supply (either the lawnmower engine or a water wheel.")
+                print("  2. Ensure that the gearbox is running correctly.")
+                print("  3. Ensure that clearance for operation has been given from the South side of the room (accessed through the shed).' ")
+        elif choice == "N":
+            loc = 37
     elif loc == 47:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). There is also a small depression in the centre of the room which you could examine (D).")
         choice = str(input()).upper()
@@ -1312,8 +1353,12 @@ while  True:
         if choice == "E":
             loc = 47
         elif choice == "B":
-            print("You find that the boxes contain a small metal wheel which you take with you. The boxes also contain many uninteresting items.")
-            smallwheels = smallwheels + 1
+            if wcollect[0] == 0:
+                wcollect[0] = 1
+                print("You find that the boxes contain a small metal wheel which you take with you. The boxes also contain many uninteresting items.")
+                smallwheels = smallwheels + 1
+            else:
+                print("You find no other objects of interest within the boxes.")
     elif loc == 58:
         print("You are in a corridor running from East to West. There are doors to the North and South (N and S) and there is a junction with a North-South corridor to the West (W).")
         choice = str(input()).upper()
@@ -1352,7 +1397,17 @@ while  True:
         elif choice == "W":
             loc = 74
     elif loc == 59:
-        print("You are in a large bedroom.")
+        print("You are in a large bedroom with a wooden wardrobe (W) and a door to the North (N).")
+        choice = str(input()).upper()
+        if choice == "W":
+            if wcollect[1] == 0:
+                wcollect[1] = 1
+                print("Hidden amongst the clothes in the wardrobe you find a small metal wheel which you take with you.")
+                smallwheels = smallwheels + 1
+            else:
+                print("There is nothing else of interest in the wardrobe.")
+        elif choice == "N":
+            loc = 50
     elif loc == 60:
         print("You are in a long rectangular room with a narrow staircase occupying around half the space in the room at the top of which is a door to the North (D). There is a door to the South (S) and there are no other objects of interest in the room.")
         choice = str(input()).upper()
@@ -1365,28 +1420,31 @@ while  True:
         choice = str(input()).upper()
         if choice == "B":
             print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
-            eqlist.append("fuses")
+            if "fuses" not in eqlist and "fuses" not in dlist:
+                eqlist.append("fuses")
         elif choice == "P":
-            print("Implanted into the panel are two large iron discs and above these is a symbol of a trident. You may attempt to interact with the panel using an item in your possesion (I), you may try to remove the iron discs using a weapon (R) or you may end your investigation into the panel (E).")
-            choice = str(input()).upper()
-            if choice == "I":
-                listweapons()
-                choice = str(input("Which item do you want to use?   "))
-                if choice == "MF" and "magnetic fork (MF) in eqlist":
-                    print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.")
-                    destroy("magnetic fork (MF)")
-                    smallwheels = smallwheels + 1
-            elif choice == "R":
-                listweapons()
-                choice = str(input()).upper()
-                if random.randint(1,6) <=2:
-                    print("Unfortunately, you were unable to remove the discs and the weapon you were using was destroyed.")
-                    dindex = 0
-                    while choice not in eqlist[dindex]:
-                        dindex = dindex + 1
-                    destroy(eqlist[dindex])
+            if "magnetic fork (MF)" in ulist:
+                print("You have already collected the small wheel from the panel.")
             else:
-                print("Unfortunately, you were unable to remove the discs.")
+                print("Implanted into the panel are two large iron discs and above these is a symbol of a trident. You may attempt to interact with the panel using an item in your possesion (I), you may try to remove the iron discs using a weapon (R) or you may end your investigation into the panel (E).")
+                choice = str(input()).upper()
+                if choice == "I":
+                    listweapons()
+                    choice = str(input("Which item do you want to use?   "))
+                    if choice == "MF" and "magnetic fork (MF)" in eqlist:
+                        print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.")
+                        udestroy("magnetic fork (MF)")
+                        smallwheels = smallwheels + 1
+                    else:
+                        inap()
+                elif choice == "R":
+                    listweapons()
+                    choice = str(input()).upper()
+                    if random.randint(1,6) <=2:
+                        print("Unfortunately, you were unable to remove the discs and the weapon you were using was destroyed.")
+                        ssdestroy(choice)
+                    else:
+                        print("Unfortunately, you were unable to remove the discs.")
         elif choice == "W":
             loc = 51
     elif loc == 62:
