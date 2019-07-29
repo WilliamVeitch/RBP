@@ -36,6 +36,21 @@ def destroy(n):
 def udestroy(n):
     ulist.append(n)
     destroy(n)
+def ssdestroy(n):
+    x = 0
+    y = 0
+    z = 0
+    while z == 0:
+        while (eqlist[x])[y] != "(" and y <= len(eqlist[x]-4):
+            y = y + 1
+        if n == (eqlist[x])[y+1] + (eqlist[x])[y+2]):
+            destroy(n)
+            z = 1
+        elif n == (eqlist[x])[y+1] + (eqlist[x])[y+2]) + (eqlist[x])[y+3])):
+            destroy(n)
+            z = 1
+        else:
+            x = x + 1
 def poswheel(n): #S=0, N=1
     poslist = ["top", "right", "down", "left"]
     if n == 3:
@@ -1855,9 +1870,9 @@ while  True:
             print("You are attacked by a security robot of Crultney mansion.")
             listweapons()
             choice = str(input()).upper()
-            risk = 0
+            risk = 1
             if choice == "BD":
-                risk = 2
+                risk = 3
             elif choice == "TS":
                 risk = 1
             elif choice == "IP":
@@ -1874,3 +1889,30 @@ while  True:
                 risk = 1
             elif choice == "WH":
                 risk = 3
+            elif choice == "SBB":
+                risk = 1
+            elif choice == "PC":
+                print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
+                endgame(2)
+            elif choice == "CBD":
+                print("The complex brain destroyer does not work on machines. You are struck down by the robotic guard.")
+                endgame(2)
+            elif choice == "EC":
+                crystsample = crystal()
+                if crystsample == "success":
+                    risk = 1
+                elif crystsample == "failure":
+                    print("The crystal has no effect on the robotic guard and you are struck down.")
+                if crystsample != "success:
+                    endgame(2)
+            elif choice == "LK":
+                risk = 2
+            elif choice == "CC":
+                risk = 100
+            if risk == 100:
+                print("You turn off the robotic guard with the control card.")
+            elif randint(1, risk) == 1:
+                ssdestroy(choice)
+                print("You defeat the robotic guard, but your weapon is destroyed.")
+            else:
+                print("You defeat the robotic guard.")                
