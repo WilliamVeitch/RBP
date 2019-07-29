@@ -43,10 +43,10 @@ def ssdestroy(n):
     while z == 0:
         while (eqlist[x])[y] != "(" and y <= len(eqlist[x]-4):
             y = y + 1
-        if n == (eqlist[x])[y+1] + (eqlist[x])[y+2]):
+        if n == (eqlist[x])[y+1] + (eqlist[x])[y+2]:
             destroy(n)
             z = 1
-        elif n == (eqlist[x])[y+1] + (eqlist[x])[y+2]) + (eqlist[x])[y+3])):
+        elif n == (eqlist[x])[y+1] + (eqlist[x])[y+2] + (eqlist[x])[y+3]:
             destroy(n)
             z = 1
         else:
@@ -1603,7 +1603,7 @@ while  True:
                 loc = lastloc
             else:
                 print("You defeat the first robotic guard and then flee the room to the place from which you came.")
-        if observe == 0 or risk == 100
+        if (observe == 0) or (risk == 100):
             print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
             choice = str(input()).upper()
             if choice == "A":
