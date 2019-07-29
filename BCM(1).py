@@ -1279,8 +1279,7 @@ while  True:
         elif choice == "W":
             loc = screencheck(65, 4, 0)
     elif loc == 56:
-        print("pool")
-        #pool#
+        print("Tou are standing by the side of a pool containing water.")
     elif loc == 57:
         print("You are in a dimly lit room with many wooden boxes piled up along the western wall. There is a door to the East (E). You could search through the boxes (B).")
         choice = str(input())
@@ -1295,7 +1294,7 @@ while  True:
         if choice == "N":
             loc = 49
         elif choice == "S":
-            loc = 67
+            loc = 98
         elif choice == "W":
             loc = 74
     elif loc == 59:
@@ -1622,10 +1621,13 @@ while  True:
         if choice == "D":
             print("You cannot make sense of most of the papers on the desk.")
             if 39 in loclog:
-                print("You notice a small scrap of paper recording the location of three small wheels in the mansion. The locations are described as 'basement panel', 'West wing storeroom - ground floor' and ''")
+                print("You notice a small scrap of paper recording the location of three small wheels in the mansion. The locations are described as 'basement panel', 'West wing storeroom - ground floor' and 'primary bedroom - first floor'")
         elif choice == "C":
-            print("Inside the cabinet you find an iron key which you decide to take with you.")
-            eqlist.append("iron key")
+            if "water wheel" not in eqlist and "water wheel" not in dlist:
+                print("Inside the cabinet you find a water wheel. Next to it is a note explaining that it is to be used as an alternative method of propulsion for the crane. You take it with you, despite its high mass, as you feel it will be important.")
+                eqlist.append("water wheel")
+            else:
+                print("You find nothing interesting inside the cabinet.")
         elif choice == "S":
             loc = 80
     elif loc == 87:
@@ -1647,7 +1649,20 @@ while  True:
     elif loc == 90:
         loc = screencheck(84, 3, 1)
     elif loc == 91:
-        print("1st floor storeroom")
+        print("You are in a spacious room with a small circular hole in the wall. Near the hole is a wooden panel with indecipherable glyphs written upon it. You can investigate the hole (H) or withdraw from the room using the door to the East (E).")
+        choice = str(input())
+        if choice == "H":
+            if "wooden rod" in ulist:
+                print("You have already inserted the wooden rod into the hole so you don not need to investigate it again.")
+            elif "wooden rod" in eqlist:
+                print("You notice that the glyphs match those on the wooden rod. You may insert the wooden rod into the hole (I) or discontinue your investigation into the hole (D).")
+                choice = str(input())
+                if choice == "I":
+                    udestroy("wooden rod")
+                    print("You insert the wooden rod into the hole and rotate it. You do not notice any immediate effect.")
+                    alert = 0
+            else:
+                print("You notice no useful function of the hole.")
     elif loc == 92:
         loc = screencheck(89, 1, 0)
     elif loc == 93:
@@ -1711,9 +1726,19 @@ while  True:
         elif choice == "N":
             loc = 94
     elif loc == 97:
-        print("west tower")
-        
-        
+        if "iron key" in eqlist or "iron key" in dlist:
+            iktext = "."
+        else:
+            iktext = " or pick up an iron key from a hook on the wall (IK)."
+        print("you are at the top of the West Tower and have a great view of the mansion. You can descend the staircase (D)", iktext.)
+        choice = str(input())
+        if choice == "IK" and "iron key" not in eqlist and "iron key" not in dlist:
+            print("You pick up the iron key")
+            eqlist.append("iron key")
+        elif choice == "D":
+            loc = 95
+    elif loc == 98:
+        print("bedroom 3")
         
     
         
