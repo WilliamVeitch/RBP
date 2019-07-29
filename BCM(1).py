@@ -1848,6 +1848,27 @@ while  True:
         if random.randint(1, rprob) == 1:
             print("You are attacked by a security robot of Crultney mansion.")
             listweapons()
+            choice = str(input())
+            risk = 0
+            if choice == "BD":
+                risk = 2
+            elif choice == "TS":
+                risk = 1
+            elif choice == "IP":
+                risk = 1
+            elif choice == "GB":
+                risk = 6
+            elif choice == "SS":
+                risk = 4
+            elif choice == "SOS":
+                risk = 5
+            elif choice == "HOH":
+                risk = 3
+            elif choice == "SP":
+                risk = 1
+            elif choice == "WH":
+                risk = 3
+                
             
             
             
