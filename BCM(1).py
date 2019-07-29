@@ -1552,9 +1552,73 @@ while  True:
             print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
             listweapons()
             choice = str(input()).upper()
-            if choice == ""
-        elif observe == 0:
-            print("You walk back into the guardroom.")
+            risk = 0
+            if choice == "BD":
+                risk = 3
+            elif choice == "TS":
+                risk = 1
+            elif choice == "IP":
+                risk = 1
+            elif choice == "GB":
+                risk = 6
+            elif choice == "SS":
+                risk = 4
+            elif choice == "SOS":
+                risk = 5
+            elif choice == "HOH":
+                risk = 3
+            elif choice == "SP":
+                risk = 1
+            elif choice == "WH":
+                risk = 3
+            elif choice == "SBB":
+                risk = 1
+            elif choice == "PC":
+                print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
+                endgame(2)
+            elif choice == "CBD":
+                print("The complex brain destroyer does not work on machines. You are struck down by the robotic guard.")
+                endgame(2)
+            elif choice == "EC":
+                crystsample = crystal()
+                if crystsample == "success":
+                    risk = 1
+                elif crystsample == "failure":
+                    print("The crystal has no effect on the robotic guard and you are struck down.")
+                if crystsample != "success":
+                    endgame(2)
+            elif choice == "LK":
+                risk = 2
+            elif choice == "CC":
+                risk = 100
+            if risk == 0:
+                print("You fail to defeat the robotic guard and are struck down.")
+                endgame(2)
+            elif risk == 100:
+                print("You turn off all of the robotic guards with the control card.")
+            elif randint(1, risk) == 1:
+                ssdestroy(choice)
+                print("You defeat the first robotic guard, but your weapon is destroyed.")
+                print("You flee the room to the place from which you came.")
+                loc = lastloc
+            else:
+                print("You defeat the first robotic guard and then flee the room to the place from which you came.")
+        if observe == 0 or risk == 100
+            print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
+            choice = str(input()).upper()
+            if choice == "A":
+                print("The alert screen shows that the alert level is currently ", alert, ". An alert level of 4 sends the mansion into lockdown and an alert level of 2 or 3 increases the activity of the mansion's robotic guards.")
+            elif choice == "C":
+                if "control card (CC)" in eqlist and observe == 1:
+                    print("You may turn off the mansion's security system using the control card (CC) or you may discontinue your investigation into the control board (D).")
+                    choice = str(input()).upper()
+                    if choice == "CC":
+                        print("You disactivate the security services.")
+                        observe = 0
+            elif choice == "S":
+                loc = 50
+            elif choice == "W":
+                loc = 66
     elif loc == 74:
         print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
         choice = str(input()).upper()
