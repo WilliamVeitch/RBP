@@ -1548,7 +1548,13 @@ while  True:
         elif choice == "N":
             loc = 81
     elif loc == 73:
-        print("Guardroom")
+        if observe == 1:
+            print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
+            listweapons()
+            choice = str(input()).upper()
+            if choice == ""
+        elif observe == 0:
+            print("You walk back into the guardroom.")
     elif loc == 74:
         print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
         choice = str(input()).upper()
@@ -1870,7 +1876,7 @@ while  True:
             print("You are attacked by a security robot of Crultney mansion.")
             listweapons()
             choice = str(input()).upper()
-            risk = 1
+            risk = 0
             if choice == "BD":
                 risk = 3
             elif choice == "TS":
@@ -1903,16 +1909,19 @@ while  True:
                     risk = 1
                 elif crystsample == "failure":
                     print("The crystal has no effect on the robotic guard and you are struck down.")
-                if crystsample != "success:
+                if crystsample != "success":
                     endgame(2)
             elif choice == "LK":
                 risk = 2
             elif choice == "CC":
                 risk = 100
-            if risk == 100:
+            if risk == 0:
+                print("You fail to defeat the robotic guard and are struck down.")
+                endgame(2)
+            elif risk == 100:
                 print("You turn off the robotic guard with the control card.")
             elif randint(1, risk) == 1:
                 ssdestroy(choice)
                 print("You defeat the robotic guard, but your weapon is destroyed.")
             else:
-                print("You defeat the robotic guard.")                
+                print("You defeat the robotic guard.")
