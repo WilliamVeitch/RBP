@@ -25,7 +25,7 @@ islandtext = "The island is small and the main feature is the mansion which look
 def inap():
     print("The item you have chosen is not appropriate for the current situation.")
 def equip():
-    print("You possess ", eqlist,)     
+    print("You possess ", eqlist,)
 def destroy(n):
     dlist.append(n)
     x = 0
@@ -59,7 +59,7 @@ def crystal():
     if choice == "S":
         strike = str(input("Which symbol do you strike?  (P/T/S/H) "))
         if strike == "H":
-            print("The crystal releases a beam which strikes your target.") 
+            print("The crystal releases a beam which strikes your target.")
             destroy("energy crystal (EC)")
             return "success"
         else:
@@ -81,14 +81,14 @@ def candle(n):
         print(scs, " or you may discontinue your investigation of the candle holder (D).")
         return 1
     else:
-        print("You notice nothing unusual about the candle holder.")    
+        print("You notice nothing unusual about the candle holder.")
         return 0
-                        
+
 def endgame(n):
     print(eqlist)
     print("You have failed in your mission.")
     print("You completed ", n, " out of 4 major events successfully.")
-    end = input() 
+    end = input()
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
 def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired location
@@ -165,7 +165,7 @@ while  True:
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
         print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (EC)")
         while ask != "NO":
-            ask = str(input("Do you want to ask Geelophisis about an invention?   "))
+            ask = str(input("Do you want to ask Geelophisis about an invention?   ")).upper()
             if ask == "CBD":
                 print("Geelophisis tells you that the current version of the CBD is much safer than the prototype used in the 1960s. He says that it should only be used on intelligent opponents with larger brains as this makes it easier for the CBD to identify them.")
             elif ask == "IP":
@@ -612,11 +612,11 @@ while  True:
                         print("You take the items and withdraw into the cylindrical room.")
                         eqlist.append("green candle")
                         eqlist.append("rusted keys")
-                    else: 
+                    else:
                         print("There are no items of interest in the room.")
                 else:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
-                    
+
     elif loc == 27:
         if lastloc == 32:
             if 27 in findconnect(32):
@@ -717,7 +717,7 @@ while  True:
                         print("The bomb works and you enter the shed.")
                         loc = 39
                     elif choice == "EC":
-                        crystsample = crystal() 
+                        crystsample = crystal()
                         if crystsample == "success":
                             print("You destroy the door and enter the shed.")
                             loc = 39
@@ -744,7 +744,7 @@ while  True:
         if choice == "W":
             print("You return to the path near the fence.")
             loc = 24
-        elif choice == "S": 
+        elif choice == "S":
             if "brass key" in eqlist or "brass key" in dlist:
                 print("You ascend the stairs into a room similar to the one below. There are no items of interest in the room.")
             else:
@@ -868,7 +868,7 @@ while  True:
                     loc = lastloc()
                 else:
                     inap()
-        
+
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
         if 34 in loclog or stairrobot == 0:
@@ -879,7 +879,7 @@ while  True:
             elif choice == "D":
                 loc = 41
             elif choice == "E":
-                loc = 31 
+                loc = 31
         else:
             print("As you step out onto the stairs, you hear a sliding noise and you see a sharp blade mounted to the banister sliding down towards you.")
             print("You must use a piece of equipment to defend against the attack")
@@ -904,7 +904,7 @@ while  True:
             else:
                 inap()
                 print("The sharp blades strikes you and you fall unconscious. Your mission is over.")
-                endgame(2)                
+                endgame(2)
     elif loc == 35:
         print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room. On the table are several empty plates, pieces of cutlery and candles.")
         print("There are doors to the North (N) and South (S). You could also stay in this room to investigate further (I).")
@@ -927,7 +927,7 @@ while  True:
             elif choice == "C":
                 if "blue candle" in eqlist or "blue candle" in dlist:
                     print("You notice nothing interesting about the candles.")
-                else: 
+                else:
                     print("You notice that while all other candles in the room are white or yellow, one is a vibrant shade of blue. You decide to take it with you.")
                     eqlist.append("blue candle")
     elif loc == 36:
@@ -966,7 +966,7 @@ while  True:
             loc = 47
     elif loc == 38:
         print("You walk into the room and notice a bank of switches in the far corner of the room. In the centre of the room is a small, round hole in the floor surrounded by inscriptions from a language you do not recognise. To one side of the room is a desk with various papers and tools on it. There are doors to the South and to the West.")
-        print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")    
+        print("You can investigate the switches (SW), the hole (H), or the desk (D) or you may leave through the doors to the South (S) or West (W).")
         choice = str(input())
         if choice == "SW":
             print("On the right of the panel there are two circular wheels, one above the other. To the right is a small lever which is hidden behind a glass screen. You could investigate the wheels (W), investigate the lever (L) or withdraw into the room (R).")
@@ -989,7 +989,7 @@ while  True:
                 print("You can attempt to insert the metal rod (MR) or you can withdraw (W)")
                 choice = str(input())
                 if choice == "MR":
-                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")   
+                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
                     udestroy("metal rod")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
@@ -1000,7 +1000,7 @@ while  True:
             loc = 31
         elif choice == "W":
             loc = 29
-    elif loc == 39: 
+    elif loc == 39:
         print("You are in a large shed with various pieces of garden related machinery. To the North and South are wooden doors (N) and (S). You could remain in the shed and investigate it further (I).")
         choice = str(input())
         if choice == "S":
@@ -1051,7 +1051,7 @@ while  True:
                             print("You find that the chest contains a ")
                             udestroy("brass key")
                         else:
-                            print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")    
+                            print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")
                             choice = str(input())
                             if choice == "W":
                                 listweapons()
@@ -1108,9 +1108,9 @@ while  True:
                 print("You open the trapdoor and find a box of matches which you decide to take with you.")
                 eqlist.append("matches")
         elif choice == "T":
-            print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")  
+            print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")
     elif loc == 45:
-        print("You are in a courtyard which is enclosed on all sides by walls. In the centre is a medium sized tree surrounded by various other plants and benches. Above you is a large balcony which you cannot access from below.")        
+        print("You are in a courtyard which is enclosed on all sides by walls. In the centre is a medium sized tree surrounded by various other plants and benches. Above you is a large balcony which you cannot access from below.")
         print("The only door out of the courtyard is to the North (N). You could observe the balcony in greater detail (B) or observe the tree in the centre of the courtyard (T).")
         choice = str(input())
         if choice == "N":
@@ -1123,8 +1123,8 @@ while  True:
                 print("You could attempt to climb up to the balcony using your super strong rope (SSR).")
                 choice = str(input())
                 if choice == "SSR":
-                    if observe == 1:  
-                        print("You are able to climb up to the balcony, but not before an alarm sounds. You notice a security camera on the balcony. It must have noticed you and sounded the alarm.") 
+                    if observe == 1:
+                        print("You are able to climb up to the balcony, but not before an alarm sounds. You notice a security camera on the balcony. It must have noticed you and sounded the alarm.")
                     else:
                         print("You successfully climb up to the balcony.")
                     loc = 53
@@ -1176,7 +1176,7 @@ while  True:
         elif choice == "W":
             loc = 66
     elif loc == 51:
-        print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North (SS).") 
+        print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North (SS).")
         choice = str(input())
         if choice == "N":
             loc = 60
@@ -1280,7 +1280,7 @@ while  True:
                 listweapons()
                 choice = str(input("Which item do you want to use?   "))
                 if choice == "MF" and "magnetic fork (MF) in eqlist":
-                    print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.") 
+                    print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.")
                     destroy("magnetic fork (MF)")
                     smallwheels = smallwheels + 1
             elif choice == "R":
@@ -1300,7 +1300,7 @@ while  True:
         ccs = ""
         if len(candlelist[1]) > 3:
             ccs = ""
-        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).") 
+        print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).")
         if candlelist == ["red candle", "green candle", "blue candle"] and lcandlelist == [1, 1, 1]:
             print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
             eqlist.append("silver key")
@@ -1328,7 +1328,7 @@ while  True:
                         lcandlelist[1] = 1
         elif choice == "D":
             luck = random.randint(1,5)
-            if luck == 1: 
+            if luck == 1:
                 print("You climb down but are injured in the process.")
                 if "medical kit (MK)" in eqlist:
                       print("Since you have a medical kit you use it and are able to continue with your investigation of the mansion.")
@@ -1348,7 +1348,7 @@ while  True:
         print("You are in a small, cylindrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
         choice = str(input())
         acloc = 63
-        if choice == "E":      
+        if choice == "E":
             loc = screencheck(69, 2, 1)
         elif choice == "S":
             loc = screencheck(70, 3, 1)
@@ -1365,7 +1365,7 @@ while  True:
             print("You open the door and descend a narrow staircase.")
             loc = 60
     elif loc == 66:
-        print("You are in a corridor which runs from North to South. To the North there is a white door (WD). To the East there is a brown door (BD) and South of this is another corridor leading off to the East (E). To the South there is a junction with passages leading to the South (S) and West (W).") 
+        print("You are in a corridor which runs from North to South. To the North there is a white door (WD). To the East there is a brown door (BD) and South of this is another corridor leading off to the East (E). To the South there is a junction with passages leading to the South (S) and West (W).")
         choice = str(input())
         if choice == "WD":
             loc = 75
@@ -1408,7 +1408,7 @@ while  True:
     elif loc == 68:
         loc = screencheck(63, 3, 1)
     elif loc == 69:
-        print("You are standing in an extremely small room whose only notable features are a number input device affixed to the wall (N) and a door to the West (W).")        
+        print("You are standing in an extremely small room whose only notable features are a number input device affixed to the wall (N) and a door to the West (W).")
         choice = str(input())
         if choice == "N":
             print("The device consists of three wheels with the numbers 0-9 enscribed upon them. These are arranged from left to right. Above the leftmost wheel is written the number 0. Above the centre wheel is written the number 1. Above the rightmost wheel is written the number 2. Below the wheels is a button. You can adjust the positions of the wheels (A), press the button (B) or withdraw (W).")
@@ -1460,7 +1460,7 @@ while  True:
         print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
         choice = str(input())
         if choice == "N":
-            print("You find that the door is locked.") 
+            print("You find that the door is locked.")
             if "iron key" in eqlist:
                 print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
                 destroy("iron key")
@@ -1468,7 +1468,7 @@ while  True:
             elif 74 in findconnect(75):
                 print("You go North into the cylindrical room.")
             else:
-                print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).") 
+                print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).")
                 choice = str(input())
                 if choice == "W":
                     listweapons()
@@ -1480,19 +1480,19 @@ while  True:
             loc = 80
     elif loc == 75:
         print("You are in a cylindrical room with a door to the South (S) and an ascending staircase (A).")
-        choice = str(input())   
-            if choice == "S":
-                loc = 66
-            elif choice == "A":
-                if 79 in loclog():
-                    print("You ascend the staircase.")
-                else:
-                    print("The staircase is barred. You may use weapons (W) or withdraw (I).")
+        choice = str(input())
+        if choice == "S":
+            loc = 66
+        elif choice == "A":
+            if 79 in loclog():
+                print("You ascend the staircase.")
+            else:
+                print("The staircase is barred. You may use weapons (W) or withdraw (I).")
+                choice = str(input())
+                if choice == "W":
+                    listweapons()
                     choice = str(input())
-                    if choice == "W":
-                        listweapons()
-                        choice = str(input())
-                        #astronomy tower#
+                    #astronomy tower#
     elif loc == 76:
         print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). South of this there is a door to the West (D).")
         choice = str(input())
@@ -1553,7 +1553,7 @@ while  True:
             loc = 76
     elif loc == 82:
         print("You open the door but notice immediatly that the room has no stable floor to walk upon. Therefore, you decide that it would be wise to withdraw from the room.")
-        loc = 77    
+        loc = 77
     elif loc == 83:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards the North, South and West (N, S and W). There is also a small depression in the centre of the room which you could examine (D).")
         choice = str(input())
@@ -1652,7 +1652,7 @@ while  True:
         elif choice == "S":
             loc = screencheck(96, 3, 0)
         elif choice == "D":
-            loc = 89          
+            loc = 89
     elif loc == 95:
         print("You are in a small room near the top of the West tower of the mansion. There is an ascending staircase (A) and a door to the West (W).")
         choice = str(input())
@@ -1672,16 +1672,16 @@ while  True:
             loc = 94
     elif loc == 97:
         print("west tower")
-        
-        
-        
-    
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
 loclog.append(loc)
