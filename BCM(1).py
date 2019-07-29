@@ -84,9 +84,10 @@ def candle(n):
         print("You notice nothing unusual about the candle holder.")    
         return 0                        
 def endgame(n):
-    print(eqlist)
     print("You have failed in your mission.")
-    print("You completed ", n, " out of 3 major events successfully.")
+    print("You collected: ", eqlist+dlist)
+    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission."]
+    print(endtext[n])
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -178,7 +179,7 @@ while  True:
         choice1 = str(input("choice 1   "))
         choice2 = str(input("choice 2   "))
         if choice1 == "CBD" or choice2 == "CBD":
-            eqlist.append("CPD")
+            eqlist.append("complex brain destroyer (CBD)")
         if choice1 == "IP" or choice2 == "IP":
             eqlist.append("invisibility potion (IP)")
         if choice1 == "SP" or choice2 == "SP":
@@ -1060,24 +1061,28 @@ while  True:
                             if choice == "W":
                                 listweapons()
                                 if choice == "BD" or choice == "GB" or choice == "SS" or choice == "WH" or choice == "HOH":
-                                    print("You break open the chest and find ")
+                                    print("You break open the chest and find a mysterious electronic device that you do not recognise. You take this with you.")
+                                    eqlist.append("strange device")
                                 elif choice == "SP":
-                                    print("You break open the chest and find ")
+                                    print("You break open the chest and find a mysterious electronic device that you do not recognise. You take this with you.")
                                     destroy("strength potion (SP)")
+                                    eqlist.append("strange device")
                                 elif choice == "PC":
                                     print("The portable cannon succeeds in destroying the chest but also destroys whatever was inside.")
                                 elif choice == "TB":
                                     destroy("time bomb (TB)")
                                     print("The time bomb succeeds in destroying the chest but also destroys whatever was inside.")
                                 elif choice == "LK":
-                                    print("You are able to open the chest but you break the knife in the process of doing so. Inside the chest you find ")
+                                    print("You are able to open the chest but you break the knife in the process of doing so. Inside the chest you find a mysterious electronic device that you do not recognise. You take this with you.")
+                                    eqlist.append("strange device")
                                 elif choice == "SBB":
                                     print("The sticky banana bomb fails to break open the chest.")
                                     destroy("sticky banana bomb (SBB)")
                                 elif choice == "EC":
                                     crystsample = crystal()
                                     if crystsample == "success":
-                                        print("You break open the chest and find ")
+                                        print("You break open the chest and find a mysterious electronic device that you do not recognise. You take this with you.")
+                                        eqlist.append("strange device")
                                     elif crystsample == "failure":
                                         print("The crystal has no effect on the chest.")
                                     elif crystsample == "big failure":
@@ -1104,7 +1109,7 @@ while  True:
         if choice == "N":
             loc = 36
         elif coice == "P":
-            print("You investigate the paintings.")  #paintings#
+            print("You investigate the paintings. You believe they correspond to notable members of the Glass Of Water family. You find nothing hidden behind the paintings and no hidden clues within them.")
         elif choice == "F":
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input())
@@ -1294,7 +1299,35 @@ while  True:
         if choice == "N":
             loc = 49
         elif choice == "S":
-            loc = 98
+            print("The door is locked.")
+            print("You may withdraw into the corridor (I) or use weapons (W)")
+            choice = str(input())
+            if choice == "W":
+                listweapons()
+                choice = str(input())
+                if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
+                    print("You succesfully break down the door and enter the room but an alarm sounds.")
+                    alert = alert + 1
+                    loc = 98
+                elif choice == "SBB":
+                    print("The sticky banana bomb is ineffective in breaking down the door.")
+                    destroy("sticky banana bomb (SBB)")
+                elif choice == "TB":
+                    print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
+                    destroy("time bomb (TB)")
+                    loc = 98
+                elif choice == "EC":
+                    crystsample = crystal()
+                    if crystsample == "success":
+                        print("You destroy the door and walk into the room but an alarm sounds as you do so.")
+                        alert = alert + 1
+                        loc = 98
+                    elif crystsample == "failure":
+                        print("The crystal is ineffective.")
+                    elif crystsample == "big failure":
+                        endgame(2)
+                else:
+                    inap()   
         elif choice == "W":
             loc = 74
     elif loc == 59:
@@ -1502,9 +1535,9 @@ while  True:
             print("You find that the door is locked.") 
             if "iron key" in eqlist:
                 print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
-                destroy("iron key")
+                udestroy("iron key")
                 loc = 79
-            elif 74 in findconnect(75):
+            elif 74 in findconnect(79) or 79 in findconnect(74) or "iron key" in ulist:
                 print("You go North into the cylindrical room.")
             else:
                 print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).") 
@@ -1512,7 +1545,34 @@ while  True:
                 if choice == "W":
                     listweapons()
                     choice = str(input())
-                    #astronomy tower#
+                    if choice == "WH":
+                        print("You successfully break down the door and enter the room but the warhammer is irreparably damaged and an alarm sounds.")
+                        destroy("warhammer (WH)")
+                        alert = alert + 1
+                    elif choice == "PC":
+                        print("You successfully break down the door and an alarm sounds. You enter the room.")
+                        alert = alert + 1
+                        loc = 79
+                    elif choice == "TB":
+                        print("The time bomb is successful in breaking down the door. An alarm sounds and you enter the room.")
+                        destroy("time bomb (TB)")
+                        alert = alert + 1
+                        loc = 79
+                    elif choice == "SBB":
+                        print("The sticky banana bomb is ineffective in breaking down the door.")
+                        destroy("sticky banana bomb (SBB)")
+                    elif choice == "EC":
+                        crystsample = crystal()
+                        if crystsample == "success":
+                            print("An alarm sounds as you walk past the destroyed door.")
+                            alert = alert + 1
+                            loc = 79
+                        elif crystsample == "failure":
+                            print("The crystal is ineffective against the door")
+                        elif crystsample == "bigfailure":
+                            endgame(2)
+                    else:
+                        print("The weapon you chose is incapable of breaking down the door.")
         elif choice == "EN":
             loc = 58
         elif choice == "ES":
@@ -1526,12 +1586,7 @@ while  True:
                 if 79 in loclog():
                     print("You ascend the staircase.")
                 else:
-                    print("The staircase is barred. You may use weapons (W) or withdraw (I).")
-                    choice = str(input())
-                    if choice == "W":
-                        listweapons()
-                        choice = str(input())
-                        #astronomy tower#
+                    print("The staircase is barred so you may not ascend.")
     elif loc == 76:
         print("You are in a corridor which runs from North to South. To the North is a junction, with passages leading off to the North (N) and West (W). Another corridor branches off further South in an Easterly direction (E). South of this there is a door to the West (D).")
         choice = str(input())
@@ -1632,6 +1687,34 @@ while  True:
             loc = 80
     elif loc == 87:
         print("You are standing in a small bedroom which looks as though it is not currently being used for that purpose, since there are several architechtural plans and scientific instruments piled on top of the bed.")
+        print("You could investigate the instruments (I) or withdraw from the room using the door to the North (N).")
+        choice = str(input())
+        if choice == "I":
+            print("You investigate the instruments and find nothing that you think will help you on your mission. You are about to leave when a robotic arm hiding amongst the instruments lunges out at you. You must parry the strike.")
+            listweapons()
+            choice = str(input())
+            if choice == "BD" or choice == "GB" or choice == "SS" or choice == "SOS" or choice == "HOH":
+                print("You succesfully parry the strike and the robot arm falls back down onto the bed. You do not think it was intending to strike at you.")
+            elif choice == "IP":
+                destroy("invisibility potion (IP)")
+                print("The robotic arm strikes you despite your use of the invisibility potion. You do not think it was deliberately trying to strike you.")
+                print("You are injured but not severely enough to end your mission.")
+            elif choice == "LK":
+                destroy("large knife (LK)")
+                print("You parry the attack but the large knife was destroyed in the process of doing so.")
+            elif choice == "WH":
+                print("The robotic arm strikes the handle of the warhammer and destroys it.")
+                destroy("warhammer (WH)")
+            elif choice == "CC":
+                print("The arm does not appear to be responding to the control card. It strikes you, but your injuries are minor.")
+            elif choice == "CBD":
+                print("The robotic arm destroys the complex brain destroyer but you are unharmed.")
+                destroy("complex brain destroyer (CBD)")
+            else:
+                inap()
+                print("You have no suitable items with which to parry the attack so you are struck by the robotic arm. It injures you but not severely enough to end your mission.")
+        elif choice == "N":
+            loc = 80
     elif loc == 88:
         print("bedroom 2")
     elif loc == 89:
@@ -1738,8 +1821,12 @@ while  True:
         elif choice == "D":
             loc = 95
     elif loc == 98:
-        print("bedroom 3")
-        
+        print("You are in an extremely large bedroom with a mirror mounted on the wall that you could investigate (M) and a door to the North (N).")
+        choice = str(input())
+        if choice == "M":
+            print("You notice nothing interesting about the mirror.")
+        elif choice == "N":
+            loc = 58
     
         
         
@@ -1749,4 +1836,17 @@ while  True:
         
         
         
-loclog.append(loc)
+    loclog.append(loc)
+    if alert >= 4 and observe == 1:
+        print("You hear a long continuous alarm and notice that all doors have locked and that your passage throught the mansion has become impossible.")
+        endgame(2)
+    if alert == 3:
+        if randint(1, 5) == 1:
+            
+    if alert == 2:
+        if randint(1, 10) == 1:
+            
+              
+              
+              
+                          
