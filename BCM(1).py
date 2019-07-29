@@ -82,12 +82,11 @@ def candle(n):
         return 1
     else:
         print("You notice nothing unusual about the candle holder.")    
-        return 0
-                        
+        return 0                        
 def endgame(n):
     print(eqlist)
     print("You have failed in your mission.")
-    print("You completed ", n, " out of 4 major events successfully.")
+    print("You completed ", n, " out of 3 major events successfully.")
     end = input() 
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -751,12 +750,17 @@ while  True:
                 print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the room towards you.")
                 print("You must hold up a piece of equipment to protect yourself.")
                 tomrin = 1
+                tomrino = 0
                 while tomrin == 1:
                     eqloss = random.choice(eqlist)
-                    if eqloss == "timebomb" or eqloss == "stickybomb" or eqloss == "invisibility" or eqloss == "strengthp":
+                    if eqloss == "time bomb (TB)" or eqloss == "sticky banana bomb (SBB)" or eqloss == "invisibility potion (IP)" or eqloss == "strength potion (SP)":
                         tomrin = 1
                     else:
                         tomrin = 0
+                    tomrino = tomrino + 1
+                    if tomrino >= 1000:
+                        print("You have no appropriate equipment. The bottle contained acid and dealt you a severe injury.")
+                        endgame(1)
                 destroy(eqloss)
                 print(eqloss, " is lost")
                 print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
@@ -1172,7 +1176,43 @@ while  True:
         elif choice == "NE":
             loc = 40
         elif choice == "S":
-            loc = 59
+            if 59 in loclog:
+                loc = 59
+            else:
+                print("The door is locked.")
+                if "silver key" in eqlist:
+                    print("You find the key to the door amongst your items (the silver key) and you open the door.")
+                    udestroy("silver key")
+                    loc = 59 
+                else:
+                    print("You may use weapons (W) or withdraw (I).")
+                    choice = str(input())
+                    if choice == "W":
+                        listweapons()
+                        choice = str(input())
+                        if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
+                            print("You succesfully break down the door and enter the room but an alarm sounds.")
+                            alert = alert + 1
+                            loc = 59
+                        elif choice == "SBB":
+                            print("The sticky banana bomb is ineffective in breaking down the door.")
+                            destroy("sticky banana bomb (SBB)")
+                        elif choice == "TB":
+                            print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
+                            destroy("time bomb (TB)")
+                            loc = 59
+                        elif choice == "EC":
+                            crystsample = crystal()
+                            if crystsample == "success":
+                                print("You destroy the door and walk into the room but an alarm sounds as you do so.")
+                                alert = alert + 1
+                                loc = 59
+                            elif crystsample == "failure":
+                                print("The crystal is ineffective.")
+                            elif crystsample == "big failure":
+                                endgame(2)
+                        else:
+                            inap()   
         elif choice == "W":
             loc = 66
     elif loc == 51:
@@ -1259,7 +1299,7 @@ while  True:
         elif choice == "W":
             loc = 74
     elif loc == 59:
-        print("Bedroom")
+        print("You are in a large bedroom.")
     elif loc == 60:
         print("You are in a long rectangular room with a narrow staircase occupying around half the space in the room at the top of which is a door to the North (D). There is a door to the South (S) and there are no other objects of interest in the room.")
         choice = str(input())
