@@ -609,16 +609,11 @@ while  True:
                             choice = str(input()).upper()
                             if choice == "L":
                                 print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
-                                print("You can look in the cabinet (C), look in the book (B) or withdraw (W).")
-                                choice = str(input()).upper()
-                                if choice == "C":
-                                    print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
-                                    print("You take the rods.")
-                                    eqlist.append("wooden rod")
-                                    eqlist.append("metal rod")
-                                elif choice == "B":
-                                    eqlist.append("information book")
-                                    print("You look in the book and find that it is about Crultney mansion. You decide to take the book with you but much of it is in a language you cannot understand.")
+                                print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
+                                print("You take the rods.")
+                                eqlist.append("wooden rod")
+                                eqlist.append("metal rod")
+                                print("You also look in the book and find that it is about Crultney mansion but much of it is in a language you cannot understand.")
     elif loc == 26:
         print("You are in a circular room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
         if 21 in findconnect(26):
@@ -665,7 +660,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
-            if 32 in loclog():
+            if 32 in loclog:
                 print("You may enter through the door (D) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
             else:
                 print("You may use a weapon to break down the door (W) or you could try to scale the wall nearby and enter through a window on the 1st floor (SW).")
@@ -735,14 +730,14 @@ while  True:
             choice = str(input()).upper()
             if choice == "D":
                 if 39 in loclog:
-                    print("The shed door is unlocked and you step inside")
+                    print("The shed door is unlocked and you step inside.")
                     loc = 39
                 else:
                     print("The shed door is locked so you may use a weapon against it.")
                     listweapons()
-                    choice = str(input)
-                    if choice == "SS":
-                        destroy("shortsword (SS)")
+                    choice = str(input()).upper()
+                    if choice == "SS" or choice == "LK":
+                        ssdestroy(choice)
                         print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
                         loc = 39
                     elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC":
