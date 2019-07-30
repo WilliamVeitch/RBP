@@ -106,7 +106,7 @@ def endgame(n):
     else:
         print("You have failed in your mission.")
     print("You collected: ", eqlist+dlist)
-    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", ""]
+    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game."]
     print(endtext[n])
     end = input()
 def listweapons():
@@ -1521,7 +1521,17 @@ while  True:
         elif choice == "W":
             loc = screencheck(71, 4, 1)
     elif loc == 64:
-        print("Puzzle room")
+        print("You are in a small room with an electrical switch on the far side (S) and a door to the West (W).")
+        choice = str(input()).upper()
+        if choice == "S":
+            if "fuses" in eqlist:
+                print("You notice a missing fuse in the wiring around the switch and you rectify this using the stock of fuses you found in the basement.")
+                udestroy("fuses")
+                print("You push the switch and a hidden door swings open to reveal a room behind.")
+                print("The room seems to be Crultney's laboratory. Amongst the scientific equipment you find a bright red candle which seems out of place. You decide to take it with you and you withdraw into the small room.")
+                eqlist.append("red candle")
+            else:
+                print("You push the switch and it has no noticeable effect.")
     elif loc == 65:
         print("You are in a very small room with no features worthy of investigation. There are doors to the East and South (E and S).")
         choice = str(input()).upper()
@@ -1874,6 +1884,42 @@ while  True:
             loc = 78
     elif loc == 85:
         print("As you ascend the staircase you hear voices from above. You ascend quietly in order to not alert whoever may be at the top of the tower to your presence.")
+        print("You arrive at the top of the astronomy tower and find Crultney chained up to a chair. Another monkey, presumably Crultney's captor, is fiddling with some scientific instruments nearby. Occasionaly, he stops and questions Crultney. Crultney seems reluctant to cooperate but gives answers.")
+        if "invisibility potion (IP)" in eqlist:
+            print("You may use your invisibility potion to sneak out and surprise the other monkey without being noticed (IP).")
+            choice = str(input()).upper()
+            if choice == "IP":
+                udestroy("invisibility potion")
+        if "invisibility potion (IP)" in ulist:
+            print("Due to your invisibilty, you are not spotted by the mysterious monkey and you are able to defeat him with your bare hands using your ninja techniques. You free Crultney and chain the mysterious monkey to the chair while you speak to Crulteney.")
+            loc = 99
+        else:
+            print("you walk out towards the mysterious monkey and he turns to face you, pulling out a sword as he does so. You must fight him.")
+            listweapons()
+            choice = str(input()).upper()
+            if choice == "BD" or choice == "SS" or choice == "GB" or choice == "TS" or choice == "CBD" or choice == "SBB" or choice == "SP":
+                print("You successfully defeat the mysterious foe and release Crultney.")
+                loc = 99
+            elif choice == "EC":
+                crystsample = crystal()
+                if crystsample == "success":
+                    print("You successfully defeat the mysterious foe and release Crultney.")
+                    loc = 99
+                elif crystsample == "failure":
+                    print("The energy crystal fails to activate and the foe defeats you with his sword.")
+                    endgame(3)
+                elif crystsample == "big failure":
+                    endgame(3)
+            elif choice == "LK" or choice == S"OS" or choice == "HOH":
+                print("You fight well but your weapon is simply inferior to that of your enemy. He defeats you with his sword.")
+                endgame(3)
+            elif choice == "PC" or choice == "WH":
+                print("You fight well but your weapon is too unwieldy and your enemy defeats you with his sword.")
+                endgame(3)
+            else:
+                inap()
+                print("Your enemy defeats you with his sword.")
+                endgame(3)
     elif loc == 86:
         print("You are in a rather untidy room with an elaborate wooden desk and a cabinet mounted to the wall. Many pieces of paper are scattered over both the desk and the floor. You believe this is Crultney's study. There is a door to the South.")
         print("You could investigate the desk (D), investigate the cabinet (C) or leave through the door to the South (S).")
@@ -2045,8 +2091,12 @@ while  True:
             print("You notice nothing interesting about the mirror.")
         elif choice == "N":
             loc = 58
-
-
+    elif loc == 99:
+        print("Crultney thanks you for rescuing him and you promise to deliver the defeated foe to the police station in Ooville when you return. You ask Crultney about his work and he tells you that he is working on a highly secret device that could be extremely dangerous and that for this reason, it is located far from civilisation in the Western Islands. He is currently working on just a small part of the machine inside and he will visit the Western Islands upon completion of this. Crultney says that the intruder was trying to steal his work to make their own version of the machine.")
+        if "strange device" in eqlist:
+            print("You show Crultney the strange device that you found earlier and he confirms that this is part of the machine he is working on.")
+        print("You say farewell to Crultney when the next ferry comes to the island. Crultney wishes you luck and finally adds: 'perhaps I shall see you again on a future adventure.' ")
+        endgame(4)
 
 
 
