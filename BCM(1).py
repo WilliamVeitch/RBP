@@ -252,6 +252,9 @@ while  True:
             loc = 11
         elif choice == "C":
             coins = coins - 2
+            if coins < 0:
+                print("You do not have enough money to get on the ferry. The ferry diverts to Ooville because of a storm and you are seized by police upon your arrival there.")
+                endgame(0)
             loc = 12
         elif choice == "MM" and "magical map (MM)" in eqlist:
             print("The magical map appears to suggest that the wisest course of action would be to take the ship to Ooville.")
@@ -304,8 +307,11 @@ while  True:
         choice = str(input()).upper()
         if choice == "F":
             coins = coins - 1
-            print("The monkey operating the ferry takes your coin and delivers you to the island.")
-            loc = 17
+            if coins >= 0:
+                print("The monkey operating the ferry takes your coin and delivers you to the island.")
+                loc = 17
+            else:
+                print("You cannot afford to take the ferry.")
         elif choice == "R":
             loc = 22
         elif choice == "T":
@@ -341,6 +347,10 @@ while  True:
             elif choice == "H":
                 eqlist.append("helm of horror (HOH)")
                 coins = coins - 6
+            if coins < 0:
+                print("You could not afford that item.")
+                del eqlist[len(eqlist) - 1]
+                coins = 0
         print("You now return to the town centre.")
         loc = 11
     elif loc == 17:
