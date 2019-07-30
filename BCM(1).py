@@ -1911,7 +1911,7 @@ while  True:
                     endgame(3)
                 elif crystsample == "big failure":
                     endgame(3)
-            elif choice == "LK" or choice == S"OS" or choice == "HOH":
+            elif choice == "LK" or choice == "SOS" or choice == "HOH":
                 print("You fight well but your weapon is simply inferior to that of your enemy. He defeats you with his sword.")
                 endgame(3)
             elif choice == "PC" or choice == "WH":
