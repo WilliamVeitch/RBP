@@ -817,43 +817,44 @@ while  True:
         elif choice == "BD":
             loc = 33
     elif loc == 30:
-        listweapons()
-        print("You may also withdraw (W).")
         if 30 in loclog:
             print("You walk back towards the front of the mansion on the path you cleared earlier.")
             loc = 27
-        choice = str(input()).upper()
-        elif choice == "GB" or choice == "SS" or choice == "SOS":
-            print("Your weapon is successful in clearing a path through the barbed wire.")
-            loc = 27
-        elif choice == "BD":
-            print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
-            destroy("black dagger (BD)")
-            loc = 27
-        elif choice == "TB" or choice == "PC":
-            print("You are able to blast a path through the barbed wire.")
-            if choice == "TB":
-                destroy("time bomb (TB)")
-            loc = 27
-        elif choice == "WH":
-            print("This weapon is not effective in cutting a path through the barbed wire.")
-        elif choice == "SBB":
-            print("The bomb explodes but does not help and leaves a mass of tangled barbed wire covered in sticky banana juices.")
-            destroy("sticky banana bomb (SBB)")
-        elif choice == "EC":
-            crystsample = crystal()
-            if  crystsample == "success":
-                print("The barbed wire is destroyed and you walk towards the mansion.")
-                loc = 27
-            elif crystsample() == "failure":
-                destroy("energy crystal (EC)")
-                print("The crystal rolls away into the middle of the wire.")
-            elif crystsample() == "big failure":
-                endgame(1)
-        elif choice == "W":
-            loc = lastloc()
         else:
-            inap()
+            listweapons()
+            print("You may also withdraw (W).")
+            choice = str(input()).upper()
+            if choice == "GB" or choice == "SS" or choice == "SOS":
+                print("Your weapon is successful in clearing a path through the barbed wire.")
+                loc = 27
+            elif choice == "BD":
+                print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
+                destroy("black dagger (BD)")
+                loc = 27
+            elif choice == "TB" or choice == "PC":
+                print("You are able to blast a path through the barbed wire.")
+                if choice == "TB":
+                    destroy("time bomb (TB)")
+                loc = 27
+            elif choice == "WH":
+                print("This weapon is not effective in cutting a path through the barbed wire.")
+            elif choice == "SBB":
+                print("The bomb explodes but does not help and leaves a mass of tangled barbed wire covered in sticky banana juices.")
+                destroy("sticky banana bomb (SBB)")
+            elif choice == "EC":
+                crystsample = crystal()
+                if  crystsample == "success":
+                    print("The barbed wire is destroyed and you walk towards the mansion.")
+                    loc = 27
+                elif crystsample() == "failure":
+                    destroy("energy crystal (EC)")
+                    print("The crystal rolls away into the middle of the wire.")
+                elif crystsample() == "big failure":
+                    endgame(1)
+            elif choice == "W":
+                loc = lastloc()
+            else:
+                inap()
     elif loc == 31:
         print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the WEstern side of the passage (WD).")
         choice = str(input()).upper()
