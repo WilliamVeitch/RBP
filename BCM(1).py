@@ -101,9 +101,12 @@ def candle(n):
         print("You notice nothing unusual about the candle holder.")
         return 0
 def endgame(n):
-    print("You have failed in your mission.")
+    if n == 4:
+        print("You have successfully completed your mission.")
+    else:
+        print("You have failed in your mission.")
     print("You collected: ", eqlist+dlist)
-    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission."]
+    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", ""]
     print(endtext[n])
     end = input()
 def listweapons():
@@ -115,9 +118,9 @@ def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired locat
         return a
 while  True:
     if loc == 1:
-        print("The date is 8th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
+        print("The date is 5th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies or the mission")
-        print("You can go to the Ninja Armoury (N), Royal Weaponary Supply Company (R) or Geelophisis' Lab (G)")
+        print("You can go to the Ninja Armoury (N), Royal Weaponary Supply Company (R) or Geelophisis' Lab (G).")
         choice = str(input()).upper()
         if choice == "N":
             loc = 2
@@ -131,8 +134,8 @@ while  True:
         print("You have arrived at the Ninja Armoury. A monkey wearing white robes walks in and offers you the black dagger, a powerful weapon which is the symbol of the ninjas of Oland.")
         print("He also shows you a wooden table with an assortment of objects on it and tells you that you may choose two of them")
         print("You can choose from the throwing stars (TS), invisibility potion (IP), golden blade, (GB), time bomb (TB) or super strong rope (SSR)")
-        choice1 = str(input("choice 1   "))
-        choice2 = str(input("choice 2   "))
+        choice1 = str(input("choice 1   ")).upper()
+        choice2 = str(input("choice 2   ")).upper()
         eqlist.append("black dagger (BD)")
         if choice1 == "TS" or choice2 == "TS":
             eqlist.append("throwing stars (TS)")
@@ -188,7 +191,7 @@ while  True:
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
         print("The inventions are: complex brain destroyer (CBD), invisibility potion (IP), magical map (MM), strength potion (SP) and the energy crystal (EC)")
         while ask != "NO":
-            ask = str(input("Do you want to ask Geelophisis about an invention?   "))
+            ask = str(input("Do you want to ask Geelophisis about an invention?   ")).upper()
             if ask == "CBD":
                 print("Geelophisis tells you that the current version of the CBD is much safer than the prototype used in the 1960s. He says that it should only be used on intelligent opponents with larger brains as this makes it easier for the CBD to identify them.")
             elif ask == "IP":
@@ -199,8 +202,8 @@ while  True:
                 print("Geelophisis tells you that this invention will allow you to find your way to any place.")
             elif ask == "EC":
                 print("Geelophisis tells you that the energy crystal is a highly dangerous weapon that will release a blast of energy from the end of the crystal marked with a triangle when the end marked with a hexagon is struck. It can only be used once as the crystal is consumed on use.")
-        choice1 = str(input("choice 1   "))
-        choice2 = str(input("choice 2   "))
+        choice1 = str(input("choice 1   ")).upper()
+        choice2 = str(input("choice 2   ")).upper()
         if choice1 == "CBD" or choice2 == "CBD":
             eqlist.append("complex brain destroyer (CBD)")
         if choice1 == "IP" or choice2 == "IP":
@@ -213,7 +216,7 @@ while  True:
             eqlist.append("energy crystal (EC)")
         print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
         print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
-        choice = str(input()).upper
+        choice = str(input()).upper()
         if choice == "S":
             loc = 6
         else:
@@ -1039,7 +1042,7 @@ while  True:
         elif choice == "I":
             print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing.")
             print("'September 16th, 1971")
-            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to '")
+            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to '")
             print("A significant fragment of the page has been torn off so you do not know how the sentence finishes.")
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
@@ -1324,7 +1327,7 @@ while  True:
                             print("You light the candle.")
                             lcandlelist[2] = 1
         elif choice == "P":
-            if observe == 1:
+            if observe >= 1:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
             else:
                 print("You notice nothing unusual about the plants.")
@@ -1346,7 +1349,19 @@ while  True:
         elif choice == "W":
             loc = screencheck(65, 4, 0)
     elif loc == 56:
-        print("Tou are standing by the side of a pool containing water.")
+        print("You are standing by the side of a pool containing water. Submerged in the pool is a non-functioning security robot (S). There is also a door to the West (W).")
+        choice = str(input()).upper()
+        if choice == "S":
+            print("You examine the robot and identify signs suggesting a struggle betweeen it and another entity. You also observe that the robot is clutching a small fragment of paper. You take the paper and read what is written upon it.")
+            print(" 'retrieve the control card from under the rubble. This seems to be very difficult without an operational crane. ' ")
+            if 39 in loclog:
+                print("You may now read the full diary entry by combining this with that which you found in the shed (D) or not (N).")
+                choice = str(input()).upper()
+                if choice == "D":
+                    print("'September 16th, 1971")
+                    print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to retrieve the control card from under the rubble. This seems to be very difficult without an operational crane. ' ")
+        elif choice == "W":
+            loc = 47
     elif loc == 57:
         print("You are in a dimly lit room with many wooden boxes piled up along the western wall. There is a door to the East (E). You could search through the boxes (B).")
         choice = str(input()).upper()
@@ -1630,7 +1645,7 @@ while  True:
             elif choice == "WH":
                 risk = 3
             elif choice == "SBB":
-                risk = 1
+                risk = 90
             elif choice == "PC":
                 print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
                 endgame(2)
@@ -1654,6 +1669,10 @@ while  True:
                 endgame(2)
             elif risk == 100:
                 print("You turn off all of the robotic guards with the control card.")
+            elif risk == 90:
+                udestroy("sticky banana bomb (SBB)")
+                print("The sticky banana bomb is extremely effective and imobolises all of the robotic guards in the room.")
+                observe = 2
             elif randint(1, risk) == 1:
                 ssdestroy(choice)
                 print("You defeat the first robotic guard, but your weapon is destroyed.")
@@ -1661,7 +1680,7 @@ while  True:
                 loc = lastloc
             else:
                 print("You defeat the first robotic guard and then flee the room to the place from which you came.")
-        if (observe == 0) or (risk == 100):
+        if (observe == 0) or (risk == 100) or (observe == 2):
             print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
             choice = str(input()).upper()
             if choice == "A":
@@ -1673,6 +1692,8 @@ while  True:
                     if choice == "CC":
                         print("You disactivate the security services.")
                         observe = 0
+                else:
+                    print("You do not know how to operate the control board.")
             elif choice == "S":
                 loc = 50
             elif choice == "W":
@@ -1768,14 +1789,49 @@ while  True:
         elif choice == "E":
             loc = screencheck(84, 4, 1)
     elif loc == 79:
-        print("You are in a cylindrical room with a staircase and a door to the South. There are many star charts and astronomical instruments on the wall. You notice that the staircase below is shut off by a door which you can pull up from this side so you decide to do that in order to enable you to travel on this staircase. You may ascend (A) or descend (D) the staircase or leave through the door to the South (S).")
+        if 79 not in loclog:
+            print("As you enter the room, a security robot lunges out at you.")
+            if "control card  (CC)" in eqlist:
+                print("You deactivate the robotic guard with your control card.")
+            elif "black dagger (BD)" in eqlist or "shortsword (SS)" in eqlist or "goldenblade(GB)" in eqlist or "helm of horror (HOH)" in eqlist or "large knife (LK)" in eqlist:
+                print("You use one of your weapons to defeat the guard.")
+            elif "invisibility potion (IP)" in eqlist:
+                print("You use your invisibility potion to sneak past the guard.")
+                udestroy("invisibility potion (IP)")
+            elif "strength potion (SP)" in eqlist:
+                destroy("strength potion (SP)")
+                print("You use your strength potion to overwhelm the robotic guard.")
+            elif "sticky banana bomb (SBB)" in eqlist:
+                destroy("sticky banana bomb (SBB)")
+                print("You use your sticky banana bomb to overwhelm the robotic guard.")
+            elif "energy crystal (EC)" in eqlist:
+                print("You must use your energy crystal to defeat the robotic guard as you have no other suitable weapons.")
+                crystsample = crystal()
+                if crystsample == "success":
+                    print("You defeat the robotic guard.")
+                else:
+                    print("You fail to use the crystal correctly.")
+                    endgame(2)         
+            else:
+                print("You have no suitable weapons with which to defeat the guard and are struck down.")
+                endgame(2)
+            print("You notice that the staircase below is shut off by a door which you can pull up from this side so you decide to do that in order to enable you to travel on this staircase.")
+        print("You are in a cylindrical room with a staircase and a door to the South. There are many star charts and astronomical instruments on the wall. You may ascend (A) or descend (D) the staircase or leave through the door to the South (S).")
         choice = str(input()).upper()
         if choice == "A":
-            loc = 85
+            if towerpos == "A":
+                loc = 85
+            else: print("Unfortunately the staircase is barred and you are unable to ascend.")
         elif choice == "D":
             loc = 75
         elif choice == "S":
             loc = 74
+        if loc != 85:
+            x = 0
+            while "invisibility potion (IP)" in ulist:
+                if ulist[x] == "invisibility potion (IP)":
+                    del ulist[x]
+                x = x + 1
     elif loc == 80:
         print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W). There are two doors on this corridor, one to the North (N) and one to the South (S).")
         choice = str(input()).upper()
@@ -1817,7 +1873,7 @@ while  True:
         elif choice == "W":
             loc = 78
     elif loc == 85:
-        print("Astronomy tower")
+        print("As you ascend the staircase you hear voices from above. You ascend quietly in order to not alert whoever may be at the top of the tower to your presence.")
     elif loc == 86:
         print("You are in a rather untidy room with an elaborate wooden desk and a cabinet mounted to the wall. Many pieces of paper are scattered over both the desk and the floor. You believe this is Crultney's study. There is a door to the South.")
         print("You could investigate the desk (D), investigate the cabinet (C) or leave through the door to the South (S).")
@@ -1865,7 +1921,14 @@ while  True:
         elif choice == "N":
             loc = 80
     elif loc == 88:
-        print("bedroom 2")
+        print("You are in a bedroom of medium size with a piece of paper lying on the bed (P) and a door to the South (S).")
+        choice = str(input()).upper()
+        if choice == "P":
+            print("The page appears to be a diary entry. You read it.")
+            print(" 'September 23rd 1971")
+            print("In recent days I have become concerned that my enemies are attempting to gain access to the mansion. I have finished the water wheel but am too scared to go out into the shed to turn on the crane. Therefore, I have instead printed off another control card and I intend to go to the astronomy tower tommorow to finally find out what is goin on up there.' ")
+        elif choice == "S":
+            loc = 81
     elif loc == 89:
         acloc = 89
         print("You are in a cylindrical room with doors to the North, East and South (N, E and S) and an ascending staircase (A).")
@@ -1898,7 +1961,13 @@ while  True:
     elif loc == 92:
         loc = screencheck(89, 1, 0)
     elif loc == 93:
-        print("small room")
+        print("You are standing in a small room with no remarkable features except a door to the West (W) and a note lying in the middle of the floor (N).")
+        choice = str(input()).upper()
+        if choice == "W":
+            loc = 89
+        elif choice == "N":
+            print("You read the note.")
+            print(" 'This note is left here for the sake of alerting all staff and visitors that I, Crultney, went to investigate the astronomy tower on 24th September 1971. The note shall be removed immediatly upon my safe return.'")
     elif loc == 94:
         print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
         choice = str(input()).upper()
@@ -1982,12 +2051,9 @@ while  True:
 
 
 
-
-
-
     loclog.append(loc)
-    if alert >= 4 and observe == 1:
-        print("You hear a long continuous alarm and notice that all doors have locked and that your passage throught the mansion has become impossible.")
+    if alert >= 4 and observe >= 1:
+        print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
     elif alert == 3:
         rprob = 5
