@@ -312,6 +312,7 @@ while  True:
                 loc = 17
             else:
                 print("You cannot afford to take the ferry.")
+                coins = 0
         elif choice == "R":
             loc = 22
         elif choice == "T":
@@ -337,14 +338,14 @@ while  True:
             if choice == "YES":
                 destroy("golden blade (GB)")
                 coins = coins + 11
-        print("You enter the shops and you find some super strong rope (S) costing 3 coins and the helm of horror (H) which costs 6 coins")
+        print("You enter the shops and you find some super strong rope (SSR) costing 3 coins and the helm of horror (HOH) which costs 6 coins")
         print("You have ", coins, "banana coins.")
         while choice != "E":
             choice = str(input("Type in an item code or type E to exit the shop.   ")).upper()
-            if choice == "S":
+            if choice == "SSR":
                 eqlist.append("super strong rope (SSR)")
                 coins = coins - 3
-            elif choice == "H":
+            elif choice == "HOH":
                 eqlist.append("helm of horror (HOH)")
                 coins = coins - 6
             if coins < 0:
@@ -813,6 +814,9 @@ while  True:
         elif choice == "BD":
             loc = 33
     elif loc == 30:
+        if 30 in loclog:
+            print("You walk back towards the front of the mansion on the path you cleared earlier.")
+            loc = 27
         listweapons()
         print("You may also withdraw (W).")
         choice = str(input()).upper()
@@ -1620,13 +1624,13 @@ while  True:
         choice = str(input()).upper()
         bwlist = ["left", "right", "on", "off"]
         if choice == "B":
-            print("You notice a strange lever attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], " .")
+            print("You notice a strange lever attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], ".")
             print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
             choice = str(input()).upper()
             if choice == "L":
-                bathwater[0] = input("You may move the lever to the left (0) or to the right (1).   ")
+                bathwater[0] = int(input("You may move the lever to the left (0) or to the right (1).   "))
             elif choice == "T":
-                bathwater[1] = input("You may turn the tap on (2) or off (3).   ")
+                bathwater[1] = int(input("You may turn the tap on (2) or off (3).   "))
         elif choice == "S":
             print("Above the sink is a collection of soaps. One bar of soap is bright orange and has a strange odour. You may take this with you (T) or leave it (L).")
             choice = str(input()).upper()
