@@ -1470,6 +1470,7 @@ while  True:
         if candlelist == ["red candle", "green candle", "blue candle"] and lcandlelist == [1, 1, 1]:
             print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
             eqlist.append("silver key")
+            lcandlelist = [0, 0, 0]
         choice = str(input()).upper()
         if choice == "N":
             loc = 67
