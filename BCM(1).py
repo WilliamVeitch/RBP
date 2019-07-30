@@ -336,9 +336,9 @@ while  True:
         print("You see many local shops selling a wide range of products.")
         if "golden blade (GB)" in eqlist:
             print("Before you have a chance to enter the shops, a monkey walks up to you and offers you 11 banana coins for your golden blade.")
-            print("Do you accept the offer")
+            print("Do you accept the offer (A) or not (N).")
             choice = str(input()).upper()
-            if choice == "YES":
+            if choice == "A":
                 destroy("golden blade (GB)")
                 coins = coins + 11
         print("You enter the shops and you find some super strong rope (SSR) costing 3 coins and the helm of horror (HOH) which costs 6 coins")
@@ -975,7 +975,7 @@ while  True:
                     print("You notice that while all other candles in the room are white or yellow, one is a vibrant shade of blue. You decide to take it with you.")
                     eqlist.append("blue candle")
     elif loc == 36:
-        print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W), a dirty wooden door leading to the North (N), a solid metal door to the East(E) and a colourfully painted door to the South (S).")
+        print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W), a dirty wooden door leading to the North (N), a solid metal door to the East (E) and a colourfully painted door to the South (S).")
         choice = str(input()).upper()
         if choice == "N":
             loc = 42
@@ -1147,7 +1147,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "N":
             loc = 36
-        elif coice == "P":
+        elif choice == "P":
             print("You investigate the paintings. You believe they correspond to notable members of the Glass Of Water family. You find nothing hidden behind the paintings and no hidden clues within them.")
         elif choice == "F":
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
