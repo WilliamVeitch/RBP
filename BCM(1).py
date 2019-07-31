@@ -768,8 +768,7 @@ while  True:
         elif choice == "P":
             loc = 24
         elif choice == "F":
-            if 30 in findconnect(27):
-                print("You walk back following the path you cleared earlier.")
+            print("You walk back following the path you cleared earlier.")
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -817,7 +816,7 @@ while  True:
         elif choice == "BD":
             loc = 33
     elif loc == 30:
-        if 30 in loclog:
+        if 27 in loclog:
             print("You walk back towards the front of the mansion on the path you cleared earlier.")
             loc = 27
         else:
