@@ -2171,7 +2171,7 @@ while  True:
                 endgame(2)
             elif risk == 100:
                 print("You turn off the robotic guard with the control card.")
-            elif randint(1, risk) == 1:
+            elif random.randint(1, risk) == 1:
                 ssdestroy(choice)
                 print("You defeat the robotic guard, but your weapon is destroyed.")
             else:
