@@ -451,8 +451,8 @@ while  True:
             print("You create a loop in the rope and throw it so that it wraps around a large stone at the top of the cliff.")
             print("You succeed in climbing the cliff and you retrieve the rope.")
             if choice == "W":
-                Print("There are no doors on the Western side of the mansion and the walls are too high to climb. Using your rope,you climb over a steep rock formation to arrive near the front of the mansion.")
-                loc = 24
+                print("There are no doors on the Western side of the mansion and the walls are too high to climb. Using your rope,you climb over a steep rock formation to arrive near the front of the mansion.")
+                loc = 27
             elif choice == "E":
                 loc = 25
     elif loc == 22:
@@ -805,7 +805,7 @@ while  True:
             loc = 24
     elif loc == 29:
         print("You are in a corridor which runs from North to South. To the North, there is a grey door leading into a room (GD). To the South, there is a junction with two passages leading off it, one to the East (E) and one to the South (S).")
-        print("There is also an old, brown door in the West wall of the corridor (BD).")
+        print("There is also an old, brown door in the East wall of the corridor (BD).")
         choice = str(input()).upper()
         if choice == "GD":
             loc = 26
@@ -855,7 +855,7 @@ while  True:
             else:
                 inap()
     elif loc == 31:
-        print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the WEstern side of the passage (WD).")
+        print("You are in a corridor which runs from East to West. There is a junction with a North - South corridor to the West (W). There are two grey doors opposite each other in the Eastern side of the passage. (NED) and (SED). There is another door to the North in the Western side of the passage (WD).")
         choice = str(input()).upper()
         if choice == "W":
             loc = 29
@@ -1172,6 +1172,7 @@ while  True:
                 if choice == "SSR":
                     if observe == 1:
                         print("You are able to climb up to the balcony, but not before an alarm sounds. You notice a security camera on the balcony. It must have noticed you and sounded the alarm.")
+                        alert = alert + 1
                     else:
                         print("You successfully climb up to the balcony.")
                     loc = 53
