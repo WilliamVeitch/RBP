@@ -877,6 +877,7 @@ while  True:
     elif loc == 33:
         if 38 in loclog:
             print("You walk back into the control room.")
+            loc = 38
         else:
             if "rusted keys" in eqlist:
                 print("You find the key to the door amongst your items and you open the door.")
@@ -1124,9 +1125,13 @@ while  True:
                                     elif crystsample == "big failure":
                                         endgame(2)
         elif choice == "U":
-            print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
-            if choice == "W":
-                eqlist.append("large knife (LK)")
+            if "large knife (LK)" in eqlist or "large knife (LK)" in dlist:
+                print("You notice nothing remarkable about the kitchen utensils.")
+            else:
+                print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
+                choice = str(input())
+                if choice == "W":
+                    eqlist.append("large knife (LK)")
         elif choice == "N":
             loc = 35
         elif choice == "S":
@@ -1139,7 +1144,7 @@ while  True:
         elif choice == "W":
             loc = 36
     elif loc == 44:
-        print("You are in a very spacious living room. Finely decorated rugs cover the floor and the walls have expensive paintings mounted upon them. There are two large sofas and several comfortable chairs and nearby is a small yet magnificent woodwn table")
+        print("You are in a very spacious living room. Finely decorated rugs cover the floor and the walls have expensive paintings mounted upon them. There are two large sofas and several comfortable chairs and nearby is a small yet magnificent wooden table")
         print("you can leave the room through the door to the North (N). You could also investigate the paintings (P), the table (T) or the floor (F).")
         choice = str(input()).upper()
         if choice == "N":
@@ -1150,10 +1155,13 @@ while  True:
             print("You pull up the rug near the sofa and discover a trapdoor in the floor. You find nothing else of interest. You can open the trapdoor (O) or ignore it (I).")
             choice = str(input()).upper()
             if choice == "O":
-                print("You open the trapdoor and find a box of matches which you decide to take with you.")
-                eqlist.append("matches")
+                if "matches" in eqlist or "matches" in dlist:
+                    print("You have already investigated the trapdoor.")
+                else:
+                    print("You open the trapdoor and find a box of matches which you decide to take with you.")
+                    eqlist.append("matches")
         elif choice == "T":
-            print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find some papers and an iron key. You take these with you.")
+            print("The top of the table is bare but there is a small drawer at the side of the table. you open the drawer and find nothing of note.")
     elif loc == 45:
         print("You are in a courtyard which is enclosed on all sides by walls. In the centre is a medium sized tree surrounded by various other plants and benches. Above you is a large balcony which you cannot access from below.")
         print("The only door out of the courtyard is to the North (N). You could observe the balcony in greater detail (B) or observe the tree in the centre of the courtyard (T).")
@@ -1213,7 +1221,7 @@ while  True:
                         print("There are three vacant spaces in the gearbox but you only have ", smallwheels, " small wheels.")
             elif choice == "N":
                 print("You read the note and find that it is a checklist for operating the crane.")
-                print(" '1. Connect the crane to a mechanical energy supply (either the lawnmower engine or a water wheel.")
+                print(" '1. Connect the crane to a mechanical energy supply (either the lawnmower engine or a water wheel).")
                 print("  2. Ensure that the gearbox is running correctly.")
                 print("  3. Ensure that clearance for operation has been given from the South side of the room (accessed through the shed).' ")
         elif choice == "N":
