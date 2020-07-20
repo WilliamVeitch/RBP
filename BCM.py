@@ -108,6 +108,11 @@ def endgame(n):
     print("You collected: ", eqlist+dlist)
     endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game."]
     print(endtext[n])
+    uniloclog = list()
+    for i in range(len(loclog)):
+        if loclog[i] not in uniloclog:
+            uniloclog.append(loclog[i])
+    print("You visited " + str(len(uniloclog)) + " of 99 possible locations.")
     end = input()
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -597,7 +602,7 @@ while  True:
                 if choice == "S":
                     print("The stone looks rather old and worn. There are some strange symbols on the stone but they are difficult to read and understand.")
                     if "stone rod" in eqlist:
-                        print("You immediatly notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
+                        print("You notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
                         print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                         choice = str(input()).upper()
                         if choice == "S":
@@ -655,7 +660,7 @@ while  True:
                 print("You unlock the door and step outside.")
         print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion. You can also see a small pier to the South.")
         print("To the West is a shed which is connected directly to the mansion.")
-        print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P), walk towards the fence (F), or walk around to the East side of the mansion (E).")
+        print("You can attempt to get in through the main door (M), investigate the shed (S), walk towards the pier (P), or walk around to the East side of the mansion (E).")
         choice = str(input()).upper()
         if choice == "M":
             print("The main door looks very well protected with an elaborate security system.")
@@ -667,17 +672,10 @@ while  True:
             if choice == "SW":
                 if "super strong rope (SSR)" in eqlist:
                     print("You use your super strong rope to successfully climb up to the window. You hurriedly use an object from your equipment bag to smash the window and you climb inside. ")
-                    print("It will be difficult to pull up the rope through the window without alerting the nearby security cameras. You can try to pull up the rope (SSR) or abandon it and climb inside (C).")
-                    choice = str(input()).upper()
-                    if choice == "SSR":
-                        print("You pull up the rope but an alarm sounds as you do so.")
-                        alert = alert + 1
-                    else:
-                        destroy("super strong rope (SSR)")
+                    print("You pull up the super strong rope and take it with you.")
                     loc = 72
                 else:
-                    print("You have no equipment for climbing so you abandon your attempt to scale the wall while halfway up. However, as you climb down, an alarm sounds.")
-                    alert = alert + 1
+                    print("You have no equipment for climbing so you abandon your attempt to scale the wall while halfway up.")
             elif choice == "W":
                 listweapons()
                 choice = str(input()).upper()
@@ -735,11 +733,11 @@ while  True:
                     print("The shed door is locked so you may use a weapon against it.")
                     listweapons()
                     choice = str(input()).upper()
-                    if choice == "SS" or choice == "LK":
-                        ssdestroy(choice)
+                    if choice choice == "LK":
+                        destroy("large knife (LK)")
                         print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
                         loc = 39
-                    elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC":
+                    elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC" or choice == "SS":
                         print("your weapon succeeds in breaking down the door and you enter the shed.")
                         loc = 39
                     elif choice == "TB":
@@ -762,8 +760,6 @@ while  True:
                         inap()
         elif choice == "P":
             loc = 24
-        elif choice == "F":
-            print("You walk back following the path you cleared earlier.")
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -1228,7 +1224,7 @@ while  True:
         elif choice == "W":
             loc = 57
         elif choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode[0], " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", str(fcode)[0], " written upon it.")
     elif loc == 48:
         print("You are standing in a room with a collapsed ceiling. Rubble blocks your way to the North, but you can see that the room continues beyond the rubble and that there is a small structure in the North side of the room. To the South is a wooden door (S).")
         if craneunlock == 0:
@@ -1631,8 +1627,11 @@ while  True:
             elif choice == "T":
                 bathwater[1] = int(input("You may turn the tap on (2) or off (3).   "))
         elif choice == "S":
-            print("Above the sink is a collection of soaps. One bar of soap is bright orange and has a strange odour. You may take this with you (T) or leave it (L).")
-            choice = str(input()).upper()
+            if "soap" in eqlist or "soap" in dlist:
+                print("You have already investigatec the sink")
+            else:
+                print("Above the sink is a collection of soaps. One bar of soap is bright orange and has a strange odour. You may take this with you (T) or leave it (L).")
+                choice = str(input()).upper()
             if choice == "T":
                 eqlist.append("soap")
         elif choice == "T":
@@ -1690,7 +1689,7 @@ while  True:
                 print("You turn off all of the robotic guards with the control card.")
             elif risk == 90:
                 udestroy("sticky banana bomb (SBB)")
-                print("The sticky banana bomb is extremely effective and imobolises all of the robotic guards in the room.")
+                print("The sticky banana bomb is extremely effective and immobilises all of the robotic guards in the room.")
                 observe = 2
             elif randint(1, risk) == 1:
                 ssdestroy(choice)
@@ -1882,7 +1881,7 @@ while  True:
         elif choice == "W":
             loc = 91
         elif choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", str(fcode)[1], " written upon it.")
     elif loc == 84:
         acloc = 84
         print("You are standing in a cylindrical room with no interesting features. There are doors to the South and to the West (S and W).")
@@ -1981,7 +1980,7 @@ while  True:
         if choice == "P":
             print("The page appears to be a diary entry. You read it.")
             print(" 'September 23rd 1971")
-            print("In recent days I have become concerned that my enemies are attempting to gain access to the mansion. I have finished the water wheel but am too scared to go out into the shed to turn on the crane. Therefore, I have instead printed off another control card and I intend to go to the astronomy tower tommorow to finally find out what is goin on up there.' ")
+            print("In recent days I have become concerned that my enemies are attempting to gain access to the mansion. I have finished the water wheel but am too scared to go out into the shed to turn on the crane. Therefore, I have instead printed off another control card and I intend to go to the astronomy tower tommorow to finally find out what is going on up there.' ")
         elif choice == "S":
             loc = 81
     elif loc == 89:
@@ -2078,7 +2077,7 @@ while  True:
         print("You are in a cylindrical room with a small depression in the centre (D) and a door to the North (N).")
         choice = str(input()).upper()
         if choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode[2], " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", str(fcode)[2], " written upon it.")
         elif choice == "N":
             loc = 94
     elif loc == 97:
