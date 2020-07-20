@@ -5,7 +5,7 @@ coins = 8
 eqlist = list()
 dlist = list()
 ulist = list()
-swicob = "0"
+swicob = "0" #loc 24
 ask = "A"
 alert = 0
 observe = 1
@@ -19,7 +19,7 @@ loclog = list()
 bathwater = [0, 3] #lever, water (water on = 2)
 stairrobot = 1
 wunlock = 0
-craneunlock = 0
+craneunlock = 0 #locs 46 and 48
 smallwheels = 0
 towerpos = "G"
 towertext = "Your weapon successfully destroys the door and you walk in."
@@ -112,7 +112,7 @@ def endgame(n):
     for i in range(len(loclog)):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
-    print("You visited " + str(len(uniloclog)) + " of 99 possible locations.")
+    print("You visited " + str(len(uniloclog)) + " of 99 locations.")
     end = input()
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -1097,6 +1097,7 @@ while  True:
                             choice = str(input()).upper()
                             if choice == "W":
                                 listweapons()
+                                choice = str(input()).upper()
                                 if choice == "BD" or choice == "GB" or choice == "SS" or choice == "WH" or choice == "HOH":
                                     print("You break open the chest and find a mysterious electronic device that you do not recognise. You take this with you.")
                                     eqlist.append("strange device")
@@ -1552,6 +1553,8 @@ while  True:
                 eqlist.append("red candle")
             else:
                 print("You push the switch and it has no noticeable effect.")
+        elif choice == "W":
+            loc = 55
     elif loc == 65:
         print("You are in a very small room with no features worthy of investigation. There are doors to the East and South (E and S).")
         choice = str(input()).upper()
