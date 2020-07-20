@@ -46,16 +46,16 @@ def ssdestroy(n):
     y = 0
     z = 0
     while z == 0:
-        while (eqlist[x])[y] != "(" and y <= len(eqlist[x]-4):
+        while z == 0 and y < len(eqlist[x]):
+            if eqlist[x][y] == "(":
+                sscheck = ""
+                for i in range(len(n)):
+                    sscheck = sscheck + eqlist[x][y+i+1]
+                if sscheck == n:
+                    destroy(eqlist[x])
+                    z = 1
             y = y + 1
-        if n == (eqlist[x])[y+1] + (eqlist[x])[y+2]:
-            destroy(n)
-            z = 1
-        elif n == (eqlist[x])[y+1] + (eqlist[x])[y+2] + (eqlist[x])[y+3]:
-            destroy(n)
-            z = 1
-        else:
-            x = x + 1
+        x = x + 1
 def poswheel(n): #S=0, N=1
     poslist = ["top", "right", "down", "left"]
     if n == 3:
