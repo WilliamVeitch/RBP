@@ -733,7 +733,7 @@ while  True:
                     print("The shed door is locked so you may use a weapon against it.")
                     listweapons()
                     choice = str(input()).upper()
-                    if choice choice == "LK":
+                    if choice == "LK":
                         destroy("large knife (LK)")
                         print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
                         loc = 39
