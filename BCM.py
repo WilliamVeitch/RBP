@@ -546,6 +546,13 @@ while  True:
                 destroy("helmet of horror (HOH)")
                 alert = alert + 1
                 loc = 27
+            elif choice == "SP":
+                print("Imbued with super strength, you tear the gate from its hinges and advance towards the mansion. You hear an alarm sound.") 
+                destroy("strength potion (SP)")
+                alert = alert + 1
+                loc = 27
+            else:
+                inap()
         elif choice == "W":
             print("The tower is two storeys high and to the West of the tower is an impassable rock formation.")
             print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
@@ -675,7 +682,7 @@ while  True:
                     print("You pull up the super strong rope and take it with you.")
                     loc = 72
                 else:
-                    print("You have no equipment for climbing so you abandon your attempt to scale the wall while halfway up.")
+                    print("You have no equipment for climbing so you abandon your attempt to scale the wall.")
             elif choice == "W":
                 listweapons()
                 choice = str(input()).upper()
@@ -1628,7 +1635,7 @@ while  True:
                 bathwater[1] = int(input("You may turn the tap on (2) or off (3).   "))
         elif choice == "S":
             if "soap" in eqlist or "soap" in dlist:
-                print("You have already investigatec the sink")
+                print("You have already investigated the sink")
             else:
                 print("Above the sink is a collection of soaps. One bar of soap is bright orange and has a strange odour. You may take this with you (T) or leave it (L).")
                 choice = str(input()).upper()
@@ -2012,6 +2019,8 @@ while  True:
                     alert = 0
             else:
                 print("You notice no useful function of the hole.")
+        elif choice == "E":
+            loc = 83
     elif loc == 92:
         loc = screencheck(89, 1, 0)
     elif loc == 93:
