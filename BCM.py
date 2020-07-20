@@ -178,7 +178,7 @@ while  True:
                 eqlist.append("golden blade (GB)")
                 coins = coins - 5
             elif choice == "PC":
-                print("You manhandle the canon")
+                print("You manhandle the cannon")
                 eqlist.append("portable cannon (PC)")
                 coins = coins - 6
             if coins < 0:
@@ -849,7 +849,12 @@ while  True:
                 elif crystsample() == "big failure":
                     endgame(1)
             elif choice == "W":
-                loc = lastloc()
+                if lastloc != 30:
+                    loc = lastloc()
+                elif 23 in findconnect(30):
+                    loc = 23
+                else:
+                    loc = 24
             else:
                 inap()
     elif loc == 31:
