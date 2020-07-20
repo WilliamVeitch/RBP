@@ -10,10 +10,7 @@ ask = "A"
 alert = 0
 observe = 1
 ncode = 0
-fcode0 = random.randint(0, 9)
-fcode1 = random.randint(0, 9)
-fcode2 = random.randint(0, 9)
-fcode = (100*fcode0) + (10*fcode1) + fcode2
+fcode = random.randint(0, 999) #cylindrical rooms
 screen = [4, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
@@ -131,8 +128,6 @@ while  True:
             loc = 3
         elif choice == "G":
             loc = 4
-        else:
-            loc = 999
     elif loc == 2:
         print("You have arrived at the Ninja Armoury. A monkey wearing white robes walks in and offers you the black dagger, a powerful weapon which is the symbol of the ninjas of Oland.")
         print("He also shows you a wooden table with an assortment of objects on it and tells you that you may choose two of them")
@@ -1233,7 +1228,7 @@ while  True:
         elif choice == "W":
             loc = 57
         elif choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode0, " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[0], " written upon it.")
     elif loc == 48:
         print("You are standing in a room with a collapsed ceiling. Rubble blocks your way to the North, but you can see that the room continues beyond the rubble and that there is a small structure in the North side of the room. To the South is a wooden door (S).")
         if craneunlock == 0:
@@ -1887,7 +1882,7 @@ while  True:
         elif choice == "W":
             loc = 91
         elif choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode1, " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[1], " written upon it.")
     elif loc == 84:
         acloc = 84
         print("You are standing in a cylindrical room with no interesting features. There are doors to the South and to the West (S and W).")
@@ -2083,7 +2078,7 @@ while  True:
         print("You are in a cylindrical room with a small depression in the centre (D) and a door to the North (N).")
         choice = str(input()).upper()
         if choice == "D":
-            print("At the bottom of the depression, you find a small plate with the number ", fcode2, " written upon it.")
+            print("At the bottom of the depression, you find a small plate with the number ", fcode[2], " written upon it.")
         elif choice == "N":
             loc = 94
     elif loc == 97:
