@@ -41,9 +41,9 @@ def udestroy(n):
     destroy(n)
 def ssdestroy(n):
     x = 0
-    y = 0
     z = 0
     while z == 0:
+        y = 0
         while z == 0 and y < len(eqlist[x]):
             if eqlist[x][y] == "(":
                 sscheck = ""
