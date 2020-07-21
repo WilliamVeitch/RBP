@@ -123,6 +123,7 @@ def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired locat
     else:
         return a
 while  True:
+    loclog.append(loc)
     if loc == 1:
         print("The date is 5th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies or the mission")
@@ -1765,14 +1766,16 @@ while  True:
         print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
         choice = str(input()).upper()
         if choice == "N":
-            print("You find that the door is locked.")
             if "iron key" in eqlist:
+                print("You find that the door is locked.")
                 print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
                 udestroy("iron key")
                 loc = 79
             elif 74 in findconnect(79) or 79 in findconnect(74) or "iron key" in ulist:
                 print("You go North into the cylindrical room.")
+                loc = 79
             else:
+                print("You find that the door is locked.")
                 print("The key to the door is not in your possesion. You may withdraw (I) or use weapons against the door (W).")
                 choice = str(input()).upper()
                 if choice == "W":
@@ -1818,6 +1821,7 @@ while  True:
         elif choice == "A":
             if 79 in loclog:
                 print("You ascend the staircase.")
+                loc = 79
             else:
                 print("The staircase is barred so you may not ascend.")
     elif loc == 76:
@@ -2159,7 +2163,6 @@ while  True:
 
 
 
-    loclog.append(loc)
     print()
     
     if alert >= 4 and observe >= 1:
