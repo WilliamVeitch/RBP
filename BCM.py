@@ -679,8 +679,12 @@ while  True:
             choice = str(input()).upper()
             if choice == "SW":
                 if "super strong rope (SSR)" in eqlist:
-                    print("You use your super strong rope to successfully climb up to the window. You hurriedly use an object from your equipment bag to smash the window and you climb inside. ")
-                    print("You pull up the super strong rope and take it with you.")
+                    if 32 in findconnect(72):
+                        print("You climb back up to the bathroom window.")
+                    else:
+                        print("You use your super strong rope to successfully climb up to the window. You hurriedly use an object from your equipment bag to smash the window and as you do so, an alarm sounds. ")
+                        print("You climb inside and pull up the super strong rope so that you can take it with you.")
+                        alert = alert + 1
                     loc = 72
                 else:
                     print("You have no equipment for climbing so you abandon your attempt to scale the wall.")
@@ -990,7 +994,7 @@ while  True:
         elif choice == "W":
             loc = 32
     elif loc == 37:
-        if lastloc() == 47 and 37 not in findconnect(47) and 47 not in findconnect(37):
+        if lastloc() == 47 and 37 not in findconnect(47):
                 print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
                 print("You are able to escape from the trap unharmed and you open the door to the North.")
                 alert = alert + 1
@@ -1037,7 +1041,7 @@ while  True:
                 print("You can attempt to insert the metal rod (MR) or you can withdraw (W)")
                 choice = str(input()).upper()
                 if choice == "MR":
-                    print("You insert the metal rod and twist it until until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
+                    print("You insert the metal rod and twist it until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
                     udestroy("metal rod")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
@@ -1462,7 +1466,7 @@ while  True:
         elif choice == "N":
             loc = 50
     elif loc == 60:
-        print("You are in a long rectangular room with a narrow staircase occupying around half the space in the room at the top of which is a door to the North (D). There is a door to the South (S) and there are no other objects of interest in the room.")
+        print("You are in a long rectangular room with a narrow staircase occupying around half the space in the room at the top of which is a door to the North (N). There is a door to the South (S) and there are no other objects of interest in the room.")
         choice = str(input()).upper()
         if choice == "N":
             loc = 65
@@ -1577,7 +1581,10 @@ while  True:
         print("You are in a very small room with no features worthy of investigation. There are doors to the East and South (E and S).")
         choice = str(input()).upper()
         if choice == "E":
-            loc = screencheck(55, 4, 0)
+            if screen[0] == 4:
+                print("You open the door but find your way blocked by a metal screen so you return to the room.")
+            else:
+                loc = 55
         elif choice == "S":
             print("You open the door and descend a narrow staircase.")
             loc = 60
@@ -2153,6 +2160,8 @@ while  True:
 
 
     loclog.append(loc)
+    print()
+    
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
