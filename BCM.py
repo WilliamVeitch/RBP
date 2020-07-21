@@ -22,6 +22,7 @@ wunlock = 0
 craneunlock = 0 #locs 46 and 48
 smallwheels = 0
 towerpos = "G"
+arm87 = 1 #loc 87
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -608,17 +609,17 @@ while  True:
                 choice = str(input()).upper()
                 if choice == "S":
                     print("The stone looks rather old and worn. There are some strange symbols on the stone but they are difficult to read and understand.")
-                    if "stone rod" in eqlist:
+                    if "stone rod" in eqlist and towerpos == "G":
                         print("You notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
                         print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                         choice = str(input()).upper()
                         if choice == "S":
-                            udestroy("stone rod")
                             print("By pushing and turning the rod, you are able to get two thirds of it to go into the hole.")
                             print("You now try to force the rod completely into the hole. This is hard to do, but eventually you succeed and the remainder of the rod descends into the hole. A loud mechanical noise occurs and you notice with surprise that one of the stone tiles in the garden has moved aside to reveal a hidden ladder leading underground.")
                             print("You can descend the ladder (L) or withdraw from the garden (W).")
                             choice = str(input()).upper()
                             if choice == "L":
+                                udestroy("stone rod")
                                 print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
                                 print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
                                 print("You take the rods.")
@@ -725,9 +726,9 @@ while  True:
                     destroy("sticky banana bomb (SBB)")
                 else:
                     inap()
-        elif choice == "D" and 32 in loclog:
-            print("You walk through the door into the main corridor.")
-            loc = 32
+            elif choice == "D" and 32 in loclog:
+                print("You walk through the door into the main corridor.")
+                loc = 32
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
             print("To the West of the shed is an impassable rock formation. You can attempt to gain access to the shed using the door (D) or you can return to the front of the mansion (M).")
@@ -1036,7 +1037,7 @@ while  True:
                 print("You can attempt to insert the metal rod (MR) or you can withdraw (W)")
                 choice = str(input()).upper()
                 if choice == "MR":
-                    print("You insert the metal rod and twist it until it descends until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
+                    print("You insert the metal rod and twist it until until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
                     udestroy("metal rod")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
@@ -1060,6 +1061,12 @@ while  True:
             print("'September 16th, 1971")
             print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to '")
             print("A significant fragment of the page has been torn off so you do not know how the sentence finishes.")
+            if 56 in loclog:
+                print("You may now read the full diary entry by combining this with that which you found in the pool (D) or not (N).")
+                choice = str(input()).upper()
+                if choice == "D":
+                    print("'September 16th, 1971")
+                    print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to retrieve the control card from under the rubble. This seems to be very difficult without an operational crane. ' ")
     elif loc == 40:
         print("You are on the first floor landing, you can go up (U) or down (D) on the spiral staircase or exit to the South at this level (E)")
         choice = str(input()).upper()
@@ -1179,7 +1186,7 @@ while  True:
         elif choice == "T":
             print("You notice nothing unusual about the tree, nor do you find anything of interest amongst the plants and benches nearby. You climb the tree for a better view of the 1st floor balcony. You can observe from this position that there are two security cameras mounted on the balcony.")
             if "super strong rope (SSR)" in eqlist:
-                print("You could attempt to climb up to the balcony using your super strong rope (SSR).")
+                print("You could attempt to climb up to the balcony using your super strong rope (SSR) or withdraw into the courtyard (W).")
                 choice = str(input()).upper()
                 if choice == "SSR":
                     if observe == 1:
@@ -1257,7 +1264,7 @@ while  True:
             print("You notice no immediate effect.")
             craneunlock = 1
     elif loc == 49:
-        print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit to the corridor in the South.")
+        print("You are standing on the second floor landing, at the top of the spiral staircase. You can go down to the first floor (D) or exit to the corridor in the South (E).")
         choice = str(input()).upper()
         if choice == "D":
             loc = 40
@@ -1277,7 +1284,6 @@ while  True:
                 print("The door is locked.")
                 if "silver key" in eqlist:
                     print("You find the key to the door amongst your items (the silver key) and you open the door.")
-                    udestroy("silver key")
                     loc = 59
                 else:
                     print("You may use weapons (W) or withdraw (I).")
@@ -1405,35 +1411,42 @@ while  True:
         if choice == "N":
             loc = 49
         elif choice == "S":
-            print("The door is locked.")
-            print("You may withdraw into the corridor (I) or use weapons (W)")
-            choice = str(input()).upper()
-            if choice == "W":
-                listweapons()
+            if 98 in loclog:
+                loc = 98
+            elif "silver key" in eqlist:
+                print("The door is locked.")
+                print("You find an appropriate key amongst your items (the silver key) and you open the door.")
+                loc = 98
+            else:
+                print("The door is locked.")
+                print("You may withdraw into the corridor (I) or use weapons (W)")
                 choice = str(input()).upper()
-                if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
-                    print("You succesfully break down the door and enter the room but an alarm sounds.")
-                    alert = alert + 1
-                    loc = 98
-                elif choice == "SBB":
-                    print("The sticky banana bomb is ineffective in breaking down the door.")
-                    destroy("sticky banana bomb (SBB)")
-                elif choice == "TB":
-                    print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
-                    destroy("time bomb (TB)")
-                    loc = 98
-                elif choice == "EC":
-                    crystsample = crystal()
-                    if crystsample == "success":
-                        print("You destroy the door and walk into the room but an alarm sounds as you do so.")
+                if choice == "W":
+                    listweapons()
+                    choice = str(input()).upper()
+                    if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
+                        print("You succesfully break down the door and enter the room but an alarm sounds.")
                         alert = alert + 1
                         loc = 98
-                    elif crystsample == "failure":
-                        print("The crystal is ineffective.")
-                    elif crystsample == "big failure":
-                        endgame(2)
-                else:
-                    inap()
+                    elif choice == "SBB":
+                        print("The sticky banana bomb is ineffective in breaking down the door.")
+                        destroy("sticky banana bomb (SBB)")
+                    elif choice == "TB":
+                        print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
+                        destroy("time bomb (TB)")
+                        loc = 98
+                    elif choice == "EC":
+                        crystsample = crystal()
+                        if crystsample == "success":
+                            print("You destroy the door and walk into the room but an alarm sounds as you do so.")
+                            alert = alert + 1
+                            loc = 98
+                        elif crystsample == "failure":
+                            print("The crystal is ineffective.")
+                        elif crystsample == "big failure":
+                            endgame(2)
+                    else:
+                        inap()
         elif choice == "W":
             loc = 74
     elif loc == 59:
@@ -1459,7 +1472,7 @@ while  True:
         print("You are in a musty room with a low ceiling. There are a few boxes piled up against the far wall and nearby there is an interesting looking panel on the wall. You could investigate the contents of the boxes (B), investigate the panel (P) or withdraw from the room (W).")
         choice = str(input()).upper()
         if choice == "B":
-            print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box.")
+            print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box. You take these with you.")
             if "fuses" not in eqlist and "fuses" not in dlist:
                 eqlist.append("fuses")
         elif choice == "P":
@@ -1618,7 +1631,7 @@ while  True:
             print("The device consists of three wheels with the numbers 0-9 enscribed upon them. These are arranged from left to right. Above the leftmost wheel is written the number 0. Above the centre wheel is written the number 1. Above the rightmost wheel is written the number 2. Below the wheels is a button. You can adjust the positions of the wheels (A), press the button (B) or withdraw (W).")
             choice = str(input()).upper()
             if choice == "A":
-                ncode = input("Type the numbers to which you set the wheels, from left to right.   ")
+                ncode = int(input("Type the numbers to which you set the wheels, from left to right.   "))
             elif choice == "B":
                 if ncode == fcode:
                     print("You here a mechanical noise from above you.")
@@ -1662,8 +1675,11 @@ while  True:
         elif choice == "N":
             loc = 81
     elif loc == 73:
-        if observe == 1:
-            print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
+        if observe == 1 and "sticky banana bomb (SBB)" not in ulist:
+            if lastloc == 73:
+                print("More guards arrive. You must defend yourself.")
+            else:
+                print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
             listweapons()
             choice = str(input()).upper()
             risk = 0
@@ -1713,7 +1729,6 @@ while  True:
             elif risk == 90:
                 udestroy("sticky banana bomb (SBB)")
                 print("The sticky banana bomb is extremely effective and immobilises all of the robotic guards in the room.")
-                observe = 2
             elif randint(1, risk) == 1:
                 ssdestroy(choice)
                 print("You defeat the first robotic guard, but your weapon is destroyed.")
@@ -1721,7 +1736,7 @@ while  True:
                 loc = lastloc
             else:
                 print("You defeat the first robotic guard and then flee the room to the place from which you came.")
-        if (observe == 0) or (risk == 100) or (observe == 2):
+        if observe == 0 or risk == 100 or "sticky banana bomb (SBB)" in ulist:
             print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
             choice = str(input()).upper()
             if choice == "A":
@@ -1794,7 +1809,7 @@ while  True:
         if choice == "S":
             loc = 66
         elif choice == "A":
-            if 79 in loclog():
+            if 79 in loclog:
                 print("You ascend the staircase.")
             else:
                 print("The staircase is barred so you may not ascend.")
@@ -1912,7 +1927,7 @@ while  True:
         if choice == "S":
             loc = screencheck(92, 3, 1)
         elif choice == "W":
-            loc = 78
+            loc = screencheck(78, 4, 1)
     elif loc == 85:
         print("As you ascend the staircase you hear voices from above. You ascend quietly in order to not alert whoever may be at the top of the tower to your presence.")
         print("You arrive at the top of the astronomy tower and find Crultney chained up to a chair. Another monkey, presumably Crultney's captor, is fiddling with some scientific instruments nearby. Occasionaly, he stops and questions Crultney. Crultney seems reluctant to cooperate but gives answers.")
@@ -1961,7 +1976,7 @@ while  True:
                 print("You notice a small scrap of paper recording the location of three small wheels in the mansion. The locations are described as 'basement panel', 'West wing storeroom - ground floor' and 'primary bedroom - first floor'")
         elif choice == "C":
             if "water wheel" not in eqlist and "water wheel" not in dlist:
-                print("Inside the cabinet you find a water wheel. Next to it is a note explaining that it is to be used as an alternative method of propulsion for the crane. You take it with you, despite its high mass, as you feel it will be important.")
+                print("Inside the cabinet you find a water wheel. Next to it is a note explaining that it is to be used as an alternative method of propulsion for the crane. You take it with you, despite its high weight, as you feel it will be important.")
                 eqlist.append("water wheel")
             else:
                 print("You find nothing interesting inside the cabinet.")
@@ -1972,29 +1987,32 @@ while  True:
         print("You could investigate the instruments (I) or withdraw from the room using the door to the North (N).")
         choice = str(input()).upper()
         if choice == "I":
-            print("You investigate the instruments and find nothing that you think will help you on your mission. You are about to leave when a robotic arm hiding amongst the instruments lunges out at you. You must parry the strike.")
-            listweapons()
-            choice = str(input()).upper()
-            if choice == "BD" or choice == "GB" or choice == "SS" or choice == "SOS" or choice == "HOH":
-                print("You succesfully parry the strike and the robot arm falls back down onto the bed. You do not think it was intending to strike at you.")
-            elif choice == "IP":
-                destroy("invisibility potion (IP)")
-                print("The robotic arm strikes you despite your use of the invisibility potion. You do not think it was deliberately trying to strike you.")
-                print("You are injured but not severely enough to end your mission.")
-            elif choice == "LK":
-                destroy("large knife (LK)")
-                print("You parry the attack but the large knife was destroyed in the process of doing so.")
-            elif choice == "WH":
-                print("The robotic arm strikes the handle of the warhammer and destroys it.")
-                destroy("warhammer (WH)")
-            elif choice == "CC":
-                print("The arm does not appear to be responding to the control card. It strikes you, but your injuries are minor.")
-            elif choice == "CBD":
-                print("The robotic arm destroys the complex brain destroyer but you are unharmed.")
-                destroy("complex brain destroyer (CBD)")
+            if arm87 == 1:
+                print("You investigate the instruments and find nothing that you think will help you on your mission. You are about to leave when a robotic arm hiding amongst the instruments lunges out at you. You must parry the strike.")
+                listweapons()
+                choice = str(input()).upper()
+                if choice == "BD" or choice == "GB" or choice == "SS" or choice == "SOS" or choice == "HOH":
+                    print("You succesfully parry the strike and the robot arm falls back down onto the bed. You do not think it was intending to strike at you.")
+                elif choice == "IP":
+                    destroy("invisibility potion (IP)")
+                    print("The robotic arm strikes you despite your use of the invisibility potion. You do not think it was deliberately trying to strike you.")
+                    print("You are injured but not severely enough to end your mission.")
+                elif choice == "LK":
+                    destroy("large knife (LK)")
+                    print("You parry the attack but the large knife was destroyed in the process of doing so.")
+                elif choice == "WH":
+                    print("The robotic arm strikes the handle of the warhammer and destroys it.")
+                    destroy("warhammer (WH)")
+                elif choice == "CC":
+                    print("The arm does not appear to be responding to the control card. It strikes you, but your injuries are minor.")
+                elif choice == "CBD":
+                    print("The robotic arm destroys the complex brain destroyer but you are unharmed.")
+                    destroy("complex brain destroyer (CBD)")
+                else:
+                    inap()
+                    print("You have no suitable items with which to parry the attack so you are struck by the robotic arm. It injures you but not severely enough to end your mission.")
             else:
-                inap()
-                print("You have no suitable items with which to parry the attack so you are struck by the robotic arm. It injures you but not severely enough to end your mission.")
+                print("You investigate the instruments and find nothing that you think will help you on your mission.")
         elif choice == "N":
             loc = 80
     elif loc == 88:
