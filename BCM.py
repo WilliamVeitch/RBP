@@ -1667,9 +1667,13 @@ while  True:
             print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
             choice = str(input()).upper()
             if choice == "L":
-                bathwater[0] = int(input("You may move the lever to the left (0) or to the right (1).   "))
+                choice = input("You may move the lever to the left (0) or to the right (1).   ")
+                if choice == 0 or choice == 1:
+                    bathwater[0] = int(choice)
             elif choice == "T":
-                bathwater[1] = int(input("You may turn the tap on (2) or off (3).   "))
+                choice = input("You may turn the tap on (2) or off (3).   ")
+                if choice == 2 or choice == 3:
+                    bathwater[1] = int(choice)
         elif choice == "S":
             if "soap" in eqlist or "soap" in dlist:
                 print("You have already investigated the sink")
@@ -1856,7 +1860,7 @@ while  True:
         elif choice == "E":
             loc = screencheck(84, 4, 1)
     elif loc == 79:
-        if 79 not in loclog:
+        if 85 not in loclog and 79 not in findconnect(74):
             print("As you enter the room, a security robot lunges out at you.")
             if "control card  (CC)" in eqlist:
                 print("You deactivate the robotic guard with your control card.")
@@ -1941,14 +1945,14 @@ while  True:
             loc = screencheck(78, 4, 1)
     elif loc == 85:
         print("As you ascend the staircase you hear voices from above. You ascend quietly in order to not alert whoever may be at the top of the tower to your presence.")
-        print("You arrive at the top of the astronomy tower and find Crultney chained up to a chair. Another monkey, presumably Crultney's captor, is fiddling with some scientific instruments nearby. Occasionaly, he stops and questions Crultney. Crultney seems reluctant to cooperate but gives answers.")
+        print("You arrive at the top of the astronomy tower and find Crultney chained up to a chair. Another monkey, presumably Crultney's captor, is fiddling with some scientific instruments nearby. Occasionally, he stops and questions Crultney. Crultney seems reluctant to cooperate but gives answers.")
         if "invisibility potion (IP)" in eqlist:
-            print("You may use your invisibility potion to sneak out and surprise the other monkey without being noticed (IP).")
+            print("You may use your invisibility potion to sneak out and surprise the other monkey without being noticed (IP) or you may try to use weapons (W).")
             choice = str(input()).upper()
             if choice == "IP":
-                udestroy("invisibility potion")
+                udestroy("invisibility potion (IP)")
         if "invisibility potion (IP)" in ulist:
-            print("Due to your invisibilty, you are not spotted by the mysterious monkey and you are able to defeat him with your bare hands using your ninja techniques. You free Crultney and chain the mysterious monkey to the chair while you speak to Crulteney.")
+            print("Due to your invisibilty, you are not spotted by the mysterious monkey and you are able to defeat him with your bare hands using your ninja techniques. You free Crultney and chain the mysterious monkey to the chair while you speak to Crultney.")
             loc = 99
         else:
             print("you walk out towards the mysterious monkey and he turns to face you, pulling out a sword as he does so. You must fight him.")
