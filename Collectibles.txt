@@ -1,4 +1,4 @@
-"stone rod"    From Geelophisis' lab (loc 4). Used in garden (loc 25) to discover two new rods.
+"stone rod"    From Geelophisis' Lab (loc 4). Used in garden (loc 25) to discover two new rods.
 "wooden rod"   From garden (loc 25). Used in (loc 91) to reset alert level.
 "metal rod"    From garden (loc 25). Used in control room (loc 38) to disable the stair trap.
 
@@ -10,3 +10,24 @@
 "green candle" From library (loc 26). Used in candle puzzle.
 "blue candle"  From dining room (loc 35). Used in candle puzzle.
 "red candle"   From hidden laboratory (loc 64). Used in candle puzzle.
+
+"black dagger (BD)"             From Ninja Armoury (loc 2).
+"throwing stars (TS)"           From Ninja Armoury (loc 2).
+"invisibility potion (IP)"      From Ninja Armoury (loc 2) or Geelophisis' Lab (loc 4).
+"golden blade (GB)"             From Ninja Armoury (loc 2) or Royal Weaponary (loc 3).
+"time bomb (TB)"                From Ninja Armoury (loc 2).
+"super strong rope (SSR)"       From Ninja Armoury (loc 2) or Ooville shops (loc 16).
+"shortsword (SS)"               From Royal Weaponary (loc 3).
+"shield of safety (SOS)"        From Royal Weaponary (loc 3).
+"strength potion (SP)"          From Royal Weaponary (loc 3) or Geelophisis' Lab (loc 4).
+"warhammer (WH)"                From Royal Weaponary (loc 3).
+"portable cannon (PC)"          From Royal Weaponary (loc 3).
+"complex brain destroyer (CBD)" From Geelophisis' Lab (loc 4).
+"magical map (MM)"              From Geelophisis' Lab (loc 4).
+"energy crystal (EC)"           From Geelophisis' Lab (loc 4).
+"sticky banana bomb (SBB)"      From Gaurilis (loc 15).
+"medical kit (MK)"              From Gaurilis (loc 15).
+"helm of horror (HOH)"          From Ooville shops (loc 16).
+"magnetic fork (MF)"            From dining room (loc 35). Used in basement (loc 61) to obtain small wheel.
+"large knife (LK)"              From Kitchen (loc 42).
+"control card (CC)"             From collapsed room (loc 46). Used to disable security (loc 73) and deactivate robots.
