@@ -545,7 +545,7 @@ while  True:
             elif choice == "HOH":
                 print("You put on the helmet and charge towards the gate. It collapses, but the helmet is also damaged beyond repair.")
                 print("An alarm sounds nearby so you advance cautiously towards the mansion.")
-                destroy("helmet of horror (HOH)")
+                destroy("helm of horror (HOH)")
                 alert = alert + 1
                 loc = 27
             elif choice == "SP":
