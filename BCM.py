@@ -2207,7 +2207,7 @@ while  True:
 
 
     print()
-    if choice == "give up":
+    if choice == "GIVEUP":
         endgame(5)
     
     if alert >= 4 and observe >= 1:
