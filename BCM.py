@@ -107,7 +107,7 @@ def endgame(n):
     else:
         print("You have failed in your mission.")
     print("You collected: ", eqlist+dlist)
-    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game."]
+    endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game.", "You gave up without completing your mission."]
     print(endtext[n])
     uniloclog = list()
     for i in range(len(loclog)):
@@ -502,11 +502,15 @@ while  True:
         if choice == "F":
             loc = 30
         elif choice == "G":
-            print("The gate looks very well armoured so only the most powerful weapons will be capable of breaching it.")
-            print("The gate also has a handle which you could attempt to open (H), and there is also a box nearby with several switches (S).")
-            listweapons()
-            print("You may also retreat to the South (R).")
-            choice = str(input()).upper()
+            if 27 in loclog:
+                print("You walk back to the front of the mansion on the path you cleared earlier.")
+                loc = 27
+            else:
+                print("The gate looks very well armoured so only the most powerful weapons will be capable of breaching it.")
+                print("The gate also has a handle which you could attempt to open (H), and there is also a box nearby with several switches (S).")
+                listweapons()
+                print("You may also retreat to the South (R).")
+                choice = str(input()).upper()
             if choice == "H":
                 swicobs = random.randint(1000, 9999)
                 if swicob != swicobs:
@@ -772,7 +776,39 @@ while  True:
                     else:
                         inap()
         elif choice == "P":
-            loc = 24
+            if 24 in findconnect(27) or 30 in findconnect(27):
+                loc = 24
+            else:
+                print("You find your way blocked by a barbed wire fence with a gate. You may attempt to use weapons against the fence (W) or withdraw towards the mansion (M).")
+                choice = str(input()).upper()
+                if choice == "W":
+                    if choice == "GB" or choice == "SS" or choice == "SOS":
+                        print("Your weapon is successful in clearing a path through the barbed wire.")
+                        loc = 24
+                    elif choice == "BD" or "LK":
+                        print("The blade of the weapon is not long enough to be particularly effective in cutting through the barbed wire. Hence, you make a blunder and drop the weapon but you are able to stumble on to the other side of the wire.")
+                        ssdestroy(choice)
+                        loc = 24
+                    elif choice == "TB" or choice == "PC":
+                        print("You are able to blast a path through the barbed wire.")
+                        if choice == "TB":
+                            destroy("time bomb (TB)")
+                        loc = 24
+                    elif choice == "WH":
+                        print("This weapon is not effective in cutting a path through the barbed wire.")
+                    elif choice == "SBB":
+                        print("The bomb explodes but does not help and leaves a mass of tangled barbed wire covered in sticky banana juices.")
+                        destroy("sticky banana bomb (SBB)")
+                    elif choice == "EC":
+                        crystsample = crystal()
+                        if  crystsample == "success":
+                            print("The barbed wire is destroyed and you walk towards the mansion.")
+                            loc = 24
+                        elif crystsample() == "failure":
+                            destroy("energy crystal (EC)")
+                            print("The crystal rolls away into the middle of the wire.")
+                        elif crystsample() == "big failure":
+                            endgame(1)
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -1958,8 +1994,11 @@ while  True:
             print("you walk out towards the mysterious monkey and he turns to face you, pulling out a sword as he does so. You must fight him.")
             listweapons()
             choice = str(input()).upper()
-            if choice == "BD" or choice == "SS" or choice == "GB" or choice == "TS" or choice == "CBD" or choice == "SBB" or choice == "SP":
+            if choice == "BD" or choice == "SS" or choice == "GB" or choice == "TS" or choice == "SBB" or choice == "SP":
                 print("You successfully defeat the mysterious foe and release Crultney.")
+                loc = 99
+            elif choice == "CBD":
+                print("You deploy the CBD and watch in horror as its plates turn towards the head of the foe and destroy his brain with radiation. You step over his body and release Crultney.")
                 loc = 99
             elif choice == "EC":
                 crystsample = crystal()
@@ -2168,6 +2207,8 @@ while  True:
 
 
     print()
+    if choice == "give up":
+        endgame(5)
     
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
