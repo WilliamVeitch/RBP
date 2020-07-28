@@ -1543,13 +1543,12 @@ while  True:
             ccs = ""
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).")
         if lcandlelist == [1, 1, 1]:
-            if candlelist == ["red candle", "green candle", "blue candle"]
+            lcandlelist = [0, 0, 0]
+            if candlelist == ["red candle", "green candle", "blue candle"]:
                 print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
                 eqlist.append("silver key")
-                lcandlelist = [0, 0, 0]
             else:
                 print("An alarm sounds. You assume this is due to your lighting of the candles so you quickly extinguish them.")
-                lcandlelist = [0, 0, 0]
                 alert = alert + 1
         choice = str(input()).upper()
         if choice == "N":
