@@ -31,3 +31,8 @@
 "magnetic fork (MF)"            From dining room (loc 35). Used in basement (loc 61) to obtain small wheel.
 "large knife (LK)"              From Kitchen (loc 42).
 "control card (CC)"             From collapsed room (loc 46). Used to disable security (loc 73) and deactivate robots.
+
+"soap"                          From bathroom (loc 72).
+"matches"                       From living room (loc 44). Used in candle puzzle.
+"strange device"                From kitchen (loc 42).
+"water wheel"                   From study (loc 86). Used in collapsed room (loc 46) to power crane.
