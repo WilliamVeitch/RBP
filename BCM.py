@@ -109,7 +109,7 @@ def endgame(n):
     endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game.", "You gave up without completing your mission."]
     print(endtext[n])
     print("You collected: ", eqlist+dlist)
-    print("You collected " + str(len(eqlist)+len(dlist)) + " of 34 collectible items.")
+    print("You collected " + str(len(eqlist)+len(dlist)) + " of 35 collectible items.")
     uniloclog = list()
     for i in range(len(loclog)):
         if loclog[i] not in uniloclog:
@@ -454,9 +454,9 @@ while  True:
             print("You create a loop in the rope and throw it so that it wraps around a large stone at the top of the cliff.")
             print("You succeed in climbing the cliff and you retrieve the rope.")
             if choice == "W":
-                print("There are no doors on the Western side of the mansion and the walls are too high to climb. Using your rope,you climb over a steep rock formation to arrive near the front of the mansion.")
-                loc = 27
+                print("There are no doors on the Western side of the mansion and the walls are too high to climb. The rock formations to the West look treacherous so you decide to turn back.")
             elif choice == "E":
+                print("You climb down near the mansion's gardens.") 
                 loc = 25
     elif loc == 22:
         print("You row the boat towards the island and the voyage seems to be going well. Suddenly, a Gaurilis submarine surfaces nearby.")
@@ -961,7 +961,7 @@ while  True:
 
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if 34 in loclog or stairrobot == 0:
+        if stairrobot == 0:
             print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input()).upper()
             if choice == "U":
@@ -978,16 +978,7 @@ while  True:
             if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD" or choice == "LK":
                 print("You parry the attack but your weapon is irrepairably damaged due to the impact.")
                 stairrobot = 0
-                if choice == "BD":
-                    destroy("black dagger (BD)")
-                elif choice == "SS":
-                    destroy("shortsword (SS)")
-                elif choice == "CBD":
-                    destroy("CBD")
-                elif choice == "WH":
-                    destroy("warhammer (WH)")
-                elif choice == "LK":
-                    destroy("large knife (LK)")
+                ssdestroy(choice)
             elif choice == "GB" or choice == "SOS" or choice == "HOH":
                 stairrobot = 0
                 print("You successfully defend against the attack and your weapon is undamaged.")
@@ -1401,6 +1392,8 @@ while  True:
                         if "matches" in eqlist:
                             print("You light the candle.")
                             lcandlelist[2] = 1
+            else:
+                print("You notice nothing interesting about the candle holder.")
         elif choice == "P":
             if observe >= 1:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
@@ -1549,10 +1542,15 @@ while  True:
         if len(candlelist[1]) > 3:
             ccs = ""
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).")
-        if candlelist == ["red candle", "green candle", "blue candle"] and lcandlelist == [1, 1, 1]:
-            print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
-            eqlist.append("silver key")
-            lcandlelist = [0, 0, 0]
+        if lcandlelist == [1, 1, 1]:
+            if candlelist == ["red candle", "green candle", "blue candle"]
+                print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
+                eqlist.append("silver key")
+                lcandlelist = [0, 0, 0]
+            else:
+                print("An alarm sounds. You assume this is due to your lighting of the candles so you quickly extinguish them.")
+                lcandlelist = [0, 0, 0]
+                alert = alert + 1
         choice = str(input()).upper()
         if choice == "N":
             loc = 67
@@ -1665,6 +1663,8 @@ while  True:
                         if "matches" in eqlist:
                             print("You light the candle.")
                             lcandlelist[0] = 1
+            else:
+                print("You notice nothing interesting about the candle holder.")
         elif choice == "D":
             loc = 45
         elif choice == "N":
@@ -1706,12 +1706,12 @@ while  True:
             print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
             choice = str(input()).upper()
             if choice == "L":
-                choice = input("You may move the lever to the left (0) or to the right (1).   ")
-                if choice == 0 or choice == 1:
+                choice = str(input("You may move the lever to the left (0) or to the right (1).   "))
+                if choice == "0" or choice == "1":
                     bathwater[0] = int(choice)
             elif choice == "T":
-                choice = input("You may turn the tap on (2) or off (3).   ")
-                if choice == 2 or choice == 3:
+                choice = str(input("You may turn the tap on (2) or off (3).   "))
+                if choice == "2" or choice == "3":
                     bathwater[1] = int(choice)
         elif choice == "S":
             if "soap" in eqlist or "soap" in dlist:
@@ -2225,6 +2225,8 @@ while  True:
         rprob = 5
     elif alert == 2:
         rprob = 10
+    if "sticky banana bomb (SBB)" in ulist:
+        rprob = rprob * 2
     if alert >= 2 and observe == 1:
         if random.randint(1, rprob) == 1:
             print("You are attacked by a security robot of Crultney mansion.")
