@@ -106,9 +106,10 @@ def endgame(n):
         print("You have successfully completed your mission.")
     else:
         print("You have failed in your mission.")
-    print("You collected: ", eqlist+dlist)
     endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game.", "You gave up without completing your mission."]
     print(endtext[n])
+    print("You collected: ", eqlist+dlist)
+    print("You collected " + str(len(eqlist)+len(dlist)) + " of 34 collectible items.")
     uniloclog = list()
     for i in range(len(loclog)):
         if loclog[i] not in uniloclog:
@@ -1143,7 +1144,8 @@ while  True:
                             print("You climb up to the ledge and discover that a locked chest sits upon it.")
                         if "brass key" in eqlist:
                             print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
-                            print("You find that the chest contains a ")
+                            print("You find that the chest contains a mysterious electronic device that you do not recognise. You take this with you.")
+                            eqlist.append("strange device")
                             udestroy("brass key")
                         else:
                             print("You do not have the key for the chest. You may use a weapon to attempt to force the chest to open (W) or you can leave the chest and go back to the kitchen (D).")
@@ -1342,6 +1344,7 @@ while  True:
                         elif choice == "TB":
                             print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
                             destroy("time bomb (TB)")
+                            alert = alert + 1
                             loc = 59
                         elif choice == "EC":
                             crystsample = crystal()
@@ -2122,8 +2125,9 @@ while  True:
     elif loc == 94:
         print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
         choice = str(input()).upper()
+        acloc = 94
         if choice == "E":
-            if wunlock == 1:
+            if wunlock == 1 or 94 in findconnect(54):
                 loc = screencheck(95, 2, 0)
             else:
                 print("The door is locked. You may withdraw (I) or use weapons (W).")
@@ -2142,6 +2146,9 @@ while  True:
                         print("Your time bomb is successful in breaking the door and you advance into the room.")
                         destroy("time bomb (TB)")
                         loc = screencheck(95, 2, 0)
+                    elif choice == "GB":
+                        print("The golden blade is not stong enough to break down the door and is broken.")
+                        destroy("golden blade (GB)")
                     elif choice == "EC":
                         crystsample = crystal()
                         if crystsample == "success":
@@ -2193,7 +2200,8 @@ while  True:
         print("You are in an extremely large bedroom with a mirror mounted on the wall that you could investigate (M) and a door to the North (N).")
         choice = str(input()).upper()
         if choice == "M":
-            print("You notice nothing interesting about the mirror.")
+            print("You notice nothing interesting about the mirror but near it you find a note written on a small piece of paper. You decide to read the note.")
+            print("'A three digit code is required to gain access to the West Tower'.")
         elif choice == "N":
             loc = 58
     elif loc == 99:
