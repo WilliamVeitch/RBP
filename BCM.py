@@ -126,6 +126,16 @@ def screencheck(a, d, p):  #p=1 if N, p=0 if S, d = direction, a = desired locat
         return 54
     else:
         return a
+def inpint(msg):
+    while True:
+        num = input(msg)
+        try:
+            val = int(num)
+            break;
+        except ValueError:
+            print("This is not a number. Please enter a valid number")
+    return(val)
+
 while  True:
     loclog.append(loc)
     if loc == 1:
@@ -459,7 +469,7 @@ while  True:
             if choice == "W":
                 print("There are no doors on the Western side of the mansion and the walls are too high to climb. The rock formations to the West look treacherous so you decide to turn back.")
             elif choice == "E":
-                print("You climb down near the mansion's gardens.") 
+                print("You climb down near the mansion's gardens.")
                 loc = 25
     elif loc == 22:
         print("You row the boat towards the island and the voyage seems to be going well. Suddenly, a Gaurilis submarine surfaces nearby.")
@@ -478,7 +488,7 @@ while  True:
         elif choice == "E":
             print(eqlist)
             print("Enter the position on the list for the item to be sacrificed.")
-            kkjj = int(input())
+            kkjj = inpint("position: ")
             print(eqlist[kkjj], " was given to the gorillas. They allow you to continue your journey.")
             destroy(eqlist[kkjj])
             loc = 17
@@ -557,7 +567,7 @@ while  True:
                     alert = alert + 1
                     loc = 27
                 elif choice == "SP":
-                    print("Imbued with super strength, you tear the gate from its hinges and advance towards the mansion. You hear an alarm sound.") 
+                    print("Imbued with super strength, you tear the gate from its hinges and advance towards the mansion. You hear an alarm sound.")
                     destroy("strength potion (SP)")
                     alert = alert + 1
                     loc = 27
@@ -1059,12 +1069,12 @@ while  True:
                 print("Each wheel has four spokes with a marker attached to one of these.")
                 print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
                 print("Let the positions of each wheel be numbered clockwise from 1 to 4, starting with the upper position.")
-                screen[1] = int(input("Set position of upper wheel (1/2/3/4).   "))
-                screen[0] = int(input("Set position of lower wheel (1/2/3/4).   "))
+                screen[1] = inpint("Set position of upper wheel (1/2/3/4).   ")
+                screen[0] = inpint("Set position of lower wheel (1/2/3/4).   ")
             elif choice == "L":
                 if "metal rod" in ulist:
                     print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
-                    stairrobot = int(input("Set position of lever (0/1).   "))
+                    stairrobot = inpint("Set position of lever (0/1).   ")
                 else:
                     print("Unfortunately, you are unable to lift the glass screen so you must withdraw into the room.")
         elif choice == "H":
@@ -1247,7 +1257,7 @@ while  True:
                         udestroy("water wheel")
                         print("You attach the water wheel here and it rotates an axle connecting to the gearbox of the crane.")
                 elif "water wheel" in ulist:
-                    print("The water is driving a water wheel which you have connected to the gearbox of the crane.") 
+                    print("The water is driving a water wheel which you have connected to the gearbox of the crane.")
             else:
                 print("You notice a channel running from the end of a vertical pipe and then passing closeby to the crane.")
             print("The crane has a set of controls which you could attempt to use (C). Nearby is a paper note (N).")
@@ -1680,7 +1690,7 @@ while  True:
             print("The device consists of three wheels with the numbers 0-9 enscribed upon them. These are arranged from left to right. Above the leftmost wheel is written the number 0. Above the centre wheel is written the number 1. Above the rightmost wheel is written the number 2. Below the wheels is a button. You can adjust the positions of the wheels (A), press the button (B) or withdraw (W).")
             choice = str(input()).upper()
             if choice == "A":
-                ncode = int(input("Type the numbers to which you set the wheels, from left to right.   "))
+                ncode = inpint("Type the numbers to which you set the wheels, from left to right.   ")
             elif choice == "B":
                 if ncode == fcode:
                     print("You here a mechanical noise from above you.")
@@ -1923,7 +1933,7 @@ while  True:
                     print("You defeat the robotic guard.")
                 else:
                     print("You fail to use the crystal correctly.")
-                    endgame(2)         
+                    endgame(2)
             else:
                 print("You have no suitable weapons with which to defeat the guard and are struck down.")
                 endgame(2)
@@ -2220,7 +2230,7 @@ while  True:
     print()
     if choice == "GIVEUP":
         endgame(5)
-    
+
     rprob = 0
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
