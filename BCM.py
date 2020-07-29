@@ -272,7 +272,7 @@ while  True:
         elif choice == "C":
             coins = coins - 2
             if coins < 0:
-                print("You do not have enough money to get on the ferry. The ferry diverts to Ooville because of a storm and you are seized by police upon your arrival there.")
+                print("You get on the ferry without a valid ticket due to your insufficient funds. The ferry diverts to Ooville because of a storm and you are seized by police upon your arrival there.")
                 endgame(0)
             loc = 12
         elif choice == "MM" and "magical map (MM)" in eqlist:
@@ -1917,6 +1917,7 @@ while  True:
     elif loc == 79:
         if 85 not in loclog and 79 not in findconnect(74):
             print("As you enter the room, a security robot lunges out at you. You must defend yourself.")
+            listweapons()
             choice = str(input()).upper()
             if "control card  (CC)" in eqlist and choice == "CC":
                 print("You deactivate the robotic guard with your control card.")
@@ -1934,6 +1935,9 @@ while  True:
                 print("You use your sticky banana bomb to overwhelm the robotic guard.")
             elif "shield of safety (SOS)" in eqlist and choice == "SOS":
                 print("The shield protects you from the blow and you are able to overcome the robot.")
+            elif choice == "PC":
+                print("The portable cannon is too unwieldy for use in combat and you are struck down.")
+                endgame(2)
             elif "energy crystal (EC)" in eqlist and choice == "EC":
                 print("You must use your energy crystal to defeat the robotic guard as you have no other suitable weapons.")
                 crystsample = crystal()
