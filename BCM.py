@@ -28,7 +28,7 @@ islandtext = "The island is small and the main feature is the mansion which look
 def inap():
     print("The item you have chosen is not appropriate for the current situation.")
 def equip():
-    print("You possess ", eqlist,)
+    print("You possess ", eqlist)
 def destroy(n):
     dlist.append(n)
     x = 0
@@ -289,7 +289,7 @@ while  True:
         loc = 7
     elif loc == 10:
         print("After travelling for a great length of time over the sea, you can see the island of Ooville.")
-        print("You could land the helicopter in Ooville (O) or travel South to try to find Crultney's Island(C).")
+        print("You could land the helicopter in Ooville (O) or travel South to try to find Crultney's Island (C).")
         choice = str(input()).upper()
         if choice == "O":
             loc = 19
