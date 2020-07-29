@@ -11,7 +11,7 @@ alert = 0
 observe = 1
 ncode = 0
 fcode = random.randint(0, 999) #cylindrical rooms
-screen = [4, 4] #SN
+screen = [2, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 wcollect = [0, 0]
@@ -116,7 +116,7 @@ def endgame(n):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
     print("You visited " + str(len(uniloclog)) + " of 99 locations.")
-    print("You took" + str(len(loclog)) + " turns.")
+    print("You took " + str(len(loclog)) + " turns.")
     end = input()
     end = input()
 def listweapons():
@@ -496,8 +496,9 @@ while  True:
             print("The gorillas overwhelm you and detain you. They take you to be questioned at their base in Gorillia Monkeyland. Your mission is over.")
             endgame(0)
         elif choice == "S":
-            print("The gorillas recognise your item and will allow you to continue your journey. They also give you a map of the nearby islands if you do not already have one.")
-            loc = 17
+            if "medical kit (MK)" in eqlist or "sticky banana bomb (SBB)" in eqlist:
+                print("The gorillas recognise your item and will allow you to continue your journey. They also give you a map of the nearby islands if you do not already have one.")
+                loc = 17
     elif loc == 23:
         print("You are standing on a beach on the island's South coast. The mansion is to the North of you and there is a barbed wire fence ahead of you. To the West is a small pier. ")
         print("You can use a weapon to break the barbed wire (W), you can walk towards the pier (P) or you can go East to try to find another way to access the mansion (E).")
@@ -989,7 +990,7 @@ while  True:
             listweapons()
             choice = str(input()).upper()
             if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD" or choice == "LK":
-                print("You parry the attack but your weapon is irrepairably damaged due to the impact.")
+                print("You parry the attack but your weapon is irreparably damaged due to the impact.")
                 stairrobot = 0
                 ssdestroy(choice)
             elif choice == "GB" or choice == "SOS" or choice == "HOH":
@@ -1862,6 +1863,9 @@ while  True:
                             print("The crystal is ineffective against the door")
                         elif crystsample == "bigfailure":
                             endgame(2)
+                    elif choice == "GB" or choice == "TS" or choice == "SS" or choice == "HOH":
+                        print("The weapon you have chosen is not strong enough to break down the iron door and is destroyed.")
+                        ssdestroy(choice)
                     else:
                         print("The weapon you chose is incapable of breaking down the door.")
         elif choice == "EN":
@@ -1912,21 +1916,25 @@ while  True:
             loc = screencheck(84, 4, 1)
     elif loc == 79:
         if 85 not in loclog and 79 not in findconnect(74):
-            print("As you enter the room, a security robot lunges out at you.")
-            if "control card  (CC)" in eqlist:
+            print("As you enter the room, a security robot lunges out at you. You must defend yourself.")
+            choice = str(input()).upper()
+            if "control card  (CC)" in eqlist and choice == "CC":
                 print("You deactivate the robotic guard with your control card.")
             elif "black dagger (BD)" in eqlist or "shortsword (SS)" in eqlist or "goldenblade(GB)" in eqlist or "helm of horror (HOH)" in eqlist or "large knife (LK)" in eqlist:
-                print("You use one of your weapons to defeat the guard.")
-            elif "invisibility potion (IP)" in eqlist:
+                if choice == "BD" or choice == "SS" or choice == "GB" or choice == "HOH" or choice == "LK":
+                    print("You use your weapon to defeat the guard.")
+            elif "invisibility potion (IP)" in eqlist and choice == "IP":
                 print("You use your invisibility potion to sneak past the guard.")
                 udestroy("invisibility potion (IP)")
-            elif "strength potion (SP)" in eqlist:
+            elif "strength potion (SP)" in eqlist and choice == "SP":
                 destroy("strength potion (SP)")
                 print("You use your strength potion to overwhelm the robotic guard.")
-            elif "sticky banana bomb (SBB)" in eqlist:
+            elif "sticky banana bomb (SBB)" in eqlist and choice == "SBB":
                 destroy("sticky banana bomb (SBB)")
                 print("You use your sticky banana bomb to overwhelm the robotic guard.")
-            elif "energy crystal (EC)" in eqlist:
+            elif "shield of safety (SOS)" in eqlist and choice == "SOS":
+                print("The shield protects you from the blow and you are able to overcome the robot.")
+            elif "energy crystal (EC)" in eqlist and choice == "EC":
                 print("You must use your energy crystal to defeat the robotic guard as you have no other suitable weapons.")
                 crystsample = crystal()
                 if crystsample == "success":
