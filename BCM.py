@@ -102,6 +102,7 @@ def candle(n):
         print("You notice nothing unusual about the candle holder.")
         return 0
 def endgame(n):
+    print()
     if n == 4:
         print("You have successfully completed your mission.")
     else:
@@ -115,6 +116,8 @@ def endgame(n):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
     print("You visited " + str(len(uniloclog)) + " of 99 locations.")
+    print("You took" + str(len(loclog)) + " turns.")
+    end = input()
     end = input()
 def listweapons():
     print("You can attempt to use any of the folllowing: ", eqlist)
@@ -645,7 +648,7 @@ while  True:
             loc = 29
         elif choice == "B":
             print("Inserted into one of the books you find a note which you read:")
-            print("'Never did I think before that such a mode of transportation would be possible, yet upon building the device as described I found that it works, under certain circumstances. However, the consequences of its use could be grave so I have dismantled it and am storing the parts in the astronomy tower.'")
+            print("'Never did I think before that such a mode of transportation would be possible, yet upon building the device as described I found that it works, under certain circumstances. However, the consequences of its use could be grave so I have dismantled it and am storing the parts in the astronomy tower and the elevator shaft.'")
             print("The book into which this is inserted is very old and the text makes little sense to you.")
         elif choice == "F":
             print("You crawl into the fireplace and find a narrow passage to the side. The passage leads up to a small black door with no handle.")
@@ -1121,7 +1124,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "E":
             print("You examine the elevator shaft and discover that the elevator is not in working order.")
-            if "super strong rope (SSR)" in eqlist:
+            if "super strong rope (SSR)" in eqlist and "strange device" not in eqlist and "strange device" not in dlist:
                 print("You look up the shaft and at first you can see nothing. However, as your eyes become accustomed to the darkness, you notice a thin rod sticking out of the wall about halfway up the shaft. Using your super strong rope, you may attempt to climb up the shaft to this point (C) or you may withdraw into the kitchen (W).")
                 choice = str(input()).upper()
                 if choice == "C":
@@ -1645,7 +1648,7 @@ while  True:
         if choice == "S":
             loc = 62
         elif choice == "C":
-            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[2]) > 3:
+            if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[0]) > 3:
                 if candle(0) == 1:
                     choice = str(input()).upper()
                     if choice == "P":
@@ -2067,6 +2070,7 @@ while  True:
                 else:
                     inap()
                     print("You have no suitable items with which to parry the attack so you are struck by the robotic arm. It injures you but not severely enough to end your mission.")
+                arm 87 = 0
             else:
                 print("You investigate the instruments and find nothing that you think will help you on your mission.")
         elif choice == "N":
@@ -2200,7 +2204,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "M":
             print("You notice nothing interesting about the mirror but near it you find a note written on a small piece of paper. You decide to read the note.")
-            print("'A three digit code is required to gain access to the West Tower'.")
+            print("'I have decided to hide the key to the Astronomy Tower in the West Tower. A three digit code is required to gain access to the West Tower'.")
         elif choice == "N":
             loc = 58
     elif loc == 99:
