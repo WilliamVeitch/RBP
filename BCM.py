@@ -2217,7 +2217,7 @@ while  True:
     if choice == "GIVEUP":
         endgame(5)
     
-    r prob = 0
+    rprob = 0
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
