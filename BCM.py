@@ -2080,7 +2080,7 @@ while  True:
                 else:
                     inap()
                     print("You have no suitable items with which to parry the attack so you are struck by the robotic arm. It injures you but not severely enough to end your mission.")
-                arm 87 = 0
+                arm87 = 0
             else:
                 print("You investigate the instruments and find nothing that you think will help you on your mission.")
         elif choice == "N":
