@@ -512,54 +512,54 @@ while  True:
                 listweapons()
                 print("You may also retreat to the South (R).")
                 choice = str(input()).upper()
-            if choice == "H":
-                swicobs = random.randint(1000, 9999)
-                if swicob != swicobs:
-                    print("The gate will not open and an alarm sounds.")
+                if choice == "H":
+                    swicobs = random.randint(1000, 9999)
+                    if swicob != swicobs:
+                        print("The gate will not open and an alarm sounds.")
+                        alert = alert + 1
+                    elif swicob == swicobs and alert <= 2:
+                        print("The gate opens and you walk up to the front of the mansion.")
+                        loc = 27
+                elif choice == "S":
+                    print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
+                    print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
+                    choice = input()
+                    if choice == "W":
+                        print("You withdraw.")
+                    else:
+                        swicob = choice
+                elif choice == "PC":
+                    print("The cannon destroys the gate. However, you hear an alarm sound from inside the mansion so you advance towards the mansion cautiously.")
                     alert = alert + 1
-                elif swicob == swicobs and alert <= 2:
-                    print("The gate opens and you walk up to the front of the mansion.")
                     loc = 27
-            elif choice == "S":
-                print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
-                print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
-                choice = input()
-                if choice == "W":
-                    print("You withdraw.")
+                elif choice == "TB":
+                    print("The bomb destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
+                    destroy("time bomb (TB)")
+                    alert = alert + 1
+                    loc = 27
+                elif choice == "EC":
+                    crystsample = crystal()
+                    if crystsample == "success":
+                        alert = alert + 1
+                        print("The crystal destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
+                        loc = 27
+                    elif crystsample == "failure":
+                        print("After the improper use, you pick up the crystal.")
+                    elif crystsample == "big failure":
+                        endgame(1)
+                elif choice == "HOH":
+                    print("You put on the helmet and charge towards the gate. It collapses, but the helmet is also damaged beyond repair.")
+                    print("An alarm sounds nearby so you advance cautiously towards the mansion.")
+                    destroy("helm of horror (HOH)")
+                    alert = alert + 1
+                    loc = 27
+                elif choice == "SP":
+                    print("Imbued with super strength, you tear the gate from its hinges and advance towards the mansion. You hear an alarm sound.") 
+                    destroy("strength potion (SP)")
+                    alert = alert + 1
+                    loc = 27
                 else:
-                    swicob = choice
-            elif choice == "PC":
-                print("The cannon destroys the gate. However, you hear an alarm sound from inside the mansion so you advance towards the mansion cautiously.")
-                alert = alert + 1
-                loc = 27
-            elif choice == "TB":
-                print("The bomb destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
-                destroy("time bomb (TB)")
-                alert = alert + 1
-                loc = 27
-            elif choice == "EC":
-                crystsample = crystal()
-                if crystsample == "success":
-                    alert = alert + 1
-                    print("The crystal destroys the gate. However, you hear an alarm sound so you advance cautiously towards the mansion.")
-                    loc = 27
-                elif crystsample == "failure":
-                    print("After the improper use, you pick up the crystal.")
-                elif crystsample == "big failure":
-                    endgame(1)
-            elif choice == "HOH":
-                print("You put on the helmet and charge towards the gate. It collapses, but the helmet is also damaged beyond repair.")
-                print("An alarm sounds nearby so you advance cautiously towards the mansion.")
-                destroy("helm of horror (HOH)")
-                alert = alert + 1
-                loc = 27
-            elif choice == "SP":
-                print("Imbued with super strength, you tear the gate from its hinges and advance towards the mansion. You hear an alarm sound.") 
-                destroy("strength potion (SP)")
-                alert = alert + 1
-                loc = 27
-            else:
-                inap()
+                    inap()
         elif choice == "W":
             print("The tower is two storeys high and to the West of the tower is an impassable rock formation.")
             print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
@@ -2217,6 +2217,7 @@ while  True:
     if choice == "GIVEUP":
         endgame(5)
     
+    r prob = 0
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
