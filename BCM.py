@@ -140,7 +140,7 @@ while  True:
     loclog.append(loc)
     if loc == 1:
         print("The date is 5th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
-        print("You now have a choice of where to go to get supplies or the mission")
+        print("You now have a choice of where to go to get supplies for the mission.")
         print("You can go to the Ninja Armoury (N), Royal Weaponary Supply Company (R) or Geelophisis' Lab (G).")
         choice = str(input()).upper()
         if choice == "N":
@@ -151,7 +151,7 @@ while  True:
             loc = 4
     elif loc == 2:
         print("You have arrived at the Ninja Armoury. A monkey wearing white robes walks in and offers you the black dagger, a powerful weapon which is the symbol of the ninjas of Oland.")
-        print("He also shows you a wooden table with an assortment of objects on it and tells you that you may choose two of them")
+        print("He also shows you a wooden table with an assortment of objects on it and tells you that you may choose two of them.")
         print("You can choose from the throwing stars (TS), invisibility potion (IP), golden blade, (GB), time bomb (TB) or super strong rope (SSR)")
         choice1 = str(input("choice 1   ")).upper()
         choice2 = str(input("choice 2   ")).upper()
@@ -204,7 +204,7 @@ while  True:
         loc = 5
     elif loc == 4:
         print("Geelophisis welcomes you into his lab but warns you that he has not invented many new items since your mission with the Robo Lion in 1963")
-        print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and which he believes will be useful on your mission.")
+        print("Geelophisis first gives you a stone rod 300 mm long with symbols protruding from it at regular intervals along it. This was given to him by Crultney and he believes it will be useful on your mission.")
         eqlist.append("stone rod")
         print("He shows you his inventions and says that you can choose two of them.")
         print("You can ask Geelophisis about an invention by typing the item code when prompted. Type NO to proceed without asking.")
@@ -253,9 +253,9 @@ while  True:
         elif choice == "L":
             loc = 7
     elif loc == 6:
-        print("Geelophisis tells you that Crultney Mansion is 3 storeys high and also has a set of underground rooms. He tells you that the easiest way to access the island is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
+        print("Geelophisis tells you that Crultney Mansion is 4 storeys high and also has a set of underground rooms. He tells you that the mansion is situated on an an island and the easiest way to access it is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
         print("Geelophisis also offers for you to travel in his helicopter to the mansion if you do not want to follow this advice. However, Geelophisis is a very busy monkey at the moment so you would have to fly the helicopter yourself.")
-        choice = str(input("Type 'H' if you travel in the helicopter or type 'P' if you go to the port to find the ship to Ooville.   "))
+        choice = str(input("Type 'H' if you travel in the helicopter or type 'P' if you go to the port to find the ship to Ooville.   ")).upper()
         if choice == "H":
             loc = 10
         elif choice == "P":
@@ -278,11 +278,11 @@ while  True:
         elif choice == "MM" and "magical map (MM)" in eqlist:
             print("The magical map appears to suggest that the wisest course of action would be to take the ship to Ooville.")
     elif loc == 8:
-        print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons.")
+        print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons. They tell you that the mansion is situated on an island near Ooville.")
         print("You now travel to the port.")
         loc = 7
     elif loc == 9:
-        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that Crultney's main living and work areas are on the second floor of the mansion.")
+        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that the mansion is located on an island near Ooville and that Crultney's main living and work areas are on the second floor of the mansion.")
         print("After the meeting with Furfoot, you find a banana coin on the ground near the palace and you put this in your pocket.")
         coins = coins + 1
         print("You now travel to the port.")
@@ -363,9 +363,11 @@ while  True:
             choice = str(input("Type in an item code or type E to exit the shop.   ")).upper()
             if choice == "SSR":
                 eqlist.append("super strong rope (SSR)")
+                Print("You collect the rope.")
                 coins = coins - 3
             elif choice == "HOH":
                 eqlist.append("helm of horror (HOH)")
+                print("You don the helm.")
                 coins = coins - 6
             if coins < 0:
                 print("You could not afford that item.")
@@ -573,7 +575,8 @@ while  True:
                     alert = alert + 1
                     loc = 27
                 else:
-                    inap()
+                    if choice != "R":
+                        inap()
         elif choice == "W":
             print("The tower is two storeys high and to the West of the tower is an impassable rock formation.")
             print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
@@ -906,7 +909,7 @@ while  True:
                 elif crystsample() == "big failure":
                     endgame(1)
             elif choice == "W":
-                if lastloc != 30:
+                if lastloc() != 30:
                     loc = lastloc()
                 elif 23 in findconnect(30):
                     loc = 23
