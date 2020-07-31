@@ -363,7 +363,7 @@ while  True:
             choice = str(input("Type in an item code or type E to exit the shop.   ")).upper()
             if choice == "SSR":
                 eqlist.append("super strong rope (SSR)")
-                Print("You collect the rope.")
+                print("You collect the rope.")
                 coins = coins - 3
             elif choice == "HOH":
                 eqlist.append("helm of horror (HOH)")
