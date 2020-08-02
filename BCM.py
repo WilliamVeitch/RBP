@@ -1109,7 +1109,7 @@ while  True:
         elif choice == "I":
             print("You find a diary on a shelf at the back of the shed and you read the most recent entry. You notice that some pages are missing.")
             print("'September 16th, 1971")
-            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to '")
+            print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently trying to '")
             print("A significant fragment of the page has been torn off so you do not know how the sentence finishes.")
             if 56 in loclog:
                 print("You may now read the full diary entry by combining this with that which you found in the pool (D) or not (N).")
@@ -1444,7 +1444,7 @@ while  True:
                 choice = str(input()).upper()
                 if choice == "D":
                     print("'September 16th, 1971")
-                    print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmwer engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently tring to retrieve the control card from under the rubble. This seems to be very difficult without an operational crane. ' ")
+                    print("Today I made another attempt to clear the rubble in the collapsed chamber. However, the lawnmower engine broke again. I am now moving all operations to the North side of the chamber and hope to find a substitute for the lawnmower engine soon. Since I am not currently capable of operating the crane, I have taken three gears from its gearbox and hidden them in the mansion, to prevent malignant use of the crane by my enemies. Records of their location can be found in the study. I have recently been distracted from the project by the mysterious antics of one of the robotic wardens, 0066A12. It seems to be slow to obey orders and has a strange tendency to walk around the astronomy tower at night, so I am urgently trying to retrieve the control card from under the rubble. This seems to be very difficult without an operational crane. ' ")
         elif choice == "W":
             loc = 47
     elif loc == 57:
@@ -1718,7 +1718,7 @@ while  True:
         choice = str(input()).upper()
         bwlist = ["left", "right", "on", "off"]
         if choice == "B":
-            print("You notice a strange lever attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], ".")
+            print("You notice a strange lever marked 'bathwater diversion' attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], ".")
             print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
             choice = str(input()).upper()
             if choice == "L":
@@ -1796,7 +1796,7 @@ while  True:
             elif risk == 90:
                 udestroy("sticky banana bomb (SBB)")
                 print("The sticky banana bomb is extremely effective and immobilises all of the robotic guards in the room.")
-            elif randint(1, risk) == 1:
+            elif random.randint(1, risk) == 1:
                 ssdestroy(choice)
                 print("You defeat the first robotic guard, but your weapon is destroyed.")
                 print("You flee the room to the place from which you came.")
