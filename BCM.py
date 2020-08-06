@@ -133,7 +133,7 @@ def inpint(msg):
             val = int(num)
             break;
         except ValueError:
-            print("This is not a number. Please enter a valid number")
+            print("This is not a number. Please enter a valid number.")
     return(val)
 
 while  True:
@@ -530,7 +530,7 @@ while  True:
                 choice = str(input()).upper()
                 if choice == "H":
                     swicobs = random.randint(1000, 9999)
-                    if swicob != swicobs:
+                    if swicob != str(swicobs):
                         print("The gate will not open and an alarm sounds.")
                         alert = alert + 1
                     elif swicob == swicobs and alert <= 2:
@@ -539,7 +539,7 @@ while  True:
                 elif choice == "S":
                     print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
                     print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
-                    choice = input()
+                    choice = str(input())
                     if choice == "W":
                         print("You withdraw.")
                     else:
