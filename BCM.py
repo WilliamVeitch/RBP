@@ -190,7 +190,7 @@ while  True:
                 eqlist.append("warhammer (WH)")
                 coins = coins - 4
             elif choice == "GB":
-                print("You admire the Golden Blade")
+                print("You aquire the Golden Blade")
                 eqlist.append("golden blade (GB)")
                 coins = coins - 5
             elif choice == "PC":
@@ -684,9 +684,9 @@ while  True:
                     print("You have no suitable items so you withdraw into the cylindrical room.")
 
     elif loc == 27:
-        if lastloc == 32:
+        if lastloc() == 32:
             if 27 in findconnect(32):
-                print("You step outside, passing the destroyed door.")
+                print("You step outside.")
             else:
                 print("You unlock the door and step outside.")
         print("You are standing directly in front of the mansion and you can see a large metal door directly ahead of you. This is the main entrance to the mansion. You can also see a small pier to the South.")
@@ -754,7 +754,7 @@ while  True:
                 else:
                     inap()
             elif choice == "D" and 32 in loclog:
-                print("You walk through the door into the main corridor.")
+                print("You walk through the door into the entrance corridor.")
                 loc = 32
         elif choice == "S":
             print("You walk towards the shed and notice that this door is much flimsier and is made from wood.")
@@ -800,6 +800,7 @@ while  True:
                 print("You find your way blocked by a barbed wire fence with a gate. You may attempt to use weapons against the fence (W) or withdraw towards the mansion (M).")
                 choice = str(input()).upper()
                 if choice == "W":
+                    choice = str(input()).upper()
                     if choice == "GB" or choice == "SS" or choice == "SOS":
                         print("Your weapon is successful in clearing a path through the barbed wire.")
                         loc = 24
@@ -827,6 +828,8 @@ while  True:
                             print("The crystal rolls away into the middle of the wire.")
                         elif crystsample() == "big failure":
                             endgame(1)
+                    else:
+                        inap()
         elif choice == "E":
             print("There are no entrances on the East side of the mansion. As you are walking you notice a monitoring camera on the wall near you so you head back to the front of the mansion to avoid being detected.")
     elif loc == 28:
@@ -1743,7 +1746,7 @@ while  True:
             loc = 81
     elif loc == 73:
         if observe == 1 and "sticky banana bomb (SBB)" not in ulist:
-            if lastloc == 73:
+            if lastloc() == 73:
                 print("More guards arrive. You must defend yourself.")
             else:
                 print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
@@ -1800,7 +1803,7 @@ while  True:
                 ssdestroy(choice)
                 print("You defeat the first robotic guard, but your weapon is destroyed.")
                 print("You flee the room to the place from which you came.")
-                loc = lastloc
+                loc = lastloc()
             else:
                 print("You defeat the first robotic guard and then flee the room to the place from which you came.")
         if observe == 0 or risk == 100 or "sticky banana bomb (SBB)" in ulist:
