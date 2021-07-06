@@ -139,6 +139,12 @@ def inpint(msg):
 while  True:
     loclog.append(loc)
     if loc == 1:
+        print("Enable low-luck mode? (y/N)")
+        choice = str(input.upper())
+        if choice == "Y" or choice == "YES":
+            lowluck = 1
+        else:
+            lowluck = 0
         print("The date is 5th October 1971 and Crultney, a famous architect and inventor has not been seen or heard from for several weeks. You are Broughtly, a skilled monkey ninja and your mission is to travel to his mansion and investigate. You should be aware that there are many traps and hidden rooms in the mansion.")
         print("You now have a choice of where to go to get supplies for the mission.")
         print("You can go to the Ninja Armoury (N), Royal Weaponary Supply Company (R) or Geelophisis' Lab (G).")
@@ -650,7 +656,7 @@ while  True:
                                 eqlist.append("metal rod")
                                 print("You also look in the book and find that it is about Crultney mansion but much of it is in a language you cannot understand.")
     elif loc == 26:
-        print("You are in a circular room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
+        print("You are in a cylindrical room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
         if 21 in findconnect(26):
             print("There are also several shards of glass on the floor, probably because the large window looking out towards the sea has been shattered.")
         else:
@@ -798,6 +804,7 @@ while  True:
                 loc = 24
             else:
                 print("You find your way blocked by a barbed wire fence with a gate. You may attempt to use weapons against the fence (W) or withdraw towards the mansion (M).")
+                listweapons()
                 choice = str(input()).upper()
                 if choice == "W":
                     choice = str(input()).upper()
@@ -2248,20 +2255,23 @@ while  True:
     print()
     if choice == "GIVEUP":
         endgame(5)
+        
 
     rprob = 0
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
     elif alert == 3:
-        rprob = 5
+        rprob = 6
     elif alert == 2:
-        rprob = 10
+        rprob = 12
     if "sticky banana bomb (SBB)" in ulist:
         rprob = rprob * 2
     if alert >= 2 and observe == 1:
-        if random.randint(1, rprob) == 1:
+        if (lowluck == 0 and random.randint(1, rprob) == 1) or (lowluck == 1 and alert ==3):
             print("You are attacked by a security robot of Crultney mansion.")
+            if lowluck == 1:
+                alert = 2
             listweapons()
             choice = str(input()).upper()
             risk = 0
