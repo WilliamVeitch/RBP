@@ -140,7 +140,7 @@ while  True:
     loclog.append(loc)
     if loc == 1:
         print("Enable low-luck mode? (y/N)")
-        choice = str(input.upper())
+        choice = str(input().upper())
         if choice == "Y" or choice == "YES":
             lowluck = 1
         else:
