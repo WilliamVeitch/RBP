@@ -224,7 +224,7 @@ while  True:
             elif ask == "SP":
                 print("Geelophisis tells you that this invention grants a sudden burst of extreme strength to the user for a short period of time.")
             elif ask == "MM":
-                print("Geelophisis tells you that this invention will allow you to find your way to any place.")
+                print("Geelophisis tells you that this invention will allow you to find your way to any place. You may consult it by typing MAP.")
             elif ask == "EC":
                 print("Geelophisis tells you that the energy crystal is a highly dangerous weapon that will release a blast of energy from the end of the crystal marked with a triangle when the end marked with a hexagon is struck. It can only be used once as the crystal is consumed on use.")
         choice1 = str(input("choice 1   ")).upper()
@@ -378,7 +378,10 @@ while  True:
             if coins < 0:
                 print("You could not afford that item.")
                 del eqlist[len(eqlist) - 1]
-                coins = 0
+                if choice == "HOH":
+                    coins = coins + 6
+                elif choice == "SSR":
+                    coins = coins + 3
         print("You now return to the town centre.")
         loc = 11
     elif loc == 17:
@@ -487,7 +490,7 @@ while  True:
         if "medical kit (MK)" in eqlist or "sticky banana bomb (SBB)" in eqlist:
              print("Since you posess a Gorilla made item, you can show this to the gorillas (S) to convince them that you are friendly.")
         choice = str(input()).upper()
-        if choice == "P":
+        if choice == "P" and coins >= 3:
             coins = coins - 3
             print("The gorillas allow you to continue your journey.")
             loc = 17
@@ -500,13 +503,13 @@ while  True:
             print(eqlist[kkjj], " was given to the gorillas. They allow you to continue your journey.")
             destroy(eqlist[kkjj])
             loc = 17
+        elif choice == "S":
+            if "medical kit (MK)" in eqlist or "sticky banana bomb (SBB)" in eqlist:
+                print("The gorillas recognise your item and will allow you to continue your journey.")
+                loc = 17
         elif choice == "F":
             print("The gorillas overwhelm you and detain you. They take you to be questioned at their base in Gorillia Monkeyland. Your mission is over.")
             endgame(0)
-        elif choice == "S":
-            if "medical kit (MK)" in eqlist or "sticky banana bomb (SBB)" in eqlist:
-                print("The gorillas recognise your item and will allow you to continue your journey. They also give you a map of the nearby islands if you do not already have one.")
-                loc = 17
     elif loc == 23:
         print("You are standing on a beach on the island's South coast. The mansion is to the North of you and there is a barbed wire fence ahead of you. To the West is a small pier. ")
         print("You can use a weapon to break the barbed wire (W), you can walk towards the pier (P) or you can go East to try to find another way to access the mansion (E).")
@@ -708,8 +711,9 @@ while  True:
             choice = str(input()).upper()
             if choice == "SW":
                 if "super strong rope (SSR)" in eqlist:
-                    if 32 in findconnect(72):
-                        print("You climb back up to the bathroom window.")
+                    if 27 in findconnect(72):
+                        print("You climb back up to the bathroom window but an alarm sounds as you do so.")
+                        alert = alert + 1
                     else:
                         print("You use your super strong rope to successfully climb up to the window. You hurriedly use an object from your equipment bag to smash the window and as you do so, an alarm sounds. ")
                         print("You climb inside and pull up the super strong rope so that you can take it with you.")
@@ -1928,7 +1932,7 @@ while  True:
         elif choice == "E":
             loc = screencheck(84, 4, 1)
     elif loc == 79:
-        if 85 not in loclog and 79 not in findconnect(74):
+        if 79 not in loclog[0:len(loclog)-1]:
             print("As you enter the room, a security robot lunges out at you. You must defend yourself.")
             listweapons()
             choice = str(input()).upper()
@@ -1949,7 +1953,7 @@ while  True:
             elif "shield of safety (SOS)" in eqlist and choice == "SOS":
                 print("The shield protects you from the blow and you are able to overcome the robot.")
             elif choice == "PC":
-                print("The portable cannon is too unwieldy for use in combat and you are struck down.")
+                print("The portable cannon is too unwieldy for use in close combat and you are struck down.")
                 endgame(2)
             elif "energy crystal (EC)" in eqlist and choice == "EC":
                 print("You must use your energy crystal to defeat the robotic guard as you have no other suitable weapons.")
@@ -2255,6 +2259,8 @@ while  True:
     print()
     if choice == "GIVEUP":
         endgame(5)
+    elif choice == "MAP":
+        print("You consult the magical map")
         
 
     rprob = 0
