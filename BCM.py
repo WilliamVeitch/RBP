@@ -260,7 +260,7 @@ while  True:
         elif choice == "L":
             loc = 7
     elif loc == 6:
-        print("Geelophisis tells you that Crultney Mansion is 4 storeys high and also has a set of underground rooms. He tells you that the mansion is situated on an an island and the easiest way to access it is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
+        print("Geelophisis tells you that Crultney Mansion is 4 storeys high and also has a set of underground rooms. He tells you that the mansion is situated on an island and the easiest way to access it is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
         print("Geelophisis also offers for you to travel in his helicopter to the mansion if you do not want to follow this advice. However, Geelophisis is a very busy monkey at the moment so you would have to fly the helicopter yourself.")
         choice = str(input("Type 'H' if you travel in the helicopter or type 'P' if you go to the port to find the ship to Ooville.   ")).upper()
         if choice == "H":
@@ -1733,6 +1733,8 @@ while  True:
             loc = 78
     elif loc == 72:
         print("You are in a bathroom containing a large bathtub (B), a sink (S) and a toilet (T). The only door is to the North (N). ")
+        if 27 in findconnect(72):
+            print("You could also climb back down to the front of the mansion (F).")
         choice = str(input()).upper()
         bwlist = ["off", "on"]
         if choice == "B":
@@ -1745,7 +1747,7 @@ while  True:
                     bathwater[0] = int(choice)
             elif choice == "T":
                 choice = str(input("You may turn the tap off (0) or on (1).   "))
-                if choice == "2" or choice == "3":
+                if choice == "0" or choice == "1":
                     bathwater[1] = int(choice)
         elif choice == "S":
             if "soap" in eqlist or "soap" in dlist:
@@ -1759,6 +1761,8 @@ while  True:
             print("You notice nothing unusual about the toilet.")
         elif choice == "N":
             loc = 81
+        elif choice == "F" and 27 in findconnect(72):
+            loc = 27
     elif loc == 73:
         if observe == 1 and "sticky banana bomb (SBB)" not in ulist:
             if lastloc() == 73:
