@@ -16,7 +16,7 @@ candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
 wcollect = [0, 0]
 loclog = list()
-bathwater = [0, 3] #lever, water (water on = 2)
+bathwater = [0, 0] #lever, water (on = 0, off = 1)
 stairrobot = 1
 wunlock = 0
 craneunlock = 0 #locs 46 and 48
@@ -135,6 +135,7 @@ def inpint(msg):
         except ValueError:
             print("This is not a number. Please enter a valid number.")
     return(val)
+
 
 while  True:
     loclog.append(loc)
@@ -1087,8 +1088,11 @@ while  True:
                 print("Each wheel has four spokes with a marker attached to one of these.")
                 print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
                 print("Let the positions of each wheel be numbered clockwise from 1 to 4, starting with the upper position.")
-                screen[1] = inpint("Set position of upper wheel (1/2/3/4).   ")
-                screen[0] = inpint("Set position of lower wheel (1/2/3/4).   ")
+                screen[1] = input("Set position of upper wheel (1/2/3/4).   ")
+                screen[0] = input("Set position of lower wheel (1/2/3/4).   ")
+                if screen[1] not in [1,2,3,4] or screen[0] not in [1,2,3,4]:
+                    print("You have not entered valid wheel positions.")
+                    screen = [2,4]
             elif choice == "L":
                 if "metal rod" in ulist:
                     print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
@@ -1266,7 +1270,7 @@ while  True:
         print("You are standing in a room with a collapsed ceilling. Nearby is a crane which you could investigate (C). Rubble blocks your way to the South. there is a door to the North (N).")
         choice = str(input()).upper()
         if choice == "C":
-            if bathwater == [1, 2]:
+            if bathwater == [1, 1]:
                 print("You notice that there is a stream of water running down a pipe from the ceiling and then passing closeby to the crane.")
                 if "water wheel" in eqlist:
                     print("You may place the waterwheel here (W) or not (N).")
@@ -1397,7 +1401,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "D":
             loc = 43
-        else:
+        elif choice in ["A","G","W"]:
             towerpos = choice
     elif loc == 53:
         print("You are standing on the Southern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the North (N). A cyan tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder as well as several potted plants.")
@@ -1730,17 +1734,17 @@ while  True:
     elif loc == 72:
         print("You are in a bathroom containing a large bathtub (B), a sink (S) and a toilet (T). The only door is to the North (N). ")
         choice = str(input()).upper()
-        bwlist = ["left", "right", "on", "off"]
+        bwlist = ["off", "on"]
         if choice == "B":
-            print("You notice a strange lever marked 'bathwater diversion' attached to the wall above the bath. It can be in two positions, left and right and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], ".")
+            print("You notice a strange lever marked 'bathwater diversion' attached to the wall above the bath. It can be in two positions, on and off, and is currently in the ", bwlist[bathwater[0]], " position. The bathtap is currently ", bwlist[bathwater[1]], ".")
             print("You may move the lever (L), turn the tap (T) or discontinue your investigation into the bath (D).")
             choice = str(input()).upper()
             if choice == "L":
-                choice = str(input("You may move the lever to the left (0) or to the right (1).   "))
+                choice = str(input("You may move the lever to the off position (0) or to the on position (1).   "))
                 if choice == "0" or choice == "1":
                     bathwater[0] = int(choice)
             elif choice == "T":
-                choice = str(input("You may turn the tap on (2) or off (3).   "))
+                choice = str(input("You may turn the tap off (0) or on (1).   "))
                 if choice == "2" or choice == "3":
                     bathwater[1] = int(choice)
         elif choice == "S":
