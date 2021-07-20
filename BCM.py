@@ -1519,6 +1519,7 @@ while  True:
                     elif choice == "TB":
                         print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
                         destroy("time bomb (TB)")
+                        alert = alert + 1
                         loc = 98
                     elif choice == "EC":
                         crystsample = crystal()
