@@ -23,6 +23,7 @@ craneunlock = 0 #locs 46 and 48
 smallwheels = 0
 towerpos = "G"
 arm87 = 1 #loc 87
+eqnames = ["BD","TS","IP","GB","TB","SSR","SS","SOS","SP","WH","PC","CBD","MM","EC","SBB","MK","HOH","MF","LK","CC"]
 towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
@@ -42,6 +43,9 @@ def udestroy(n):
 def ssdestroy(n):
     x = 0
     z = 0
+    if n not in eqnames:
+        print("!!!  ssdestroy error  !!!")
+        return
     while z == 0:
         y = 0
         while z == 0 and y < len(eqlist[x]):
@@ -94,8 +98,10 @@ def candle(n):
         scs = "You may place a candle from your inventory into the holder (P). "
         if len(candlelist[n]) > 3:
             scs = "You may retrieve the ", candlelist[n], "from the candle holder (R). "
-            if "matches" in eqlist:
+            if "matches" in eqlist and lcandlelist[n] == 0:
                 print("You may use the matches in your possesion to light the ", candlelist[n], " in the candle holder (L).")
+            elif lcandlelist[n] == 1:
+                print("You may put out the ", candlelist[n], " in the candle holder (OUT).")
         print(scs, " or you may discontinue your investigation of the candle holder (D).")
         return 1
     else:
@@ -856,18 +862,16 @@ while  True:
                 print("You ascend the stairs into a room similar to the one below. There are no items of interest in the room.")
             else:
                 print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the room towards you.")
-                print("You must hold up a piece of equipment to protect yourself.")
-                tomrin = 1
-                tomrino = 0
-                while tomrin == 1:
-                    eqloss = random.choice(eqlist)
-                    if eqloss == "time bomb (TB)" or eqloss == "sticky banana bomb (SBB)" or eqloss == "invisibility potion (IP)" or eqloss == "strength potion (SP)":
-                        tomrin = 1
+                print("You may hold up a piece of equipment to protect yourself or not bother (NB).")
+                listweapons()
+                choice = str(input())
+                if choice in eqnames:
+                    ssdestroy(choice)
+                else:
+                    print("You have no appropriate equipment. The bottle contained acid and dealt you a severe injury.")
+                    if "medical kit (MK)" in eqlist:
+                        print("You are able to recover thanks to your medical kit.")
                     else:
-                        tomrin = 0
-                    tomrino = tomrino + 1
-                    if tomrino >= 1000:
-                        print("You have no appropriate equipment. The bottle contained acid and dealt you a severe injury.")
                         endgame(1)
                 destroy(eqloss)
                 print(eqloss, " is lost")
@@ -1088,8 +1092,14 @@ while  True:
                 print("Each wheel has four spokes with a marker attached to one of these.")
                 print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
                 print("Let the positions of each wheel be numbered clockwise from 1 to 4, starting with the upper position.")
-                screen[1] = int(input("Set position of upper wheel (1/2/3/4).   "))
-                screen[0] = int(input("Set position of lower wheel (1/2/3/4).   "))
+                screen[1] = input("Set position of upper wheel (1/2/3/4).   ")
+                screen[0] = input("Set position of lower wheel (1/2/3/4).   ")
+                if screen[0] not in ["1","2","3","4"] or screen[1] not in ["1","2","3","4"]:
+                    print("You have not entered valid wheel positions.")
+                    screen = [2,4]
+                else:
+                    screen[0] = int(screen[0])
+                    screen[1] = int(screen[1])
             elif choice == "L":
                 if "metal rod" in ulist:
                     print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
@@ -1357,10 +1367,13 @@ while  True:
                     if choice == "W":
                         listweapons()
                         choice = str(input()).upper()
-                        if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
+                        if choice == "WH"  or choice == "HOH" or choice == "PC":
                             print("You succesfully break down the door and enter the room but an alarm sounds.")
                             alert = alert + 1
                             loc = 59
+                        elif choice == "GB":
+                            destroy("golden blade (GB)")
+                            ("The golden blade is successful in breaking down the door but is too severely damaged to be of any further use.")
                         elif choice == "SBB":
                             print("The sticky banana bomb is ineffective in breaking down the door.")
                             destroy("sticky banana bomb (SBB)")
@@ -1412,7 +1425,7 @@ while  True:
                     choice = str(input()).upper()
                     if choice == "P":
                         print(eqlist)
-                        candleid = input("Which candle should be placed here?   ")
+                        candleid = input("Which candle should be placed here?  (enter name exactly as it appears in the equipment list)   ")
                         if candleid in eqlist:
                             destroy(candleid)
                             candlelist[2] = candleid
@@ -1424,6 +1437,9 @@ while  True:
                         if "matches" in eqlist:
                             print("You light the candle.")
                             lcandlelist[2] = 1
+                    elif choice == "OUT":
+                        print("You put the candle out.")
+                        lcandlelist[2] = 0
             else:
                 print("You notice nothing interesting about the candle holder.")
         elif choice == "P":
@@ -1541,9 +1557,11 @@ while  True:
         print("You are in a musty room with a low ceiling. There are a few boxes piled up against the far wall and nearby there is an interesting looking panel on the wall. You could investigate the contents of the boxes (B), investigate the panel (P) or withdraw from the room (W).")
         choice = str(input()).upper()
         if choice == "B":
-            print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box. You take these with you.")
             if "fuses" not in eqlist and "fuses" not in dlist:
+                print("You check the boxes and find that they contain scientific and electrical equipment. These items are all too heavy to add to your baggage apart from a selection of fuses which you notice near the top of the box. You take these with you.")
                 eqlist.append("fuses")
+            else:
+                print("You have already investigated the boxes.")
         elif choice == "P":
             if "magnetic fork (MF)" in ulist:
                 print("You have already collected the small wheel from the panel.")
@@ -1552,7 +1570,7 @@ while  True:
                 choice = str(input()).upper()
                 if choice == "I":
                     listweapons()
-                    choice = str(input("Which item do you want to use?   "))
+                    choice = str(input("Which item do you want to use?   ")).upper()
                     if choice == "MF" and "magnetic fork (MF)" in eqlist:
                         print("You attach the ends of the magnetic fork to the two discs and the panel slides upwards, revealing a small hollow containing a metal wheel. You decide to take this with you as it looks to be of significance.")
                         udestroy("magnetic fork (MF)")
@@ -1604,8 +1622,13 @@ while  True:
                     if "matches" in eqlist:
                         print("You light the candle.")
                         lcandlelist[1] = 1
+                elif choice == "OUT":
+                    print("You put the candle out.")
+                    lcandlelist[1] = 0
         elif choice == "D":
-            luck = random.randint(1,5)
+            luck = 2
+            if lowluck == 0:
+                luck = random.randint(1,5)
             if luck == 1:
                 print("You climb down but are injured in the process.")
                 if "medical kit (MK)" in eqlist:
@@ -1694,6 +1717,9 @@ while  True:
                         if "matches" in eqlist:
                             print("You light the candle.")
                             lcandlelist[0] = 1
+                    elif choice == "OUT":
+                        print("You put the candle out.")
+                        lcandlelist[0] = 0
             else:
                 print("You notice nothing interesting about the candle holder.")
         elif choice == "D":
@@ -1834,6 +1860,7 @@ while  True:
                     if choice == "CC":
                         print("You disactivate the security services.")
                         observe = 0
+                        alert = 0
                 else:
                     print("You do not know how to operate the control board.")
             elif choice == "S":
@@ -1941,11 +1968,10 @@ while  True:
             print("As you enter the room, a security robot lunges out at you. You must defend yourself.")
             listweapons()
             choice = str(input()).upper()
-            if "control card  (CC)" in eqlist and choice == "CC":
+            if "control card (CC)" in eqlist and choice == "CC":
                 print("You deactivate the robotic guard with your control card.")
-            elif "black dagger (BD)" in eqlist or "shortsword (SS)" in eqlist or "goldenblade(GB)" in eqlist or "helm of horror (HOH)" in eqlist or "large knife (LK)" in eqlist:
-                if choice == "BD" or choice == "SS" or choice == "GB" or choice == "HOH" or choice == "LK":
-                    print("You use your weapon to defeat the guard.")
+            elif choice == "BD" or choice == "SS" or choice == "GB" or choice == "HOH" or choice == "LK":
+                print("You use your weapon to defeat the guard.")
             elif "invisibility potion (IP)" in eqlist and choice == "IP":
                 print("You use your invisibility potion to sneak past the guard.")
                 udestroy("invisibility potion (IP)")
@@ -2264,7 +2290,7 @@ while  True:
     print()
     if choice == "GIVEUP":
         endgame(5)
-    elif choice == "MAP":
+    elif choice == "MAP" and "magical map (MM)" in eqlist:
         print("You consult the magical map")
         
 
