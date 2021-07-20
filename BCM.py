@@ -10,7 +10,7 @@ ask = "A"
 alert = 0
 observe = 1
 ncode = 0
-fcode = random.randint(0, 999) #cylindrical rooms
+fcode = random.randint(100, 999) #cylindrical rooms
 screen = [2, 4] #SN
 candlelist = ["", "", ""]
 lcandlelist = [0, 0, 0] #NCS
@@ -2150,7 +2150,7 @@ while  True:
         choice = str(input()).upper()
         if choice == "H":
             if "wooden rod" in ulist:
-                print("You have already inserted the wooden rod into the hole so you don not need to investigate it again.")
+                print("You have already inserted the wooden rod into the hole so you do not need to investigate it again.")
             elif "wooden rod" in eqlist:
                 print("You notice that the glyphs match those on the wooden rod. You may insert the wooden rod into the hole (I) or discontinue your investigation into the hole (D).")
                 choice = str(input()).upper()
