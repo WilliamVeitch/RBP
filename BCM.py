@@ -1088,11 +1088,8 @@ while  True:
                 print("Each wheel has four spokes with a marker attached to one of these.")
                 print("Currently, the marker of the upper wheel is in the ", poswheel(1), " position and that of the lower wheel is in the ", poswheel(0), "position.")
                 print("Let the positions of each wheel be numbered clockwise from 1 to 4, starting with the upper position.")
-                screen[1] = input("Set position of upper wheel (1/2/3/4).   ")
-                screen[0] = input("Set position of lower wheel (1/2/3/4).   ")
-                if screen[1] not in [1,2,3,4] or screen[0] not in [1,2,3,4]:
-                    print("You have not entered valid wheel positions.")
-                    screen = [2,4]
+                screen[1] = int(input("Set position of upper wheel (1/2/3/4).   "))
+                screen[0] = int(input("Set position of lower wheel (1/2/3/4).   "))
             elif choice == "L":
                 if "metal rod" in ulist:
                     print("You lift the glass cover. The lever can be in two positions, up (0) or down (1), and is currently in the ", poswheel(3), "position.")
