@@ -5,7 +5,7 @@
 "rusted keys"  From library (loc 26). Used in (loc 33) to gain access to control room (loc 38).
 "brass key"    From outside tower (loc 28). Used in kitchen (loc 42) to collect the "strange device".
 "iron key"     From west tower (loc 97). Used in (loc 74) to access astronomy tower (loc 79)
-"silver key"   From candle puzzle (loc 62). Used in (loc 50) to access bedroom 1 (loc 59).
+"silver key"   From candle puzzle (loc 62). Used in (loc 50) to access bedroom 1 (loc 59) and in (loc 58) to access bedroom 3 (loc 98).
 
 "green candle" From library (loc 26). Used in candle puzzle.
 "blue candle"  From dining room (loc 35). Used in candle puzzle.
