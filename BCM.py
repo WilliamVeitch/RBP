@@ -30,13 +30,15 @@ def inap():
     print("The item you have chosen is not appropriate for the current situation.")
 def equip():
     print("You possess ", eqlist)
+def ldestroy(n,li):
+    x = 0
+    while n in li
+        if li[x] == n:
+            del li[x]
+        x = x + 1
 def destroy(n):
     dlist.append(n)
-    x = 0
-    while n in eqlist:
-        if eqlist[x] == n:
-            del eqlist[x]
-        x = x + 1
+    ldestroy(n,eqlist)
 def udestroy(n):
     ulist.append(n)
     destroy(n)
@@ -1431,6 +1433,7 @@ while  True:
                             candlelist[2] = candleid
                     elif choice == "R":
                         eqlist.append(candlelist[2])
+                        ldestroy(candlelist[2],dlist)
                         lcandlelist[2] = 0
                         candlelist[2] = ""
                     elif choice == "L":
@@ -1617,6 +1620,7 @@ while  True:
                         candlelist[1] = candleid
                 elif choice == "R":
                     eqlist.append(candlelist[1])
+                    ldestroy(candlelist[1],dlist)
                     lcandlelist[1] = 0
                     candlelist[1] = ""
                 elif choice == "L":
@@ -1712,6 +1716,7 @@ while  True:
                             candlelist[0] = candleid
                     elif choice == "R":
                         eqlist.append(candlelist[0])
+                        ldestroy(candlelist[0],dlist)
                         lcandlelist[0] = 0
                         candlelist[0] = ""
                     elif choice == "L":
@@ -2010,11 +2015,7 @@ while  True:
         elif choice == "S":
             loc = 74
         if loc != 85:
-            x = 0
-            while "invisibility potion (IP)" in ulist:
-                if ulist[x] == "invisibility potion (IP)":
-                    del ulist[x]
-                x = x + 1
+            ldestroy("invisibility potion (IP)",ulist)
     elif loc == 80:
         print("You are in a corridor which runs from East to West. There is a junction with a North-South corridor to the West (W). There are two doors on this corridor, one to the North (N) and one to the South (S).")
         choice = str(input()).upper()
@@ -2264,6 +2265,8 @@ while  True:
         else:
             iktext = " or pick up an iron key from a hook on the wall (IK)."
         print("you are at the top of the West Tower and have a great view of the mansion. You can descend the staircase (D)", iktext)
+        if 20 in loclog:
+            print("You recognise this tower as the location of the mysterious device which caused you to crash the helicopter.")
         choice = str(input()).upper()
         if choice == "IK" and "iron key" not in eqlist and "iron key" not in dlist:
             print("You pick up the iron key")
@@ -2290,7 +2293,10 @@ while  True:
 
     print()
     if choice == "GIVEUP":
-        endgame(5)
+        print("Abort the mission? (y/N)")
+        choice = str(input()).upper()
+        if choice == "Y" or choice == "YES":
+            endgame(5)
     elif choice == "MAP" and "magical map (MM)" in eqlist:
         print("You consult the magical map")
         
