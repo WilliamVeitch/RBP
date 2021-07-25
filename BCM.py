@@ -32,7 +32,7 @@ def equip():
     print("You possess ", eqlist)
 def ldestroy(n,li):
     x = 0
-    while n in li
+    while n in li:
         if li[x] == n:
             del li[x]
         x = x + 1
