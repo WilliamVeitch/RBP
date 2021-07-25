@@ -2378,7 +2378,7 @@ while True:
                 risk2 = robotattack(lowluck)
                 if risk2[0] == 1:
                     ssdestroy(risk2[1])
-        elif lowluck == 1:
+    elif lowluck == 1:
         if alert == 2:
             print("You are attacked by a security robot of Crultney mansion.")
             robotattack(lowluck)
