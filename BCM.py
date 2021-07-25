@@ -118,12 +118,12 @@ def endgame(n):
     endtext = ["You failed to even reach the island that Crultney lives on.", "You reached Crultney's island but were unable to gain access to the mansion.", "You entered the mansion but were unable to complete your mission.", "You made it to the final scene but were unable to defeat your mysterious foe.", "Congratulations, you have completed the game.", "You gave up without completing your mission."]
     print(endtext[n])
     print("You collected: ", eqlist+dlist)
-    print("You collected " + str(len(eqlist)+len(dlist)) + " of 35 collectible items.")
+    print("You collected " + str(len(eqlist)+len(dlist)) + " of 35 collectible items (most in 1 game = 22).")
     uniloclog = list()
     for i in range(len(loclog)):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
-    print("You visited " + str(len(uniloclog)) + " of 99 locations.")
+    print("You visited " + str(len(uniloclog)) + " of 99 locations (most in 1 game = 91).")
     print("You took " + str(len(loclog)) + " turns.")
     end = input()
     end = input()
@@ -143,9 +143,69 @@ def inpint(msg):
         except ValueError:
             print("This is not a number. Please enter a valid number.")
     return(val)
+def robotattack(luckmode):
+    listweapons()
+    choice = str(input()).upper()
+    risk = 0
+    if choice == "BD":
+        risk = 3
+    elif choice == "TS":
+        risk = 1
+    elif choice == "IP":
+        risk = 1
+    elif choice == "GB":
+        risk = 6
+    elif choice == "SS":
+        risk = 4
+    elif choice == "SOS":
+        risk = 5
+    elif choice == "HOH":
+        risk = 3
+    elif choice == "SP":
+        risk = 1
+    elif choice == "WH":
+        risk = 3
+    elif choice == "SBB":
+        risk = 1
+    elif choice == "PC":
+        print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
+        endgame(2)
+    elif choice == "CBD":
+        print("The complex brain destroyer does not work on machines. You are struck down by the robotic guard.")
+        endgame(2)
+    elif choice == "EC":
+        crystsample = crystal()
+        if crystsample == "success":
+            risk = 1
+        elif crystsample == "failure":
+            print("The crystal has no effect on the robotic guard and you are struck down.")
+        if crystsample != "success":
+            endgame(2)
+    elif choice == "LK":
+        risk = 2
+    elif choice == "CC":
+        risk = 100
+    if risk == 0:
+        print("You fail to defeat the robotic guard and are struck down.")
+        endgame(2)
+    elif risk == 100:
+        print("You turn off the robotic guard with the control card.")
+    elif luckmode == 0:
+        if random.randint(1, risk) == 1:
+            print("You defeat the robotic guard, but your weapon is destroyed.")
+            return [1,choice]
+        else:
+            print("You defeat the robotic guard.")
+    elif luckmode == 1:
+        if risk <= alert:
+            print("You defeat the robotic guard, but your weapon is destroyed.")
+            return [1,choice]
+        else:
+            print("You defeat the robotic guard.")
+    return [0,0]
 
 
-while  True:
+while True:
     loclog.append(loc)
     if loc == 1:
         print("Enable low-luck mode? (y/N)")
@@ -1858,7 +1918,7 @@ while  True:
             print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
             choice = str(input()).upper()
             if choice == "A":
-                print("The alert screen shows that the alert level is currently ", alert, ". An alert level of 4 sends the mansion into lockdown and an alert level of 2 or 3 increases the activity of the mansion's robotic guards.")
+                print("The alert screen shows that the alert level is currently ", str(round(alert)), ". An alert level of 4 sends the mansion into lockdown and an alert level of 2 or 3 increases the activity of the mansion's robotic guards.")
             elif choice == "C":
                 if "control card (CC)" in eqlist and observe == 1:
                     print("You may turn off the mansion's security system using the control card (CC) or you may discontinue your investigation into the control board (D).")
@@ -2305,65 +2365,36 @@ while  True:
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
-    elif alert == 3:
-        rprob = 6
-    elif alert == 2:
-        rprob = 12
-    if "sticky banana bomb (SBB)" in ulist:
-        rprob = rprob * 2
-    if alert >= 2 and observe == 1:
-        if (lowluck == 0 and random.randint(1, rprob) == 1) or (lowluck == 1 and alert ==3):
+    if lowluck == 0:
+        if alert == 3:
+            rprob = 6
+        elif alert == 2:
+            rprob = 12
+        if "sticky banana bomb (SBB)" in ulist:
+            rprob = rprob * 2
+        if alert >= 2 and observe == 1:
+            if random.randint(1, rprob) == 1:
+                print("You are attacked by a security robot of Crultney mansion.")
+                risk2 = robotattack(lowluck)
+                if risk2[0] == 1:
+                    ssdestroy(risk2[1])
+        elif lowluck == 1:
+        if alert == 2:
             print("You are attacked by a security robot of Crultney mansion.")
-            if lowluck == 1:
-                alert = 2
-            listweapons()
-            choice = str(input()).upper()
-            risk = 0
-            if choice == "BD":
-                risk = 3
-            elif choice == "TS":
-                risk = 1
-            elif choice == "IP":
-                risk = 1
-            elif choice == "GB":
-                risk = 6
-            elif choice == "SS":
-                risk = 4
-            elif choice == "SOS":
-                risk = 5
-            elif choice == "HOH":
-                risk = 3
-            elif choice == "SP":
-                risk = 1
-            elif choice == "WH":
-                risk = 3
-            elif choice == "SBB":
-                risk = 1
-            elif choice == "PC":
-                print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
-                endgame(2)
-            elif choice == "CBD":
-                print("The complex brain destroyer does not work on machines. You are struck down by the robotic guard.")
-                endgame(2)
-            elif choice == "EC":
-                crystsample = crystal()
-                if crystsample == "success":
-                    risk = 1
-                elif crystsample == "failure":
-                    print("The crystal has no effect on the robotic guard and you are struck down.")
-                if crystsample != "success":
-                    endgame(2)
-            elif choice == "LK":
-                risk = 2
-            elif choice == "CC":
-                risk = 100
-            if risk == 0:
-                print("You fail to defeat the robotic guard and are struck down.")
-                endgame(2)
-            elif risk == 100:
-                print("You turn off the robotic guard with the control card.")
-            elif random.randint(1, risk) == 1:
-                ssdestroy(choice)
-                print("You defeat the robotic guard, but your weapon is destroyed.")
-            else:
-                print("You defeat the robotic guard.")
+            robotattack(lowluck)
+            
+            alert = 2.4
+        elif alert == 3.4:
+            alert = 3
+            print("You are attacked by two security robots simultaneously.")
+            print("You fight the first robot.")
+            risk2 = robotattack(lowluck)
+            if risk2[0] == 1:
+                ssdestroy(risk2[1])
+            print()
+            print("You fight the second robot.")
+            robotattack(lowluck)
+            if risk2[0] == 1:
+                ssdestroy(risk2[1])
+            
+
