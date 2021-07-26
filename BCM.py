@@ -713,13 +713,15 @@ while True:
                             choice = str(input()).upper()
                             if choice == "L":
                                 if towerpos == "G":
-                                udestroy("stone rod")
-                                print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
-                                print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
-                                print("You take the rods.")
-                                eqlist.append("wooden rod")
-                                eqlist.append("metal rod")
-                                print("You also look in the book and find that it is about Crultney mansion but much of it is in a language you cannot understand.")
+                                    udestroy("stone rod")
+                                    print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
+                                    print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
+                                    print("You take the rods.")
+                                    eqlist.append("wooden rod")
+                                    eqlist.append("metal rod")
+                                    print("You also look in the book and find that it is about Crultney mansion but much of it is in a language you cannot understand.")
+                                else:
+                                    print("You find your way blocked by a stone panel. Grooves in the panel suggest that it is has been moved before, though you do not have the strength to move it.")
     elif loc == 26:
         print("You are in a cylindrical room with bookshelves all the way along the wall except for a gap in the East where there is a fireplace.")
         if 21 in findconnect(26):
@@ -2363,8 +2365,11 @@ while True:
         elif loc <= 22:
             print("The magical map appears to suggest that approaching Crultney's Island from the North would be the most direct way to gain access to the mansion.")
         elif loc <= 25 or loc == 30:
-            print("The map indicates that you must break through the barbed wire fence in order to access the mansion.)
-                  
+            print("The map indicates that you must break through the barbed wire fence in order to access the mansion.")
+        elif loc == 27:
+            print("According to the magical map, the door before you leads to the main entrance corridor and the window above you on the first floor is that of the bathroom.")
+        else:
+            print("")
         print()
 
     rprob = 0
