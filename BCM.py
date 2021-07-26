@@ -329,7 +329,7 @@ while True:
             loc = 7
     elif loc == 6:
         print("Geelophisis tells you that Crultney Mansion is 4 storeys high and also has a set of underground rooms. He tells you that the mansion is situated on an island and the easiest way to access it is by first travelling to Ooville and then departing for the island in a smaller vessel. He warns you also that Crultney is paranoid and will have made it difficult to gain access to his mansion.")
-        print("Geelophisis also offers for you to travel in his helicopter to the mansion if you do not want to follow this advice. However, Geelophisis is a very busy monkey at the moment so you would have to fly the helicopter yourself.")
+        print("Geelophisis also offers for you to travel in his helicopter to the mansion if you do not want to follow his advice. However, Geelophisis is a very busy monkey at the moment so you would have to fly the helicopter yourself.")
         choice = str(input("Type 'H' if you travel in the helicopter or type 'P' if you go to the port to find the ship to Ooville.   ")).upper()
         if choice == "H":
             loc = 10
@@ -339,8 +339,6 @@ while True:
         print("You arrive at the port and see many ships which you could use to get to Crultney Mansion.")
         print("You could travel for free on the ship to Ooville (O) or you could travel for 2 banana coins on a boat going directly to Crultney's Island (C).")
         print("You have ", coins, "banana coins")
-        if "magical map (MM)" in eqlist:
-            print("You may also consult the magical map (MM).")
         choice = str(input()).upper()
         if choice == "O":
             loc = 11
@@ -350,14 +348,12 @@ while True:
                 print("You get on the ferry without a valid ticket due to your insufficient funds. The ferry diverts to Ooville because of a storm and you are seized by police upon your arrival there.")
                 endgame(0)
             loc = 12
-        elif choice == "MM" and "magical map (MM)" in eqlist:
-            print("The magical map appears to suggest that the wisest course of action would be to take the ship to Ooville.")
     elif loc == 8:
-        print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons. They tell you that the mansion is situated on an island near Ooville.")
+        print("The ninja leaders tell you that there will likely be many robots in Crultney Mansion and these will be difficult to fight with conventional ninja weapons. Therefore they advise you to visit the Gaurilis army base in Ooville in order to obtain more suitable weapons. The leaders tell you that you should then seek to travel by boat from Ooville to the mansion, which is located on a nearby island.")
         print("You now travel to the port.")
         loc = 7
     elif loc == 9:
-        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that the mansion is located on an island near Ooville and that Crultney's main living and work areas are on the second floor of the mansion.")
+        print("You arrive at Furfoot's Palace but he tells you that he does not have much advice to give you. However, he can tell you that the mansion is located on an island near Ooville and that it has an elaborate security system. He adds that if you feel that your safety is endangered, you may type GIVEUP and a team will be dispatched to rescue you. This will, however, result in failure of the mission.")
         print("After the meeting with Furfoot, you find a banana coin on the ground near the palace and you put this in your pocket.")
         coins = coins + 1
         print("You now travel to the port.")
@@ -456,8 +452,6 @@ while True:
     elif loc == 17:
         print(islandtext)
         print("You are approaching the island from the South and you can see a small pier directly ahead of you (P) and a sandy beach to the East (B). Alternatively, you could circle around the island to the North side (N).")
-        if "magical map (MM)" in eqlist:
-            print("You may also consult the magical map (MM).")
         choice = str(input()).upper()
         if choice == "P":
             loc = 24
@@ -466,8 +460,6 @@ while True:
             print("You disembark from the boat and climb out onto the beach.")
         elif choice == "N":
             loc = 21
-        elif choice == "MM" and "magical map (MM)" in eqlist:
-            print("The magical map appears to suggest that circling around to the North would be the most direct way to gain access to the mansion.")
     elif loc == 18:
         print("You carry on through the stormy weather but some of your equipment is washed overboard by the waves.")
         text6 = random.choice(eqlist)
@@ -541,7 +533,7 @@ while True:
                 inap()
         elif choice == "S":
             loc = 17
-        elif choice == "R":
+        elif choice == "R" and "super strong rope (SSR)" in eqlist:
             print("Do you climb the cliffs to the West (W) or the East (E)?")
             choice = str(input()).upper()
             print("You create a loop in the rope and throw it so that it wraps around a large stone at the top of the cliff.")
@@ -710,7 +702,7 @@ while True:
                 choice = str(input()).upper()
                 if choice == "S":
                     print("The stone looks rather old and worn. There are some strange symbols on the stone but they are difficult to read and understand.")
-                    if "stone rod" in eqlist and towerpos == "G":
+                    if "stone rod" in eqlist:
                         print("You notice that the symbols on the stone are similar to those on the stone rod given to you by Geelophisis.")
                         print("You can attempt to insert the rod into the hole in the stone (S) or abandon your examination of the stone (A).")
                         choice = str(input()).upper()
@@ -720,6 +712,7 @@ while True:
                             print("You can descend the ladder (L) or withdraw from the garden (W).")
                             choice = str(input()).upper()
                             if choice == "L":
+                                if towerpos == "G":
                                 udestroy("stone rod")
                                 print("You descend into a small chamber of stone. The only furniture is a wooden table with a large book upon it and a cabinet mounted to the wall.")
                                 print("you look in the cabinet and find 2 rods, similar to the stone one you used to possess, hanging on hooks. These rods are of metal and wood. but there are two more hooks with no rods hanging on them.")
@@ -1435,15 +1428,20 @@ while True:
                             loc = 59
                         elif choice == "GB":
                             destroy("golden blade (GB)")
-                            ("The golden blade is successful in breaking down the door but is too severely damaged to be of any further use.")
+                            print("The golden blade is successful in breaking down the door but is too severely damaged to be of any further use. As you enter the room, an alarm sounds.")
+                            alert = alert + 1
+                            loc = 59
                         elif choice == "SBB":
                             print("The sticky banana bomb is ineffective in breaking down the door.")
                             destroy("sticky banana bomb (SBB)")
-                        elif choice == "TB":
-                            print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
-                            destroy("time bomb (TB)")
+                        elif choice == "TB" or choice == "SP":
+                            print("You successfully break down the door and you enter the room. However, an alarm sounds.")
+                            ssdestroy(choice)
                             alert = alert + 1
                             loc = 59
+                        elif choice == "LK" or choice == "BD" or choice == "SS":
+                            print("Your weapon is not strong enough to break the door and is destroyed.")
+                            ssdestroy(choice)
                         elif choice == "EC":
                             crystsample = crystal()
                             if crystsample == "success":
@@ -1956,6 +1954,7 @@ while True:
                         print("You successfully break down the door and enter the room but the warhammer is irreparably damaged and an alarm sounds.")
                         destroy("warhammer (WH)")
                         alert = alert + 1
+                        loc = 79
                     elif choice == "PC":
                         print("You successfully break down the door and an alarm sounds. You enter the room.")
                         alert = alert + 1
@@ -2359,7 +2358,14 @@ while True:
             endgame(5)
     elif choice == "MAP" and "magical map (MM)" in eqlist:
         print("You consult the magical map")
-        
+        if loc <= 10 or loc == 12:
+            print("The magical map warns of a storm near the mansion and suggests that it would be best to travel to Ooville and wait there until the bad weather passes.")
+        elif loc <= 22:
+            print("The magical map appears to suggest that approaching Crultney's Island from the North would be the most direct way to gain access to the mansion.")
+        elif loc <= 25 or loc == 30:
+            print("The map indicates that you must break through the barbed wire fence in order to access the mansion.)
+                  
+        print()
 
     rprob = 0
     if alert >= 4 and observe >= 1:
