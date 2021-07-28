@@ -648,7 +648,10 @@ while True:
                         inap()
         elif choice == "W":
             print("The tower is two storeys high and to the West of the tower is an impassable rock formation.")
-            print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
+            if 28 in loclog:
+                print("You could enter the tower through the door (H) or go to the East (E).")
+            else:
+                print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
             choice = str(input()).upper()
             if choice == "H":
                 print("The door opens with a loud creaking noise. You enter the tower.")
@@ -931,9 +934,8 @@ while True:
                         print("You are forced to abort the mission and seek medical attention.")
                         endgame(1)
                 print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
-                print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and exit the tower.")
+                print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and return to the ground floor.")
                 eqlist.append("brass key")
-                print("You return to the ground floor.")
     elif loc == 29:
         print("You are in a corridor which runs from North to South. To the North, there is a grey door leading into a room (N). To the South, there is a junction with two passages leading off it, one to the East (E) and one to the South (S).")
         print("There is also an old, brown door in the East wall of the corridor (BD).")
@@ -2373,7 +2375,7 @@ while True:
     if alert >= 4 and observe >= 1:
         print("You hear a long continuous alarm and notice that all doors have locked and that your passage through the mansion has become impossible.")
         endgame(2)
-    if lowluck == 0:
+    if lowluck == 0 and loc >= 30:
         if alert == 3:
             rprob = 6
         elif alert == 2:
@@ -2390,7 +2392,6 @@ while True:
         if alert == 2:
             print("You are attacked by a security robot of Crultney mansion.")
             robotattack(lowluck)
-            
             alert = 2.4
         elif alert == 3.4:
             alert = 3
@@ -2401,7 +2402,7 @@ while True:
                 ssdestroy(risk2[1])
             print()
             print("You fight the second robot.")
-            robotattack(lowluck)
+            risk2 = robotattack(lowluck)
             if risk2[0] == 1:
                 ssdestroy(risk2[1])
             
