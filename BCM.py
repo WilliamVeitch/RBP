@@ -17,14 +17,13 @@ lcandlelist = [0, 0, 0] #NCS
 wcollect = [0, 0]
 loclog = list()
 bathwater = [0, 0] #lever, water (on = 0, off = 1)
-stairrobot = 1
+stairrobot = 1 #loc 34
 wunlock = 0
 craneunlock = 0 #locs 46 and 48
 smallwheels = 0
 towerpos = "G"
 arm87 = 1 #loc 87
 eqnames = ["BD","TS","IP","GB","TB","SSR","SS","SOS","SP","WH","PC","CBD","MM","EC","SBB","MK","HOH","MF","LK","CC"]
-towertext = "Your weapon successfully destroys the door and you walk in."
 islandtext = "The island is small and the main feature is the mansion which looks majestic and intimidating. You can see a barbed wire fence surrounding this side of the mansion."
 def inap():
     print("The item you have chosen is not appropriate for the current situation.")
@@ -289,9 +288,9 @@ while True:
             if ask == "CBD":
                 print("Geelophisis tells you that the current version of the CBD is much safer than the prototype used in the 1960s. He says that it should only be used on intelligent opponents with larger brains as this makes it easier for the CBD to identify them.")
             elif ask == "IP":
-                print("Geelophisis tells you that this is the standard invisibility potion used by the ninjas in Oland and it makes the user invisible for 2 minutes.")
+                print("Geelophisis tells you that this is the standard invisibility potion used by the ninjas in Oland and it makes the user invisible for 2 minutes. The bottle includes only one dose as an overdose can have serious health implications.")
             elif ask == "SP":
-                print("Geelophisis tells you that this invention grants a sudden burst of extreme strength to the user for a short period of time.")
+                print("Geelophisis tells you that this invention grants a sudden burst of extreme strength to the user for a short period of time. The bottle includes only one dose as an overdose can have serious health implications.")
             elif ask == "MM":
                 print("Geelophisis tells you that this invention will allow you to find your way to any place. You may consult it by typing MAP.")
             elif ask == "EC":
@@ -455,6 +454,7 @@ while True:
         choice = str(input()).upper()
         if choice == "P":
             loc = 24
+            print("You disembark at the pier.")
         elif choice == "B":
             loc = 23
             print("You disembark from the boat and climb out onto the beach.")
@@ -487,7 +487,7 @@ while True:
         if choice == "W":
             listweapons()
             choice = str(input()).upper()
-            if choice == "BD" or choice == "GB" or choice == "WH":
+            if choice == "BD" or choice == "GB" or choice == "WH" or choice == "HOH":
                 print("The window shatters and an alarm sounds. You enter the room.")
                 alert = alert + 1
                 loc = 26
@@ -500,35 +500,34 @@ while True:
                 print("Unfortunately, the glass of this window is reinforced so the throwing stars bounce off and fall into the sea.")
                 destroy("throwing stars (TS)")
             elif choice == "TB":
-                print("You place the bomb and duck back down into the boat. A few seconds later, a loud explosion occurs and an alarm sounds nside the mansion. You walk into the room through the large hole that has beeen created in the window.")
+                print("You place the bomb and duck back down into the boat. A few seconds later, a loud explosion occurs and an alarm sounds inside the mansion. You walk into the room through the large hole that has beeen created in the window.")
                 destroy("time bomb (TB)")
                 alert= alert + 1
                 loc = 26
             elif choice == "PC":
                 loc = 26
                 print("You load the cannon and fire at the window. The window shatters and an alarm sounds. You enter the room.")
+                alert = alert + 1
+            elif choice == "SP":
+                loc = 26
+                print("With the supreme strength granted by the potion, you are able to smash through the window. You enter the room and an alarm sounds as you do so.")
+                destroy("strength potion (SP)")
             elif choice == "EC":
                 crystsample = crystal()
                 if  crystsample == "success":
                     print("The window is incinerated and an alarm sounds. You enter the room.")
+                    alert = alert + 1
                     loc = 26
                 elif crystsample == "failure":
                     destroy("energy crystal (EC)")
                     print("After the improper use, the crystal falls into the sea.")
                 elif crystsample == "big failure":
                     endgame(1)
-            elif choice == "CBD":
-                inap()
             elif choice == "SBB":
                 print("You pull the bomb out of your pocket and place it near the window but it explodes before you can take cover.")
                 print("The window shatters and an alarm sounds. Unfortunately you are injured by the bomb and the broken glass.")
-                if "medical kit (MK)" in eqlist:
-                    print("Since you have a medical kit, you use it and after recovering, you enter the room.")
-                    destroy("medical kit (MK)")
-                    loc = 26
-                else:
-                    print("Your injuries are too great to continue. You return to Ooville and Crultney is never seen again.")
-                    endgame(1)
+                print("Your injuries are too great to continue. You return to Ooville to seek medical treatment and Crultney is never seen again.")
+                endgame(1)
             else:
                 inap()
         elif choice == "S":
@@ -652,20 +651,20 @@ while True:
             print("The door to the tower is old and wooden with a rusty keyhole. You could try the handle (H), try to force the door open with a weapon (W) or go to the East (E).")
             choice = str(input()).upper()
             if choice == "H":
-                print("The door opens with a loud creaking noise.")
+                print("The door opens with a loud creaking noise. You enter the tower.")
                 loc = 28
             elif choice == "W":
                 listweapons()
                 choice = str(input()).upper()
-                if choice == "SS" or choice == "GB" or choice == "WH" or choice == "PC" or choice == "HOH":
-                    print(towertext)
+                if choice == "SS" or choice == "GB" or choice == "WH" or choice == "PC" or choice == "HOH" or choice == "BD":
+                    print("Using your weapon, you are able to force open the door. You enter the tower.")
                     loc = 28
+                elif choice == "LK":
+                    print("Your weapon is not strong enough to force open the door and is destroyed.")
+                    destroy("large knife (LK)")
                 elif choice == "TB" or choice == "SBB" :
-                    if choice == "TB":
-                        destroy("time bomb (TB)")
-                    elif choice == "SBB":
-                        destroy("sticky banana bomb (SBB)")
-                    print(towertext)
+                    ssdestroy(choice)
+                    print("The explosion of the bomb destroys the door and you enter the tower.")
                     loc = 28
                 elif choice == "SP":
                     destroy("strength potion (SP)")
@@ -674,7 +673,7 @@ while True:
                 elif choice == "EC":
                     crystsample = crystal()
                     if crystsample == "success":
-                        print(towertext)
+                        print("The blast of energy from the crystal destroys the door and you enter the tower.")
                         loc = 28
                     elif crystsample == "failure":
                         print("You used the crystal improperly.")
@@ -846,11 +845,11 @@ while True:
                         destroy("large knife (LK)")
                         print("Your weapon is destroyed on contact with the door but it does damage the door enough for you to be able to enter the shed.")
                         loc = 39
-                    elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC" or choice == "SS":
+                    elif choice == "GB" or choice == "WH" or choice == "HOH" or choice == "PC" or choice == "SS" or choice == "BD" or choice == "TS":
                         print("your weapon succeeds in breaking down the door and you enter the shed.")
                         loc = 39
-                    elif choice == "TB":
-                        destoy("time bomb (TB)")
+                    elif choice == "TB" or choice == "SBB":
+                        ssdestroy(choice)
                         print("The bomb works and you enter the shed.")
                         loc = 39
                     elif choice == "EC":
@@ -929,19 +928,17 @@ while True:
                     if "medical kit (MK)" in eqlist:
                         print("You are able to recover thanks to your medical kit.")
                     else:
+                        print("You are forced to abort the mission and seek medical attention.")
                         endgame(1)
-                destroy(eqloss)
-                print(eqloss, " is lost")
                 print("The bottle contained acid and your equipment was destroyed. The bottle was launched from a spring powered mechanism that detected the opening of the door into the room.")
                 print("You look around the room and see that it is very similar to the downstairs room. However, you do notice a small brass key hanging from the wall. You take the key and exit the tower.")
                 eqlist.append("brass key")
-                print("You return to the path near the fence.")
-            loc = 24
+                print("You return to the ground floor.")
     elif loc == 29:
-        print("You are in a corridor which runs from North to South. To the North, there is a grey door leading into a room (GD). To the South, there is a junction with two passages leading off it, one to the East (E) and one to the South (S).")
+        print("You are in a corridor which runs from North to South. To the North, there is a grey door leading into a room (N). To the South, there is a junction with two passages leading off it, one to the East (E) and one to the South (S).")
         print("There is also an old, brown door in the East wall of the corridor (BD).")
         choice = str(input()).upper()
-        if choice == "GD":
+        if choice == "N":
             loc = 26
         elif choice == "E":
             loc = 31
@@ -2369,7 +2366,7 @@ while True:
         elif loc == 27:
             print("According to the magical map, the door before you leads to the main entrance corridor and the window above you on the first floor is that of the bathroom.")
         else:
-            print("")
+            print("Consulting the magical map, you find that the mansion has two towers, the astronomy tower in the north and another tower to the west. You also observe that the main spiral staircase is located in the north-east.")
         print()
 
     rprob = 0
