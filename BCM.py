@@ -5,7 +5,6 @@ coins = 8
 eqlist = list()
 dlist = list()
 ulist = list()
-swicob = "0" #loc 24
 ask = "A"
 alert = 0
 observe = 1
@@ -600,13 +599,8 @@ while True:
                 print("You may also retreat to the South (R).")
                 choice = str(input()).upper()
                 if choice == "H":
-                    swicobs = random.randint(1000, 9999)
-                    if swicob != str(swicobs):
-                        print("The gate will not open and an alarm sounds.")
-                        alert = alert + 1
-                    elif swicob == swicobs and alert <= 2:
-                        print("The gate opens and you walk up to the front of the mansion.")
-                        loc = 27
+                    print("The gate will not open and an alarm sounds.")
+                    alert = alert + 1
                 elif choice == "S":
                     print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
                     print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
@@ -614,7 +608,7 @@ while True:
                     if choice == "W":
                         print("You withdraw.")
                     else:
-                        swicob = choice
+                        print("You set the switches and withdraw.")
                 elif choice == "PC":
                     print("The cannon destroys the gate. However, you hear an alarm sound from inside the mansion so you advance towards the mansion cautiously.")
                     alert = alert + 1
@@ -743,22 +737,27 @@ while True:
             print("The book into which this is inserted is very old and the text makes little sense to you.")
         elif choice == "F":
             print("You crawl into the fireplace and find a narrow passage to the side. The passage leads up to a small black door with no handle.")
-            print("There is a lever for opening the door but the handle is missing and it is too heavy to move without the handle.")
-            print("You can withdraw into the room (W) or use an object in your possesion to stand in for the handle (H).")
+            print("Next to the door is a panel with seven buttons labelled with the days of the week. Below this, there is a plaque on the wall, which you now read:")
+            print("'Boris told me yesterday that the previous day was a ", random.choice(["Monday","Tuesday","Friday","Sunday"]), ". I know that he always tells lies at the weekend and is truthful on other days. Today he told me that he had been lying yesterday. What day is it today?'")
+            print("You may press one of the buttons (P) or withdraw into the cylindrical room (W).")
             choice = str(input()).upper()
-            if choice == "H":
-                if "shortsword (SS)" in eqlist or "metal rod" in eqlist or "large knife (LK)" in eqlist or "golden blade (GB)" in eqlist or "stone rod" in eqlist or "wooden rod" in eqlist:
-                    print("You find a suitable item and open the door.")
-                    print("The room is very small and you have to crouch down to get in.")
+            if choice == "P":
+                print("Which button do you press? (MO/TU/WE/TH/FR/SA/SU)")
+                choice = str(input()).upper()
+                if choice == "MO":
+                    print("You press the button and the door swings open. The room  beyond is very small and you have to crouch down to get in.")
                     if "rusted keys" not in eqlist and "rusted keys" not in dlist:
                         print("In the room is a low wooden table with a green candle and a set of rusted keys on it.")
                         print("You take the items and withdraw into the cylindrical room.")
                         eqlist.append("green candle")
                         eqlist.append("rusted keys")
                     else:
-                        print("There are no items of interest in the room.")
+                        print("There are no items of interest in the room so you withdraw.")
+                elif choice in ["TU","WE","TH","FR","SA","SU"]:
+                    print("You press the button and an alarm sounds. You withdraw into the cylindrical room.")
+                    alert = alert + 1
                 else:
-                    print("You have no suitable items so you withdraw into the cylindrical room.")
+                    print("Invalid input")
 
     elif loc == 27:
         if lastloc() == 32:
@@ -1382,7 +1381,6 @@ while True:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). There is also a small depression in the centre of the room which you could examine (D).")
         choice = str(input()).upper()
         if choice == "N":
-            acloc = 47
             loc = screencheck(55, 3, 0)
         elif choice == "E":
             loc = 56
@@ -1521,11 +1519,12 @@ while True:
             loc = 45
     elif loc == 54:
         print("You open the door but find your way blocked by a metal screen so you return to the room.")
-        loc = acloc
+        loc = lastloc()
+        if loc == 68 or loc == 70:
+            loc = loclog[len(loclog)-3]
     elif loc == 55:
         print("You are standing in a small, cylindrical room with a low ceiling and doors leading off towards each of the cardinal compass directions (N, E, S, W). The room has no features worthy of further investigation.")
         choice = str(input()).upper()
-        acloc = 55
         if choice == "N":
             loc = screencheck(68, 1, 0)
         elif choice == "E":
@@ -1579,18 +1578,20 @@ while True:
                 if choice == "W":
                     listweapons()
                     choice = str(input()).upper()
-                    if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC":
+                    if choice == "GB" or choice == "WH"  or choice == "HOH" or choice == "PC" or choice == "SS":
                         print("You succesfully break down the door and enter the room but an alarm sounds.")
                         alert = alert + 1
                         loc = 98
                     elif choice == "SBB":
                         print("The sticky banana bomb is ineffective in breaking down the door.")
                         destroy("sticky banana bomb (SBB)")
-                    elif choice == "TB":
-                        print("The time bomb successfully breaks down the door and you enter the room. However, an alarm sounds.")
-                        destroy("time bomb (TB)")
+                    elif choice == "TB" or choice == "SP":
+                        print("You successfully breaks down the door and you enter the room. However, an alarm sounds.")
+                        ssdestroy(choice)
                         alert = alert + 1
                         loc = 98
+                    elif choice == "BD" or choice == "LK" or choice == "TS":
+                        print("Your weapon is not strong enough to break down the door.")
                     elif choice == "EC":
                         crystsample = crystal()
                         if crystsample == "success":
@@ -1606,7 +1607,7 @@ while True:
         elif choice == "W":
             loc = 74
     elif loc == 59:
-        print("You are in a large bedroom with a wooden wardrobe (W) and a door to the North (N).")
+        print("You are in a large bedroom with a wooden wardrobe (W), a bookcase (B), and a door to the North (N).")
         choice = str(input()).upper()
         if choice == "W":
             if wcollect[1] == 0:
@@ -1615,6 +1616,9 @@ while True:
                 smallwheels = smallwheels + 1
             else:
                 print("There is nothing else of interest in the wardrobe.")
+        elif choice == "B":
+            print("You read an extract from one of the books:")
+            print("")
         elif choice == "N":
             loc = 50
     elif loc == 60:
@@ -1625,7 +1629,7 @@ while True:
         elif choice == "S":
             loc = 51
     elif loc == 61:
-        print("You are in a musty room with a low ceiling. There are a few boxes piled up against the far wall and nearby there is an interesting looking panel on the wall. You could investigate the contents of the boxes (B), investigate the panel (P) or withdraw from the room (W).")
+        print("You are in a musty room with a low ceiling. There are a few boxes piled up against the far wall and nearby there is an interesting looking panel on the wall. You could investigate the contents of the boxes (B), investigate the panel (P) or withdraw from the room using the door to the North (N).")
         choice = str(input()).upper()
         if choice == "B":
             if "fuses" not in eqlist and "fuses" not in dlist:
@@ -1656,20 +1660,18 @@ while True:
                         ssdestroy(choice)
                     else:
                         print("Unfortunately, you were unable to remove the discs.")
-        elif choice == "W":
+        elif choice == "N":
             loc = 51
     elif loc == 62:
-        ccs = ""
-        if len(candlelist[1]) > 3:
-            ccs = ""
         print("You are standing in the centre of a balcony which overlooks a courtyard to the West. To the North and South (N and S), the balcony turns such that it becomes perpendicular to the part on which you currently stand. In the centre of the North-South part of the balcony is a large stone cuboid upon which stands an elaborate candle holder (C). You could attempt to climb down into the courtyard below (D) but there may be safer places nearby to do this. There is also a door to the East (E).")
         if lcandlelist == [1, 1, 1]:
-            lcandlelist = [0, 0, 0]
             if candlelist == ["red candle", "green candle", "blue candle"]:
-                print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
-                eqlist.append("silver key")
+                if "silver key" not in eqlist and "silver key" not in dlist:
+                    print("You notice that a hidden door in the stone cube has swung aside to reveal a small chamber. Inside the chamber is a silver key which you take with you.")
+                    eqlist.append("silver key")
             else:
                 print("An alarm sounds. You assume this is due to your lighting of the candles so you quickly extinguish them.")
+                lcandlelist = [0, 0, 0]
                 alert = alert + 1
         choice = str(input()).upper()
         if choice == "N":
@@ -1705,7 +1707,6 @@ while True:
                 print("You climb down but are injured in the process.")
                 if "medical kit (MK)" in eqlist:
                       print("Since you have a medical kit you use it and are able to continue with your investigation of the mansion.")
-                      destroy("medical kit (MK)")
                 else:
                     print("You are so severely injured that you must abort your mission")
                     endgame(2)
@@ -1720,7 +1721,6 @@ while True:
     elif loc == 63:
         print("You are in a small, cylindrical room with doors leading off towards the East, South and West (E, S and W). The room has no other noteworthy features.")
         choice = str(input()).upper()
-        acloc = 63
         if choice == "E":
             loc = screencheck(69, 2, 1)
         elif choice == "S":
@@ -1753,9 +1753,9 @@ while True:
             print("You open the door and descend a narrow staircase.")
             loc = 60
     elif loc == 66:
-        print("You are in a corridor which runs from North to South. To the North there is a white door (WD). To the East there is a brown door (BD) and South of this is another corridor leading off to the East (E). To the South there is a junction with passages leading to the South (S) and West (W).")
+        print("You are in a corridor which runs from North to South. To the North there is a white door (N). To the East there is a brown door (BD) and South of this is another corridor leading off to the East (E). To the South there is a junction with passages leading to the South (S) and West (W).")
         choice = str(input()).upper()
-        if choice == "WD":
+        if choice == "N":
             loc = 75
         elif choice == "BD":
             loc = 73
@@ -1766,7 +1766,7 @@ while True:
         elif choice == "W":
             loc = 77
     elif loc == 67:
-        print("You are standing on the Northern side of  a balcony which overlooks a courtyard below. To the East, the balcony turns to the South (S). A yellow tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder. There is also a door to the North.")
+        print("You are standing on the Northern side of a balcony which overlooks a courtyard below. To the East, the balcony turns to the South (S). A yellow tile is set into the wall on the corner between the East-West part of the balcony, which you are currently standing on, and the North-South part of the balcony. On the part of the balcony upon which you stand, there is a small bench and an elaborate candle holder. There is also a door to the North.")
         print("You can go South along the balcony (S), investigate the candle holder (C), climb down into the coutyard (D) or go through the door to the North (N).")
         choice = str(input()).upper()
         if choice == "S":
@@ -2117,7 +2117,6 @@ while True:
         elif choice == "D":
             print("At the bottom of the depression, you find a small plate with the number ", str(fcode)[1], " written upon it.")
     elif loc == 84:
-        acloc = 84
         print("You are standing in a cylindrical room with no interesting features. There are doors to the South and to the West (S and W).")
         choice = str(input()).upper()
         if choice == "S":
@@ -2225,7 +2224,6 @@ while True:
         elif choice == "S":
             loc = 81
     elif loc == 89:
-        acloc = 89
         print("You are in a cylindrical room with doors to the North, East and South (N, E and S) and an ascending staircase (A).")
         choice = str(input()).upper()
         if choice == "N":
@@ -2268,7 +2266,6 @@ while True:
     elif loc == 94:
         print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
         choice = str(input()).upper()
-        acloc = 94
         if choice == "E":
             if wunlock == 1 or 94 in findconnect(54):
                 loc = screencheck(95, 2, 0)
@@ -2346,7 +2343,7 @@ while True:
         choice = str(input()).upper()
         if choice == "M":
             print("You notice nothing interesting about the mirror but near it you find a note written on a small piece of paper. You decide to read the note.")
-            print("'I have decided to hide the key to the Astronomy Tower in the West Tower. A three digit code is required to gain access to the West Tower'.")
+            print("'I have decided to hide the key to the Astronomy Tower in the West Tower. A three digit code is required to gain access to the West Tower and the input device for this is located on the ground floor in the West wing'.")
         elif choice == "N":
             loc = 58
     elif loc == 99:
