@@ -125,7 +125,7 @@ def endgame(n):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
     print("You visited " + str(len(uniloclog)) + " of 99 locations (most in 1 game = 91).")
-    print("You took " + str(len(loclog)) + " turns.")
+    print("You took " + str(len(loclog)) + " turns (fastest win = 28).")
     end = input()
     end = input()
 def listweapons():
@@ -2411,7 +2411,9 @@ while True:
     elif lowluck == 1 and observe == 1:
         if alert == 2:
             print("You are attacked by a security robot of Crultney mansion.")
-            robotattack(lowluck)
+            risk2 = robotattack(lowluck)
+            if risk2[0] == 1:
+                ssdestroy(risk2[1])
             alert = 2.4
         elif alert == 3.4:
             alert = 3
