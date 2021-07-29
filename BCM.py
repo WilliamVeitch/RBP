@@ -17,7 +17,6 @@ lcandlelist = [0, 0, 0] #NCS
 wcollect = [0, 0]
 loclog = list()
 bathwater = [0, 0] #lever, water (on = 0, off = 1)
-stairrobot = 1 #loc 34
 wunlock = 0
 craneunlock = 0 #locs 46 and 48
 smallwheels = 0
@@ -76,7 +75,7 @@ def findconnect(a):
     return conreport
 def crystal():
     print("You reach for the crystal and observe that it is a rombohedron with one face being marked with a symbol in each corner.")
-    print("In clockwise order, starting with the pentagon, these are a pentagon (P), a triangle (T), a square (S) and a hexagon (H)")
+    print("In clockwise order, starting with the pentagon, these are a pentagon, a triangle, a square and a hexagon")
     print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
     choice = str(input()).upper()
     if choice == "S":
@@ -87,13 +86,16 @@ def crystal():
             return "success"
         else:
             return "failure"
-    else:
+    elif choice == "T":
         if random.randint(1, 4) == 4:
             print("The crystal strikes the target and releases a beam of energy which incinerates you.")
             return "big failure"
         else:
             print("The crystal bounces off the target without releasing a beam of energy.")
             return "failure"
+    else:
+        print("Invalid input")
+        return crystal()
 def candle(n):
     if "green candle" in eqlist or "red candle" in eqlist or "blue candle" in eqlist or len(candlelist[n]) > 3:
         scs = "You may place a candle from your inventory into the holder (P). "
@@ -978,7 +980,7 @@ while True:
                 if  crystsample == "success":
                     print("The barbed wire is destroyed and you walk towards the mansion.")
                     loc = 27
-                elif crystsample() == "failure":
+                elif crystsample == "failure":
                     destroy("energy crystal (EC)")
                     print("The crystal rolls away into the middle of the wire.")
                 elif crystsample() == "big failure":
@@ -1033,10 +1035,19 @@ while True:
                 elif choice == "PC":
                     print("Your portable cannon is successful in breaking the door and you advance into the room.")
                     loc = 38
+                elif choice == "SP":
+                    destroy("strength potion (SP)")
+                    print("you feel a sudden burst of strength after taking the potion and you are able to break down the door. You then advance into the room.")
+                    loc = 38
                 elif choice == "TB":
                     print("Your time bomb is successful in breaking the door and you advance into the room.")
                     destroy("time bomb (TB)")
                     loc = 38
+                elif choice == "SBB":
+                    print("The sticky banana bomb is not capable of breaking down the door and leaves it coated with banana juices.")
+                    destroy("sticky banana bomb (SBB)")
+                elif choice == "BD" or choice == "GB" or choice == "SS" or choice == "LK" or choice == "HOH" or choice == "TS":
+                    print("The door is too strong to be broken down by your weapon.")
                 elif choice == "EC":
                     crystsample = crystal()
                     if crystsample == "success":
@@ -1053,7 +1064,7 @@ while True:
 
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if stairrobot == 0:
+        if 34 in loclog[0:len(loclog)-1]:
             print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input()).upper()
             if choice == "U":
@@ -1069,10 +1080,8 @@ while True:
             choice = str(input()).upper()
             if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD" or choice == "LK":
                 print("You parry the attack but your weapon is irreparably damaged due to the impact.")
-                stairrobot = 0
                 ssdestroy(choice)
             elif choice == "GB" or choice == "SOS" or choice == "HOH":
-                stairrobot = 0
                 print("You successfully defend against the attack and your weapon is undamaged.")
             else:
                 inap()
@@ -1115,10 +1124,6 @@ while True:
         elif choice == "W":
             loc = 32
     elif loc == 37:
-        if lastloc() == 47 and 37 not in findconnect(47):
-                print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in.")
-                print("You are able to escape from the trap unharmed and you open the door to the North.")
-                alert = alert + 1
         print("You are in a sparsely furnished corridor running from East to West. There are two doors leading to the South (SE) and (SW), a junction with another corridor to the East (E) and to the North, a short passageway leading up to another door (N).")
         choice = str(input()).upper()
         if choice == "SE":
@@ -1227,10 +1232,7 @@ while True:
                     print("You can pull yourself up onto the ledge (L) or go back down the shaft to the kitchen (D).")
                     choice = str(input()).upper()
                     if choice == "L":
-                        if "brass key" in ulist:
-                            print("You have already opened the chest so you feel no need to climb back up to the ledge.")
-                        else:
-                            print("You climb up to the ledge and discover that a locked chest sits upon it.")
+                        print("You climb up to the ledge and discover that a locked chest sits upon it.")
                         if "brass key" in eqlist:
                             print("You notice that the brass key you found in the tower fits the chest and you excitedly open it.")
                             print("You find that the chest contains a mysterious electronic device that you do not recognise. You take this with you.")
@@ -1251,12 +1253,15 @@ while True:
                                     eqlist.append("strange device")
                                 elif choice == "PC":
                                     print("The portable cannon succeeds in destroying the chest but also destroys whatever was inside.")
+                                    dlist.append("strange device")
                                 elif choice == "TB":
                                     destroy("time bomb (TB)")
                                     print("The time bomb succeeds in destroying the chest but also destroys whatever was inside.")
+                                    dlist.append("strange device")
                                 elif choice == "LK":
                                     print("You are able to open the chest but you break the knife in the process of doing so. Inside the chest you find a mysterious electronic device that you do not recognise. You take this with you.")
                                     eqlist.append("strange device")
+                                    destroy("large knife (LK)")
                                 elif choice == "SBB":
                                     print("The sticky banana bomb fails to break open the chest.")
                                     destroy("sticky banana bomb (SBB)")
@@ -1316,7 +1321,7 @@ while True:
         elif choice == "B":
             print("The balcony looks down on the courtyard from 3 sides. You observe that while two of these sides have only wooden railings, the other has a stone wall with only a small gap above it.")
         elif choice == "T":
-            print("You notice nothing unusual about the tree, nor do you find anything of interest amongst the plants and benches nearby. You climb the tree for a better view of the 1st floor balcony. You can observe from this position that there are two security cameras mounted on the balcony.")
+            print("You notice nothing unusual about the tree, nor do you find anything of interest amongst the plants and benches nearby. You climb the tree for a better view of the 1st floor balcony. You can observe from this position that there are security cameras mounted on the balcony.")
             if "super strong rope (SSR)" in eqlist:
                 print("You could attempt to climb up to the balcony using your super strong rope (SSR) or withdraw into the courtyard (W).")
                 choice = str(input()).upper()
@@ -1352,8 +1357,10 @@ while True:
                 choice = str(input()).upper()
                 if choice == "R":
                     if "water wheel" in ulist and craneunlock == 1 and smallwheels == 4 and "control card (CC)" not in eqlist and "control card (CC)" not in dlist:
-                        print("You move the rubble to clear a path to the Southern side of the room Unfortunately, the reach of the crane is insufficient for you to be able to do this. However, buried under the rubble you find an ID card which you take with you.")
+                        print("You move the rubble to clear a path to the Southern side of the room. Unfortunately, the reach of the crane is insufficient for you to be able to do this. However, buried under the rubble you find an ID card which you take with you.")
                         eqlist.append("control card (CC)")
+                    elif "control card (CC)" in eqlist or "control card (CC)" in dlist:
+                        print("You have already used the crane to move as much of the debris as possible.")
                     else:
                         print("You are unable to operate the crane.")
                 elif choice == "G":
@@ -1381,6 +1388,10 @@ while True:
             loc = 56
         elif choice == "S":
             loc = 37
+            if 37 not in findconnect(47) and 47 not in findconnect(37):
+                print("As you walk up the short passageway to the door, a pit trap opens up beneath your feet and you fall in. An alarm sounds.")
+                print("You are able to escape from the trap unharmed and you open the door to the North.")
+                alert = alert + 1
         elif choice == "W":
             loc = 57
         elif choice == "D":
@@ -1440,7 +1451,7 @@ while True:
                             ssdestroy(choice)
                             alert = alert + 1
                             loc = 59
-                        elif choice == "LK" or choice == "BD" or choice == "SS":
+                        elif choice == "LK" or choice == "BD" or choice == "SS" or choice == "TS":
                             print("Your weapon is not strong enough to break the door and is destroyed.")
                             ssdestroy(choice)
                         elif choice == "EC":
@@ -1467,7 +1478,7 @@ while True:
         elif choice == "SS":
             loc = 41
     elif loc == 52:
-        print("You are in a small room with no doors and a narrow descending staircase (D). There is a small window facing East and you can see the gardens of the mansion through this. In the centre of the room is a turntable with a marker on it. You can turn the table so that the marker points towards the Garden (G), Astronomy Tower (A) or West Tower (W).")
+        print("You are in a small room with no doors and a narrow descending staircase (D). There are two small windows through which you can see the gardens of the mansion as well as the mansion's two towers. In the centre of the room is a turntable with a marker on it. You can turn the table so that the marker points towards the Garden (G), Astronomy Tower (A) or West Tower (W).")
         print("The turntable is currently in the ", towerpos, " position.")
         choice = str(input()).upper()
         if choice == "D":
@@ -1505,10 +1516,7 @@ while True:
             else:
                 print("You notice nothing interesting about the candle holder.")
         elif choice == "P":
-            if observe >= 1:
                 print("You notice that one of the plants is obscuring a hidden security camera, yet no alarm sounds when you uncover it. You wonder what the purpose of this camera is.")
-            else:
-                print("You notice nothing unusual about the plants.")
         elif choice == "D":
             loc = 45
     elif loc == 54:
@@ -2388,7 +2396,7 @@ while True:
                 risk2 = robotattack(lowluck)
                 if risk2[0] == 1:
                     ssdestroy(risk2[1])
-    elif lowluck == 1:
+    elif lowluck == 1 and observe == 1:
         if alert == 2:
             print("You are attacked by a security robot of Crultney mansion.")
             robotattack(lowluck)
