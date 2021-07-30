@@ -9,7 +9,7 @@ ask = "A"
 alert = 0
 observe = 1
 ncode = 0
-weekday = random.choice(["Monday","Tuesday","Friday","Sunday"])
+weekday = random.choice(["Monday","Tuesday","Sunday"])
 fcode = random.randint(100, 999) #cylindrical rooms
 screen = [2, 4] #SN
 candlelist = ["", "", ""]
@@ -605,7 +605,7 @@ while True:
                 elif choice == "S":
                     print("There are four switches which can each be set to any position between 0 and 9. Currently they are all set to 0, but the first from the left which is set to 1.")
                     print("You can set the switches by typing their positions from left to right or you can withdraw (W).")
-                    choice = str(input())
+                    choice = str(input()).upper()
                     if choice == "W":
                         print("You withdraw.")
                     elif len(choice) == 4:
@@ -922,10 +922,10 @@ while True:
             if "brass key" in eqlist or "brass key" in dlist:
                 print("You ascend the stairs into a room similar to the one below. There are no items of interest in the room.")
             else:
-                print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the room towards you.")
+                print("You climb the stairs into another room similar to the one below. Before you have a chance to look for clues, a bottle of green liquid suddenly shoots out from the wall towards you.")
                 print("You may hold up a piece of equipment to protect yourself or not bother (NB).")
                 listweapons()
-                choice = str(input())
+                choice = str(input()).upper()
                 if choice in eqnames:
                     ssdestroy(choice)
                 else:
@@ -1280,7 +1280,7 @@ while True:
                 print("You notice nothing remarkable about the kitchen utensils.")
             else:
                 print("You find a large knife that you may carry with you as a weapon (W) or leave behind (L).")
-                choice = str(input())
+                choice = str(input()).upper()
                 if choice == "W":
                     eqlist.append("large knife (LK)")
         elif choice == "N":
