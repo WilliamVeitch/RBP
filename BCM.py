@@ -840,7 +840,7 @@ while True:
             choice = str(input()).upper()
             if choice == "D":
                 if 39 in loclog:
-                    print("The shed door is unlocked and you step inside.")
+                    print("You step back inside the shed.")
                     loc = 39
                 else:
                     print("The shed door is locked so you may use a weapon against it.")
@@ -1061,6 +1061,7 @@ while True:
                     loc = lastloc()
                 else:
                     inap()
+                    loc = lastloc()
 
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
