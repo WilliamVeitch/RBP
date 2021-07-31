@@ -315,7 +315,7 @@ while True:
         choice = str(input()).upper()
         if choice == "S":
             loc = 6
-        elif choice == "P":
+        else:
             loc = 7
     elif loc == 5:
         print("Would you like to attend the ninja strategy meeting to discuss the mission before you leave or would you rather seek advice from other sources?")
