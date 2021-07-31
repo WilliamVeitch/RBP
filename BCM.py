@@ -1285,6 +1285,7 @@ while True:
                 choice = str(input()).upper()
                 if choice == "W":
                     eqlist.append("large knife (LK)")
+                    print("You pick up the knife.")
         elif choice == "N":
             loc = 35
         elif choice == "S":
@@ -1475,7 +1476,7 @@ while True:
         elif choice == "W":
             loc = 66
     elif loc == 51:
-        print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North (SS).")
+        print("You are in a passageway in the basement of the mansion. There are doors to the North and South (N and S) and there is also a short passageway leading off towards a spiral staircase to the North-East (SS).")
         choice = str(input()).upper()
         if choice == "N":
             loc = 60
@@ -1869,68 +1870,17 @@ while True:
             loc = 27
     elif loc == 73:
         if observe == 1 and "sticky banana bomb (SBB)" not in ulist:
-            if lastloc() == 73:
-                print("More guards arrive. You must defend yourself.")
-            else:
-                print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
-            listweapons()
-            choice = str(input()).upper()
-            risk = 0
-            if choice == "BD":
-                risk = 3
-            elif choice == "TS":
-                risk = 1
-            elif choice == "IP":
-                risk = 1
-            elif choice == "GB":
-                risk = 6
-            elif choice == "SS":
-                risk = 4
-            elif choice == "SOS":
-                risk = 5
-            elif choice == "HOH":
-                risk = 3
-            elif choice == "SP":
-                risk = 1
-            elif choice == "WH":
-                risk = 3
-            elif choice == "SBB":
-                risk = 90
-            elif choice == "PC":
-                print("The portable cannon is too unwieldy to use against the robotic guard and you are struck down by the guard.")
-                endgame(2)
-            elif choice == "CBD":
-                print("The complex brain destroyer does not work on machines. You are struck down by the robotic guard.")
-                endgame(2)
-            elif choice == "EC":
-                crystsample = crystal()
-                if crystsample == "success":
-                    risk = 1
-                elif crystsample == "failure":
-                    print("The crystal has no effect on the robotic guard and you are struck down.")
-                if crystsample != "success":
-                    endgame(2)
-            elif choice == "LK":
-                risk = 2
-            elif choice == "CC":
-                risk = 100
-            if risk == 0:
-                print("You fail to defeat the robotic guard and are struck down.")
-                endgame(2)
-            elif risk == 100:
-                print("You turn off all of the robotic guards with the control card.")
-            elif risk == 90:
-                udestroy("sticky banana bomb (SBB)")
+            print("You are in a room with several robotic guards, which surge towards you as you enter. You must defend yourself.")
+            risk2 = robotattack(lowluck)
+            if risk2[0] == 1:
+                ssdestroy(risk2[1])
+            if risk2[1] == "SBB":
+                ulist.append("sticky banana bomb (SBB)")
                 print("The sticky banana bomb is extremely effective and immobilises all of the robotic guards in the room.")
-            elif random.randint(1, risk) == 1:
-                ssdestroy(choice)
-                print("You defeat the first robotic guard, but your weapon is destroyed.")
-                print("You flee the room to the place from which you came.")
-                loc = lastloc()
-            else:
-                print("You defeat the first robotic guard and then flee the room to the place from which you came.")
-                loc = lastloc()
-        if observe == 0 or risk == 100 or "sticky banana bomb (SBB)" in ulist:
+            elif risk2[1] == "CC":
+                ulist.append("sticky banana bomb (SBB)")
+                print("You use the control card to turn off the robots.")
+        if observe == 0 or "sticky banana bomb (SBB)" in ulist:
             print("You are in a guardroom with doors to the North and South and a panel controlling the mansion's security services. You can examine the alert screen (A), examine the control board (C) or leave using the doors to the South and the West (S and W).")
             choice = str(input()).upper()
             if choice == "A":
@@ -1951,6 +1901,9 @@ while True:
                 loc = 50
             elif choice == "W":
                 loc = 66
+        else:
+            print("You defend yourself against the attacking robots and are forced to flee the room to the place from which you came.")
+            loc = lastloc()
     elif loc == 74:
         print("You are in a corridor which runs from North to South. There is an iron door to the North with a painting of the Moon on a wall nearby (N), and two other corridors leading off to the East which are a large distance apart (EN and ES).")
         choice = str(input()).upper()
