@@ -1046,8 +1046,10 @@ while True:
                 elif choice == "SBB":
                     print("The sticky banana bomb is not capable of breaking down the door and leaves it coated with banana juices.")
                     destroy("sticky banana bomb (SBB)")
+                    loc = lastloc()
                 elif choice == "BD" or choice == "GB" or choice == "SS" or choice == "LK" or choice == "HOH" or choice == "TS":
                     print("The door is too strong to be broken down by your weapon.")
+                    loc = lastloc()
                 elif choice == "EC":
                     crystsample = crystal()
                     if crystsample == "success":
