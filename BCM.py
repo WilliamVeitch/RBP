@@ -9,6 +9,7 @@ ask = "A"
 alert = 0
 observe = 1
 ncode = 0
+stairrobot = 1
 weekday = random.choice(["Monday","Tuesday","Sunday"])
 fcode = random.randint(100, 999) #cylindrical rooms
 screen = [2, 4] #SN
@@ -1022,7 +1023,7 @@ while True:
             loc = 38
         else:
             if "rusted keys" in eqlist:
-                print("You find the key to the door amongst your items and you open the door.")
+                print("You find the key to the door amongst your items (the rusted key) and you open the door.")
                 loc = 38
             else:
                 print("The door is locked. You may retreat (R) or use weapons.")
@@ -1067,7 +1068,7 @@ while True:
 
     elif loc == 34:
         print("You walk out onto a spiral staircase which has stairs leading off upwards and downwards and an exit to the South at this level.")
-        if 34 in loclog[0:len(loclog)-1]:
+        if stairrobot == 0:
             print("You can go upwards (U) or downwards (D) on the stairs or exit to the South at this level (E).")
             choice = str(input()).upper()
             if choice == "U":
@@ -1088,7 +1089,7 @@ while True:
                 print("You successfully defend against the attack and your weapon is undamaged.")
             else:
                 inap()
-                print("The sharp blades strikes you and you fall unconscious. Your mission is over.")
+                print("The sharp blade strikes you and you fall unconscious. Your mission is over.")
                 endgame(2)
     elif loc == 35:
         print("You walk into an elaborately furnished dining room. A large table dominates the centre of the room. On the table are several empty plates, pieces of cutlery and candles.")
@@ -1178,6 +1179,8 @@ while True:
                 if choice == "MR":
                     print("You insert the metal rod and twist it until it descends into the hole, with only around 150 mm protruding. You here a noise from the corner of the room and you believe that something has changed about the panel of switches.")
                     udestroy("metal rod")
+            elif "metal rod" in ulist:
+                print("You have already inserted the metal rod into the hole.")
             else:
                 print("You do not recognise the symbols and do not understand the purpose of the hole. You withdraw from the hole.")
         elif choice == "D":
@@ -1277,6 +1280,8 @@ while True:
                                         print("The crystal has no effect on the chest.")
                                     elif crystsample == "big failure":
                                         endgame(2)
+                                else:
+                                    inap()
         elif choice == "U":
             if "large knife (LK)" in eqlist or "large knife (LK)" in dlist:
                 print("You notice nothing remarkable about the kitchen utensils.")
