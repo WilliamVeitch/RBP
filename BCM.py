@@ -125,7 +125,7 @@ def endgame(n):
     for i in range(len(loclog)):
         if loclog[i] not in uniloclog:
             uniloclog.append(loclog[i])
-    print("You visited " + str(len(uniloclog)) + " of 99 locations (most in 1 game = 91).")
+    print("You visited " + str(len(uniloclog)) + " of 99 locations (most in 1 game = 90).")
     print("You took " + str(len(loclog)) + " turns (fastest win = 28).")
     end = input()
     end = input()
@@ -474,7 +474,7 @@ while True:
         print("You land at the airport in Ooville Town and arrange for a local pilot to return the helicopter to Geelophisis.")
         loc = 11
     elif loc == 20:
-        print("You attempt to land the helicopter but you notice an arcane looking device on the 2nd floor turning to face you. You suddenly lose control of the helicopter and it crashes near the mansion.")
+        print("You attempt to land the helicopter but you notice an arcane looking device mounted on one of the mansion's towers turning to face you. You suddenly lose control of the helicopter and it crashes near the mansion.")
         print("You scramble out from the wreckage of the helicopter and notice that some of your equipment has beeen destroyed in the collision.")
         text7 = random.choice(eqlist)
         print(text7, " is lost")
@@ -1693,7 +1693,7 @@ while True:
                 choice = str(input()).upper()
                 if choice == "P":
                     print(eqlist)
-                    candleid = input("Which candle should be placed here?   ")
+                    candleid = input("Which candle should be placed here?  (enter name exactly as it appears in the equipment list)   ")
                     if candleid in eqlist:
                         destroy(candleid)
                         candlelist[1] = candleid
@@ -1789,7 +1789,7 @@ while True:
                     choice = str(input()).upper()
                     if choice == "P":
                         print(eqlist)
-                        candleid = input("Which candle should be placed here?   ")
+                        candleid = input("Which candle should be placed here?  (enter name exactly as it appears in the equipment list)   ")
                         if candleid in eqlist:
                             destroy(candleid)
                             candlelist[0] = candleid
@@ -1824,9 +1824,11 @@ while True:
             if choice == "A":
                 ncode = inpint("Type the numbers to which you set the wheels, from left to right.   ")
             elif choice == "B":
-                if ncode == fcode:
+                if ncode == fcode and wunlock == 0:
                     print("You here a mechanical noise from above you.")
                     wunlock = 1
+                elif wunlock == 1:
+                    print("You notice no immediate effect.")
                 else:
                     print("An alarm sounds.")
                     alert = alert + 1
@@ -1915,7 +1917,7 @@ while True:
         if choice == "N":
             if "iron key" in eqlist:
                 print("You find that the door is locked.")
-                print("You find the key to the door amongst your items and you walk through the doorway having opened the door.")
+                print("You find the key to the door amongst your items (the iron key) and you walk through the doorway having opened the door.")
                 udestroy("iron key")
                 loc = 79
             elif 74 in findconnect(79) or 79 in findconnect(74) or "iron key" in ulist:
