@@ -1082,6 +1082,7 @@ while True:
             print("You must use a piece of equipment to defend against the attack")
             listweapons()
             choice = str(input()).upper()
+            stairrobot = 0
             if choice == "BD" or choice == "SS" or choice == "WH" or choice == "CBD" or choice == "LK":
                 print("You parry the attack but your weapon is irreparably damaged due to the impact.")
                 ssdestroy(choice)
