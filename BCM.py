@@ -929,6 +929,8 @@ while True:
                 choice = str(input()).upper()
                 if choice in eqnames:
                     ssdestroy(choice)
+                elif choice.lower() in eqlist:
+                    destroy(choice.lower())
                 else:
                     print("You have no appropriate equipment. The bottle contained acid and dealt you a severe injury.")
                     if "medical kit (MK)" in eqlist:
