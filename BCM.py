@@ -80,7 +80,7 @@ def crystal():
     print("Do you point the crystal at the target and strike one of the symbols (S) or do you throw the crystal at the target (T).")
     choice = str(input()).upper()
     if choice == "S":
-        strike = str(input("Which symbol do you strike?  (P/T/S/H) "))
+        strike = str(input("Which symbol do you strike?  (P/T/S/H) ")).upper()
         if strike == "H":
             print("The crystal releases a beam which strikes your target.")
             destroy("energy crystal (EC)")
