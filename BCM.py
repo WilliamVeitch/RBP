@@ -310,13 +310,14 @@ while True:
             eqlist.append("magical map (MM)")
         if choice1 == "EC" or choice2 == "EC":
             eqlist.append("energy crystal (EC)")
-        print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
-        print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
-        choice = str(input()).upper()
-        if choice == "S":
-            loc = 6
-        else:
-            loc = 7
+        while loc == 4:
+            print("You were just about to leave when Geelophisis offers to give you some advice for the mission.")
+            print("Type 'S' if you stay to listen to his advice or type 'P' if you go straight to the port.")
+            choice = str(input()).upper()
+            if choice == "S":
+                loc = 6
+            elif choice == "P":
+                loc = 7
     elif loc == 5:
         print("Would you like to attend the ninja strategy meeting to discuss the mission before you leave or would you rather seek advice from other sources?")
         print("Type 'M' to attend the meeting, type 'G' to seek advice from Geelophisis, type 'F' to seek advice from Furfoot or type 'L' to leave without seeking advice.")
