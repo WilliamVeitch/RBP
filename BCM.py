@@ -18,7 +18,7 @@ lcandlelist = [0, 0, 0] #NCS
 wcollect = [0, 0]
 loclog = list()
 bathwater = [0, 0] #lever, water (on = 0, off = 1)
-wunlock = 0
+wunlock = 0 #West tower: 0 = locked, 1 = unlocked, 2 = destroyed
 craneunlock = 0 #locs 46 and 48
 smallwheels = 0
 towerpos = "G"
@@ -1827,8 +1827,10 @@ while True:
             if choice == "A":
                 ncode = inpint("Type the numbers to which you set the wheels, from left to right.   ")
             elif choice == "B":
-                if ncode == fcode and wunlock == 0:
-                    print("You here a mechanical noise from above you.")
+                if ncode == fcode and wunlock in [0, 2]:
+                    print("You hear a mechanical noise from above you.")
+                    if wunlock == 2:
+                        print("You wonder if this is the mechanism to unlock the door on the floor above that you already broke down with a weapon.")
                     wunlock = 1
                 elif wunlock == 1:
                     print("You notice no immediate effect.")
@@ -2244,7 +2246,7 @@ while True:
         print("You are in a cylindrical room with doors to the East and South (E and S). There is also a descending staircase (D).")
         choice = str(input()).upper()
         if choice == "E":
-            if wunlock == 1 or 94 in findconnect(54):
+            if wunlock in [1,2]:
                 loc = screencheck(95, 2, 0)
             else:
                 print("The door is locked. You may withdraw (I) or use weapons (W).")
@@ -2284,6 +2286,7 @@ while True:
                     if loc == 95 or loc == 54:
                         print("An alarm sounds as you break down the door.")
                         alert = alert + 1
+                        wunlock = 2
         elif choice == "S":
             loc = screencheck(96, 3, 0)
         elif choice == "D":
